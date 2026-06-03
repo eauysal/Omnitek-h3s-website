@@ -1,0 +1,100 @@
+@import 'tailwindcss';
+@import 'tw-animate-css';
+
+@custom-variant dark (&:is(.dark *));
+
+:root {
+ --background: #E0E0E0; 
+  --foreground: #1A1A1A;
+  --card: #EBEBEB;       /* Kartların arkasına koyacağımız, pürüzsüz açık ton */
+  --card-border: #C0C0C0;/* Kartların ve logonun etrafındaki şık teknolojik çizgi */
+  --accent-glow: rgba(0, 180, 216, 0.15);
+  --popover: #F5F5F5;
+  --popover-foreground: #1A1A1A;
+  --primary: #2a81f4;
+  --primary-foreground: #FFFFFF;
+  --secondary: #ECECEC;
+  --secondary-foreground: #1A1A1A;
+  --muted: #ECECEC;
+  --muted-foreground: #888888;
+  --accent: #2a81f4;
+  --accent-foreground: #08121F;
+  --destructive: #DC2626;
+  --destructive-foreground: #FFFFFF;
+  --warning: #FFB020;
+  --warning-foreground: #08121F;
+  --success: #00D26A;
+  --success-foreground: #08121F;
+  --border: #C0C0C0;
+  --input: #F5F5F5;
+  --ring: #DC2626;
+  --radius: 0.625rem;
+}
+
+@theme inline {
+  --font-sans: var(--font-sans-var), 'DM Sans', ui-sans-serif, system-ui, sans-serif;
+  --font-heading: var(--font-heading-var), 'Syne', ui-sans-serif, system-ui, sans-serif;
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-warning: var(--warning);
+  --color-warning-foreground: var(--warning-foreground);
+  --color-success: var(--success);
+  --color-success-foreground: var(--success-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+    font-variant-numeric: tabular-nums;
+  }
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in-up {
+  animation: fadeInUp 0.6s ease-out forwards;
+}
+
+/* Tabular numbers alignment */
+.tabular-nums {
+  font-feature-settings: 'tnum' on, 'kern' on;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.02em;
+}
