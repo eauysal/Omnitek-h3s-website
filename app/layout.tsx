@@ -3,7 +3,7 @@ import { Plus_Jakarta_Sans, Inter } from 'next/font/google'
 import { Analytics } from '@vercel/analytics/next'
 import './globals.css'
 // 1. WhatsApp butonunu buraya import ediyoruz
-import WhatsAppButton from '@/components/WhatsAppButton' 
+import WhatsAppButton from '@/app/WhatsAppButton' 
 
 const plusJakarta = Plus_Jakarta_Sans({ 
   subsets: ['latin'],
