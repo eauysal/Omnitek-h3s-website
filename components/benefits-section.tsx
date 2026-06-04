@@ -1,5 +1,17 @@
 "use client"
 
+import { 
+  IconWifi, 
+  IconUser, 
+  IconSpeakerphone, 
+  IconClock, 
+  IconX, 
+  IconCheck, 
+  IconRepeat, 
+  IconPointFilled, 
+  IconArrowRight 
+} from '@tabler/icons-react'
+
 const lossCards = [
   { label: "Günlük misafir", value: "~100 Kişi", unit: "kişi bağlanıyor" },
   { label: "Tanınmayan misafir", value: "%35", unit: "bir daha gelmiyor" },
@@ -33,7 +45,7 @@ const heroCardPoints = [
 
 const secondaryCards = [
   {
-    icon: "ti-user",
+    icon: IconUser, // Doğrudan bileşen referansını geçiyoruz
     title: "Müşterinizi tanıyın",
     points: [
       "Bağlanırken ad ve iletişim bırakır",
@@ -43,7 +55,7 @@ const secondaryCards = [
     insight: "345 kayıt — hiç reklam verilmedi.",
   },
   {
-    icon: "ti-speakerphone",
+    icon: IconSpeakerphone,
     title: "Anlık kampanya",
     points: [
       "Bağlantı ekranı = reklam panonuz",
@@ -53,10 +65,10 @@ const secondaryCards = [
     insight: "Ekstra bütçe yok — müşteri zaten orada.",
   },
   {
-    icon: "ti-clock",
+    icon: IconClock,
     title: "Gerçek veri",
     points: [
-      "Bağlantı süresi = masada geçen süre",
+      "Bağlantı süreleri = masada geçen süre",
       "Hangi saatler dolu, boş — görünür",
       "Tahmin değil, veriyle karar",
     ],
@@ -67,10 +79,12 @@ const secondaryCards = [
 export function BenefitsSection() {
   return (
     <section id="faydalar" className="bg-[#1A365D] scroll-mt-auto py-16 lg:py-24 relative overflow-hidden">
-        <link
-        rel="stylesheet"
-        href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/dist/tabler-icons.min.css"
-        />
+      
+      {/* İkonun görünmesini garanti altına alan şık, test amaçlı bir taşıyıcı kutu */}
+      <div className="absolute top-4 left-4 z-50 bg-white/10 p-2 rounded-xl flex items-center gap-2 backdrop-blur-sm">
+        <IconWifi className="w-6 h-6 text-green-400 animate-pulse" stroke={2} />
+        <span className="text-white text-xs font-mono">H3S Aktif</span>
+      </div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col gap-3">
 
@@ -138,13 +152,13 @@ export function BenefitsSection() {
           <div className="grid grid-cols-2">
             <div className="px-5 py-4 border-r border-white/10">
               <span className="inline-flex items-center gap-1.5 bg-[#FCEBEB] text-[#A32D2D] text-[11px] font-medium px-2.5 py-1 rounded-md uppercase tracking-wide mb-3">
-                <i className="ti ti-clock" aria-hidden="true" style={{ fontSize: 11 }} />
+                <IconClock className="w-3 h-3" />
                 H3S öncesi
               </span>
               <ul className="space-y-2">
                 {beforeItems.map((item, i) => (
                   <li key={i} className="flex items-start gap-2 text-[14px] text-white/100 leading-snug">
-                    <i className="ti ti-x text-[#E24B4A] mt-0.5 flex-shrink-0" style={{ fontSize: 13 }} aria-hidden="true" />
+                    <IconX className="text-[#E24B4A] mt-0.5 w-3.5 h-3.5 flex-shrink-0" />
                     {item}
                   </li>
                 ))}
@@ -152,13 +166,13 @@ export function BenefitsSection() {
             </div>
             <div className="px-5 py-4">
               <span className="inline-flex items-center gap-1.5 bg-[#EAF3DE] text-[#3B6D11] text-[11px] font-medium px-2.5 py-1 rounded-md uppercase tracking-wide mb-3">
-                <i className="ti ti-check" aria-hidden="true" style={{ fontSize: 11 }} />
+                <IconCheck className="w-3 h-3" />
                 H3S sonrası
               </span>
               <ul className="space-y-2">
                 {afterItems.map((item, i) => (
                   <li key={i} className="flex items-start gap-2 text-[14px] text-white/100 leading-snug">
-                    <i className="ti ti-check text-[#639922] mt-0.5 flex-shrink-0" style={{ fontSize: 13 }} aria-hidden="true" />
+                    <IconCheck className="text-[#639922] mt-0.5 w-3.5 h-3.5 flex-shrink-0" />
                     {item}
                   </li>
                 ))}
@@ -187,14 +201,14 @@ export function BenefitsSection() {
           </span>
           <div className="flex items-center gap-2 mb-4">
             <div className="w-9 h-9 rounded-xl bg-white/10 flex items-center justify-center flex-shrink-0">
-              <i className="ti ti-repeat text-white/70 text-lg" aria-hidden="true" />
+              <IconRepeat className="text-white/70 w-5 h-5" />
             </div>
             <p className="text-white font-medium text-[15px]">Kaybettiğiniz müşteriyi geri getirin</p>
           </div>
           <ul className="space-y-2 mb-4">
             {heroCardPoints.map((p, i) => (
               <li key={i} className="flex items-start gap-2 text-[14px] text-white/100 leading-snug">
-                <i className="ti ti-point-filled text-white/30 mt-0.5 flex-shrink-0" style={{ fontSize: 11 }} aria-hidden="true" />
+                <IconPointFilled className="text-white/30 mt-0.5 w-2.5 h-2.5 flex-shrink-0" />
                 {p}
               </li>
             ))}
@@ -209,30 +223,33 @@ export function BenefitsSection() {
 
         {/* ── Secondary cards ── */}
         <div className="grid grid-cols-3 gap-3">
-          {secondaryCards.map((card, i) => (
-            <div key={i} className="bg-white/8 border border-white/15 rounded-2xl p-4">
-              <div className="flex items-center gap-2 mb-3">
-                <div className="w-8 h-8 rounded-lg bg-white/10 flex items-center justify-center flex-shrink-0">
-                  <i className={`ti ${card.icon} text-white/80`} style={{ fontSize: 15 }} aria-hidden="true" />
+          {secondaryCards.map((card, i) => {
+            const IconComponent = card.icon; // Atadığımız ikon bileşenini değişkene alıyoruz
+            return (
+              <div key={i} className="bg-white/8 border border-white/15 rounded-2xl p-4">
+                <div className="flex items-center gap-2 mb-3">
+                  <div className="w-8 h-8 rounded-lg bg-white/10 flex items-center justify-center flex-shrink-0">
+                    <IconComponent className="text-white/80 w-4 h-4" />
+                  </div>
+                  <p className="text-white font-medium text-[14px]">{card.title}</p>
                 </div>
-                <p className="text-white font-medium text-[14px]">{card.title}</p>
+                <ul className="space-y-1.5 mb-3">
+                  {card.points.map((p, j) => (
+                    <li key={j} className="flex items-start gap-1.5 text-[14px] text-white/85 leading-snug">
+                      <IconPointFilled className="text-white/25 mt-0.5 w-2.5 h-2.5 flex-shrink-0" />
+                      {p}
+                    </li>
+                  ))}
+                </ul>
+                <div
+                  className="text-[14px] text-[#185FA5] bg-[#E6F1FB] border-l-2 border-[#185FA5] px-2.5 py-1.5 leading-relaxed"
+                  style={{ borderRadius: 0 }}
+                >
+                  {card.insight}
+                </div>
               </div>
-              <ul className="space-y-1.5 mb-3">
-                {card.points.map((p, j) => (
-                  <li key={j} className="flex items-start gap-1.5 text-[14px] text-white/85 leading-snug">
-                    <i className="ti ti-point-filled text-white/25 mt-0.5 flex-shrink-0" style={{ fontSize: 10 }} aria-hidden="true" />
-                    {p}
-                  </li>
-                ))}
-              </ul>
-              <div
-                className="text-[14px] text-[#185FA5] bg-[#E6F1FB] border-l-2 border-[#185FA5] px-2.5 py-1.5 leading-relaxed"
-                style={{ borderRadius: 0 }}
-              >
-                {card.insight}
-              </div>
-            </div>
-          ))}
+            );
+          })}
         </div>
 
         {/* ── CTA ── */}
@@ -251,7 +268,7 @@ export function BenefitsSection() {
             className="inline-flex items-center gap-2 bg-[#3B6D11] text-[#EAF3DE] text-[13px] font-medium px-5 py-2.5 rounded-xl whitespace-nowrap hover:bg-[#27500A] transition-colors flex-shrink-0"
           >
             Ücretsiz keşif talep et
-            <i className="ti ti-arrow-right" style={{ fontSize: 14 }} aria-hidden="true" />
+            <IconArrowRight className="w-3.5 h-3.5" />
           </a>
         </div>
 
