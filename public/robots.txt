@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://omnitekh3s.com/sitemap.xml
