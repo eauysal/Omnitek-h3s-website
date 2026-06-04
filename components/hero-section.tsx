@@ -5,6 +5,7 @@ import Link from "next/link"
 import Image from "next/image"
 import { Button } from "@/components/ui/button"
 import { Star, ShieldAlert, Wifi, FileText, Clock, Eye, Package } from "lucide-react"
+import OmnitekLogo from "@/app/OmnitekLogo"
 
 const diagnosticItems = [
   { label: "Güvenlik duvarı", status: "YOK", type: "red" },
@@ -115,18 +116,12 @@ export function HeroSection() {
             </div>
 
             {/* Right Column - Logo with Opaque White Background */}
-            <div className="flex items-center justify-center">
-              <div className="relative w-full h-96 lg:h-full rounded-2xl overflow-hidden bg-white">
-                <Image
-                  src="/images/Omnitekh3sLogonew.jpg"
-                  alt="Omnitek H3S Logo"
-                  width={400}
-                  height={300}
-                  quality={100}
-                  priority
-                  className="w-full h-full object-contain p-8"
-                />
-              </div>
+            {/* Right Column - Logo with Opaque White Background */}
+        <div className="flex items-center justify-center">
+          <div className="relative w-full h-96 lg:h-[450px] flex items-center justify-center rounded-2xl overflow-hidden bg-white p-8">
+              {/* Yeni Vektörel Logomuz - Kapsayıcı kutunun boyutuna göre mükemmel şekilde ortalanır ve esner */}
+                < OmnitekLogo className="w-full h-full max-h-80 object-contain" />
+               </div>
             </div>
           </div>
         </div>
