@@ -5,6 +5,7 @@ import Image from "next/image"
 import Link from "next/link"
 import { Menu, X } from "lucide-react"
 import { Button } from "@/components/ui/button"
+import OmnitekLogo from "@/app/OmnitekLogo"
 
 const navLinks = [
   { href: "#teshis", label: "Sorunlar" },
@@ -33,25 +34,13 @@ export function Navbar() {
           : "opacity-0 invisible"
       }`}
     >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-12 lg:h-16">
-          {/* Logo - Premium Badge Tasarımı */}
-         {/* Logo - Premium & Big Rozet Tasarımı (Zoomed & Fitted) */}
-        {/* Logo - Premium & Big Rozet Tasarımı (Perfectly Fitted, No Oversize) */}
-              <Link 
-                href="/" 
-                className="relative flex items-center justify-center bg-white/95 px-1.5 py-0.5 lg:px-2 lg:py-1 rounded-lg shadow-[0_0_25px_rgba(0,180,216,0.2)] hover:shadow-[0_0_35px_rgba(0,180,216,0.4)] transition-all border border-white/30 hover:scale-105"
-              >
-                <Image
-                  src="/images/logo.jpeg"
-                  alt="Omnitek H3S Logo"
-                  width={300}
-                  height={140}
-                  quality={100} 
-                  priority
-                  className="h-8 lg:h-12 w-auto object-contain"
-                />
-              </Link>
+      <Link 
+  href="/" 
+  className="relative flex items-center justify-center bg-white/95 px-3 py-1 lg:px-4 lg:py-1.5 rounded-lg shadow-[0_0_25px_rgba(0,180,216,0.2)] hover:shadow-[0_0_35px_rgba(0,180,216,0.4)] transition-all border border-white/30 hover:scale-105"
+>
+  {/* Yeni Vektörel Logomuz - Mobil için h-8, Büyük Ekranlar için h-12 yüksekliğinde esner */}
+  <OmnitekLogo className="h-8 lg:h-12 w-auto" />
+</Link>
 
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center gap-8">

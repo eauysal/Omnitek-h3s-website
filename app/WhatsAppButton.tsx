@@ -30,7 +30,7 @@ export default function WhatsAppButton() {
       
       {/* Üzerine gelince açılan ufak bir "Bizimle İletişime Geçin" balonu */}
       <span className="absolute right-16 bg-white text-gray-800 text-xs font-medium px-3 py-1.5 rounded-lg shadow-md opacity-0 group-hover:opacity-100 transition-opacity duration-300 whitespace-nowrap pointer-events-none border border-gray-100">
-        Hızlı WhatsApp Talebi
+        WhatsApp'tan Hemen İletişime Geçin
       </span>
     </a>
   );
