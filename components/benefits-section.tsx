@@ -1,17 +1,5 @@
 "use client"
 
-import { 
-  IconWifi, 
-  IconUser, 
-  IconSpeakerphone, 
-  IconClock, 
-  IconX, 
-  IconCheck, 
-  IconRepeat, 
-  IconPointFilled, 
-  IconArrowRight 
-} from '@tabler/icons-react'
-
 const lossCards = [
   { label: "Günlük misafir", value: "~100 Kişi", unit: "kişi bağlanıyor" },
   { label: "Tanınmayan misafir", value: "%35", unit: "bir daha gelmiyor" },
@@ -43,9 +31,22 @@ const heroCardPoints = [
   "Sosyal medya reklamlarından 5× daha ucuz",
 ]
 
+// İkonları harici paket yerine saf SVG fonksiyonları olarak tanımlıyoruz (Sıfır yük!)
+const IconUserSVG = () => (
+  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M8 7a4 4 0 1 0 8 0a4 4 0 0 0 -8 0" /><path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" /></svg>
+)
+
+const IconSpeakerphoneSVG = () => (
+  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M18 8a3 3 0 0 1 0 6" /><path d="M10 8v11a1 1 0 0 1 -1 1H8a1 1 0 0 1 -1 -1v-5H4a1 1 0 0 1 -1 -1V9a1 1 0 0 1 1 -1h3V3a1 1 0 0 1 1 -1h1a1 1 0 0 1 1 1v5" /></svg>
+)
+
+const IconClockSVG = () => (
+  <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0 -18 0" /><path d="M12 7v5l3 3" /></svg>
+)
+
 const secondaryCards = [
   {
-    icon: IconUser, // Doğrudan bileşen referansını geçiyoruz
+    icon: IconUserSVG,
     title: "Müşterinizi tanıyın",
     points: [
       "Bağlanırken ad ve iletişim bırakır",
@@ -55,7 +56,7 @@ const secondaryCards = [
     insight: "345 kayıt — hiç reklam verilmedi.",
   },
   {
-    icon: IconSpeakerphone,
+    icon: IconSpeakerphoneSVG,
     title: "Anlık kampanya",
     points: [
       "Bağlantı ekranı = reklam panonuz",
@@ -65,7 +66,7 @@ const secondaryCards = [
     insight: "Ekstra bütçe yok — müşteri zaten orada.",
   },
   {
-    icon: IconClock,
+    icon: IconClockSVG,
     title: "Gerçek veri",
     points: [
       "Bağlantı süreleri = masada geçen süre",
@@ -80,9 +81,11 @@ export function BenefitsSection() {
   return (
     <section id="faydalar" className="bg-[#1A365D] scroll-mt-auto py-16 lg:py-24 relative overflow-hidden">
       
-      {/* İkonun görünmesini garanti altına alan şık, test amaçlı bir taşıyıcı kutu */}
-      <div className="absolute top-4 left-4 z-50 bg-white/10 p-2 rounded-xl flex items-center gap-2 backdrop-blur-sm">
-        <IconWifi className="w-6 h-6 text-green-400 animate-pulse" stroke={2} />
+      {/* Görünmeyen Wifi İkonu yerine Garanti Saf SVG Wifi Sinyali */}
+      <div className="absolute top-4 left-4 z-50 bg-white/10 p-2 rounded-xl flex items-center gap-2 backdrop-blur-sm border border-white/10">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#22c55e" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="animate-pulse">
+          <path d="M12 18l.01 0" /><path d="M9.17 15.17a4 4 0 0 1 5.66 0" /><path d="M6.34 12.34a8 8 0 0 1 11.32 0" /><path d="M3.51 9.51a12 12 0 0 1 16.98 0" />
+        </svg>
         <span className="text-white text-xs font-mono">H3S Aktif</span>
       </div>
 
@@ -99,7 +102,7 @@ export function BenefitsSection() {
         </div>
 
         {/* ── Hook ── */}
-        <div className="bg-[#0B1221] border border-[#1E2D4A] rounded-2xl px-8 py-6 text-center shadow-lg transition-all duration-500 transform hover:scale-[1.05] hover:border-cyan-500/50 hover:shadow-[0_15px_40px_rgba(0,180,216,0.1)] cursor-default">
+        <div className="bg-[#0B1221] border border-[#1E2D4A] rounded-2xl px-8 py-6 text-center shadow-lg cursor-default">
             <p className="text-gray-100 font-semibold text-[26px] mb-2.5 tracking-wide"> 
                 Wi-Fi'ınız her gün kaç müşteri kaydediyor — siz görüyor musunuz?
             </p>
@@ -109,7 +112,7 @@ export function BenefitsSection() {
         </div>
 
         {/* ── Kayıp hesabı ── */}
-        <div className="bg-[#FCEBEB] border border-[#F09595] rounded-2xl px-6 py-5 hover:border-cyan-500/50 hover:shadow-[0_15px_40px_rgba(0,180,216,0.1)] transition-all duration-300">
+        <div className="bg-[#FCEBEB] border border-[#F09595] rounded-2xl px-6 py-5 hover:border-cyan-500/50 transition-all duration-300">
           <p className="text-[11px] font-medium text-[#791F1F] uppercase tracking-wide mb-4">
             Doğrulanmış Kayıp Hesabı — 50 sandalyeli kafe
           </p>
@@ -143,7 +146,7 @@ export function BenefitsSection() {
               <p className="text-white font-medium text-medium">Burak Kaçmaz</p>
               <p className="text-white/50 text-small">İşletme sahibi · Burro Cafe, Kadıköy</p>
               <p className="text-white/90 text-[18px] italic mt-1 leading-relaxed">
-                "Omnitek H3S kullanmaya başladıktan sonra sadece ilk haftada 345 kayıt topladık. Hafta sonu doluluğunu ilk kez ölçtük ve kampanyalarımızı müşterilerimizle buluşturduk."
+                "Omnitek H3S kullanmaya başladıktan sonra sadece ilk haftada 345 kayıt topladık. Hafta sonu doluluğunu ilk kez ölçtük ve kampanyalarimizi müşterilerimizle buluşturduk."
               </p>
             </div>
           </div>
@@ -152,13 +155,14 @@ export function BenefitsSection() {
           <div className="grid grid-cols-2">
             <div className="px-5 py-4 border-r border-white/10">
               <span className="inline-flex items-center gap-1.5 bg-[#FCEBEB] text-[#A32D2D] text-[11px] font-medium px-2.5 py-1 rounded-md uppercase tracking-wide mb-3">
-                <IconClock className="w-3 h-3" />
+                <IconClockSVG />
                 H3S öncesi
               </span>
               <ul className="space-y-2">
                 {beforeItems.map((item, i) => (
-                  <li key={i} className="flex items-start gap-2 text-[14px] text-white/100 leading-snug">
-                    <IconX className="text-[#E24B4A] mt-0.5 w-3.5 h-3.5 flex-shrink-0" />
+                  <li key={i} className="flex items-center gap-2 text-[14px] text-white/100 leading-snug">
+                    {/* Saf SVG X ikonu */}
+                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#E24B4A" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="flex-shrink-0"><path d="M18 6l-12 12" /><path d="M6 6l12 12" /></svg>
                     {item}
                   </li>
                 ))}
@@ -166,13 +170,14 @@ export function BenefitsSection() {
             </div>
             <div className="px-5 py-4">
               <span className="inline-flex items-center gap-1.5 bg-[#EAF3DE] text-[#3B6D11] text-[11px] font-medium px-2.5 py-1 rounded-md uppercase tracking-wide mb-3">
-                <IconCheck className="w-3 h-3" />
+                {/* Saf SVG Check ikonu */}
+                <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12l5 5l10 -10" /></svg>
                 H3S sonrası
               </span>
               <ul className="space-y-2">
                 {afterItems.map((item, i) => (
-                  <li key={i} className="flex items-start gap-2 text-[14px] text-white/100 leading-snug">
-                    <IconCheck className="text-[#639922] mt-0.5 w-3.5 h-3.5 flex-shrink-0" />
+                  <li key={i} className="flex items-center gap-2 text-[14px] text-white/100 leading-snug">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#639922" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="flex-shrink-0"><path d="M5 12l5 5l10 -10" /></svg>
                     {item}
                   </li>
                 ))}
@@ -194,29 +199,27 @@ export function BenefitsSection() {
           </div>
         </div>
 
-        {/* ── Hero card — en kritik fayda ── */}
+        {/* ── Hero card ── */}
         <div className="relative bg-white/8 border-2 border-[#639922] rounded-2xl px-6 py-5">
           <span className="absolute -top-px right-4 bg-[#639922] text-[#EAF3DE] text-[24px] font-medium px-3 py-1 rounded-b-lg uppercase tracking-wide">
             En kritik Kazanç: Kayıp müşteriyi geri getirin
           </span>
           <div className="flex items-center gap-2 mb-4">
             <div className="w-9 h-9 rounded-xl bg-white/10 flex items-center justify-center flex-shrink-0">
-              <IconRepeat className="text-white/70 w-5 h-5" />
+              {/* Saf SVG Döngü ikonu */}
+              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-white/70"><path d="M4 12v-3a3 3 0 0 1 3 -3h13m-3 -3l3 3l-3 3" /><path d="M20 12v3a3 3 0 0 1 -3 3h-13m3 3l-3 -3l3 -3" /></svg>
             </div>
             <p className="text-white font-medium text-[15px]">Kaybettiğiniz müşteriyi geri getirin</p>
           </div>
           <ul className="space-y-2 mb-4">
             {heroCardPoints.map((p, i) => (
-              <li key={i} className="flex items-start gap-2 text-[14px] text-white/100 leading-snug">
-                <IconPointFilled className="text-white/30 mt-0.5 w-2.5 h-2.5 flex-shrink-0" />
+              <li key={i} className="flex items-center gap-2 text-[14px] text-white/100 leading-snug">
+                <span className="w-1.5 h-1.5 rounded-full bg-white/30 flex-shrink-0" />
                 {p}
               </li>
             ))}
           </ul>
-          <div
-            className="text-[14px] text-[#185FA5] bg-[#E6F1FB] border-l-2 border-[#185FA5] px-3 py-2 leading-relaxed"
-            style={{ borderRadius: 0 }}
-          >
+          <div className="text-[14px] text-[#185FA5] bg-[#E6F1FB] border-l-2 border-[#185FA5] px-3 py-2 leading-relaxed">
             Burro Kafe'de ilk kampanya sonrası hafta sonu doluluk %38 arttı — 7 günde.
           </div>
         </div>
@@ -224,27 +227,24 @@ export function BenefitsSection() {
         {/* ── Secondary cards ── */}
         <div className="grid grid-cols-3 gap-3">
           {secondaryCards.map((card, i) => {
-            const IconComponent = card.icon; // Atadığımız ikon bileşenini değişkene alıyoruz
+            const IconComponent = card.icon;
             return (
               <div key={i} className="bg-white/8 border border-white/15 rounded-2xl p-4">
                 <div className="flex items-center gap-2 mb-3">
-                  <div className="w-8 h-8 rounded-lg bg-white/10 flex items-center justify-center flex-shrink-0">
-                    <IconComponent className="text-white/80 w-4 h-4" />
+                  <div className="w-8 h-8 rounded-lg bg-white/10 flex items-center justify-center flex-shrink-0 text-white/80">
+                    <IconComponent />
                   </div>
                   <p className="text-white font-medium text-[14px]">{card.title}</p>
                 </div>
                 <ul className="space-y-1.5 mb-3">
                   {card.points.map((p, j) => (
-                    <li key={j} className="flex items-start gap-1.5 text-[14px] text-white/85 leading-snug">
-                      <IconPointFilled className="text-white/25 mt-0.5 w-2.5 h-2.5 flex-shrink-0" />
+                    <li key={j} className="flex items-center gap-1.5 text-[14px] text-white/85 leading-snug">
+                      <span className="w-1H h-1 rounded-full bg-white/25 flex-shrink-0" />
                       {p}
                     </li>
                   ))}
                 </ul>
-                <div
-                  className="text-[14px] text-[#185FA5] bg-[#E6F1FB] border-l-2 border-[#185FA5] px-2.5 py-1.5 leading-relaxed"
-                  style={{ borderRadius: 0 }}
-                >
+                <div className="text-[14px] text-[#185FA5] bg-[#E6F1FB] border-l-2 border-[#185FA5] px-2.5 py-1.5 leading-relaxed">
                   {card.insight}
                 </div>
               </div>
@@ -268,7 +268,7 @@ export function BenefitsSection() {
             className="inline-flex items-center gap-2 bg-[#3B6D11] text-[#EAF3DE] text-[13px] font-medium px-5 py-2.5 rounded-xl whitespace-nowrap hover:bg-[#27500A] transition-colors flex-shrink-0"
           >
             Ücretsiz keşif talep et
-            <IconArrowRight className="w-3.5 h-3.5" />
+            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12l14 0" /><path d="M13 18l6 -6" /><path d="M13 6l6 -6" /></svg>
           </a>
         </div>
 
