@@ -2,8 +2,8 @@ import type { Metadata } from 'next'
 import { Plus_Jakarta_Sans, Inter } from 'next/font/google'
 import { Analytics } from '@vercel/analytics/next'
 import './globals.css'
-// 1. WhatsApp butonunu buraya import ediyoruz
-import WhatsAppButton from '@/app/WhatsAppButton' 
+// Hatayı çözen nokta-eğik çizgili import:
+import WhatsAppButton from './WhatsAppButton' 
 
 const plusJakarta = Plus_Jakarta_Sans({ 
   subsets: ['latin'],
@@ -32,7 +32,6 @@ export default function RootLayout({
       <body className="font-sans antialiased bg-background text-foreground relative">
         {children}
         
-        {/* 2. WhatsApp butonunu Analytics'in hemen yanına yerleştiriyoruz */}
         <WhatsAppButton />
 
         {process.env.NODE_ENV === 'production' && <Analytics />}
