@@ -18,8 +18,8 @@ const inter = Inter({
 })
 
 export const metadata: Metadata = {
-  title: 'Omnitek H3S - Hotspot Security Systems',
-  description: 'İşletmeniz için kurumsal ve KVKK uyumlu hotspot çözümleri.',
+  title: 'Omnitek H3S | Kurumsal Hotspot ve 5651 Uyumlu Güvenlik',
+  description: 'İşletmenizin Wi-Fi hizmetini Omnitek H3S ile güçlendirin. KVKK uyumlu loglama, güvenli internet ve ücretsiz saha keşfi için hemen tıklayın.',
 }
 
 export default function RootLayout({
