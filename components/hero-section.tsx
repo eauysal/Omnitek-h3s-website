@@ -4,8 +4,7 @@ import { useState, useEffect } from "react"
 import Link from "next/link"
 import Image from "next/image"
 import { Button } from "@/components/ui/button"
-import { Star, ShieldAlert, Wifi, FileText, Clock, Eye, Package } from "lucide-react"
-import OmnitekLogo from "@/app/OmnitekLogo"
+import { Star, ShieldAlert, ShieldCheck, Wifi, FileText, Clock, Eye, Package } from "lucide-react"
 
 const diagnosticItems = [
   { label: "Güvenlik duvarı", status: "YOK", type: "red" },
@@ -59,18 +58,6 @@ export function HeroSection() {
   return (
     <>
       <section className="min-h-screen pt-20 lg:pt-24 pb-12 relative overflow-hidden">
-        {/* Background Image with Overlay */}
-        <div className="absolute inset-0 z-0">
-          <Image
-            src="/images/Omnitekh3sLogonew.jpg"
-            alt="Happy guests enjoying accommodation"
-            fill
-            className="object-cover opacity-20"
-            priority
-          />
-          <div className="absolute inset-0 bg-gradient-to-r from-background to-white/90" />
-        </div>
-
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
             {/* Left Column */}
@@ -115,14 +102,32 @@ export function HeroSection() {
               </div>
             </div>
 
-            {/* Right Column - Logo with Opaque White Background */}
-            {/* Right Column - Logo with Opaque White Background */}
-        <div className="flex items-center justify-center">
-          <div className="relative w-full h-96 lg:h-[450px] flex items-center justify-center rounded-2xl overflow-hidden bg-white p-8">
-              {/* Yeni Vektörel Logomuz - Kapsayıcı kutunun boyutuna göre mükemmel şekilde ortalanır ve esner */}
-                < OmnitekLogo className="w-full h-full max-h-80 object-contain" />
-               </div>
+            {/* Right Column - H3S Diagram */}
+            <div className="relative flex items-center justify-center">
+              {/* Soft brand-colored glow behind the card */}
+              <div className="absolute inset-4 -z-10 rounded-[2rem] bg-gradient-to-br from-primary/30 via-cyan-400/20 to-success/30 blur-3xl" />
+
+              <div className="relative w-full aspect-[1131/926] rounded-2xl bg-gradient-to-br from-primary via-cyan-400 to-success p-[2px] shadow-2xl">
+                <div className="relative w-full h-full rounded-[calc(1rem-2px)] overflow-hidden">
+                  <Image
+                    src="/images/h3s-diagram.png"
+                    alt="Omnitek H3S - Siber Güvenlik Kalkanı, Yasal Uyumluluk ve Aktif İnternet Kontrolü"
+                    width={1131}
+                    height={926}
+                    className="w-full h-full object-cover"
+                    priority
+                  />
+                </div>
+              </div>
             </div>
+          </div>
+
+          {/* Trust Badge */}
+          <div className="mt-12 lg:mt-16 flex items-center justify-center gap-2 text-sm">
+            <ShieldCheck className="h-4 w-4 text-primary shrink-0" />
+            <span className="text-muted-foreground">
+              <span className="font-semibold text-foreground">1986&apos;dan beri</span> Omnitek Telekom güvencesiyle
+            </span>
           </div>
         </div>
       </section>
