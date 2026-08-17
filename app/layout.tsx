@@ -3,7 +3,8 @@ import { Plus_Jakarta_Sans, Inter } from 'next/font/google'
 import { Analytics } from '@vercel/analytics/next'
 import './globals.css'
 // Hatayı çözen nokta-eğik çizgili import:
-import WhatsAppButton from './WhatsAppButton' 
+import WhatsAppButton from './WhatsAppButton'
+import CookieBanner from '@/components/cookie-banner'
 
 const plusJakarta = Plus_Jakarta_Sans({ 
   subsets: ['latin'],
@@ -33,6 +34,7 @@ export default function RootLayout({
         {children}
         
         <WhatsAppButton />
+        <CookieBanner />
 
         {process.env.NODE_ENV === 'production' && <Analytics />}
       </body>

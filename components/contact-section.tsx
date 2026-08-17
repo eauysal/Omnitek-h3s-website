@@ -1,9 +1,11 @@
 "use client"
 
 import { useState } from "react"
+import Link from "next/link"
 import { Phone, Mail, MapPin, CheckCircle, AlertCircle } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
+import { Reveal } from "@/components/ui/reveal"
 
 const businessTypes = [
   "Kafe",
@@ -16,8 +18,8 @@ const businessTypes = [
 ]
 
 const contactInfo = [
-  { icon: Phone, label: "Telefon", value: "+90 536 920 22 14" },
-  { icon: Mail, label: "E-posta", value: "eauysal@omnitek.com.tr" },
+  { icon: Phone, label: "Telefon", value: "+90 536 920 22 14", href: "tel:+905369202214" },
+  { icon: Mail, label: "E-posta", value: "eauysal@omnitek.com.tr", href: "mailto:eauysal@omnitek.com.tr" },
   { icon: MapPin, label: "Konum", value: "İstanbul, Antalya, Ankara" },
 ]
 
@@ -25,6 +27,7 @@ export function ContactSection() {
   const [isSubmitted, setIsSubmitted] = useState(false)
   const [isLoading, setIsLoading] = useState(false)
   const [error, setError] = useState("")
+  const [consent, setConsent] = useState(false)
   const [formData, setFormData] = useState({
     name: "",
     phone: "",
@@ -36,6 +39,12 @@ export function ContactSection() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
+
+    if (!consent) {
+      setError("Devam etmek için KVKK Aydınlatma Metni'ni onaylamanız gerekiyor.")
+      return
+    }
+
     setIsLoading(true)
     setError("")
 
@@ -45,7 +54,9 @@ export function ContactSection() {
       formDataToSend.append("phone", formData.phone)
       formDataToSend.append("business", formData.business)
       formDataToSend.append("businessType", formData.businessType)
+      formDataToSend.append("city", formData.city)
       formDataToSend.append("note", formData.note)
+      formDataToSend.append("kvkkOnay", "Evet")
 
       // Submit to Formspree
       const response = await fetch("https://formspree.io/f/xeewjyra", {
@@ -62,6 +73,7 @@ export function ContactSection() {
 
       setIsSubmitted(true)
       setFormData({ name: "", phone: "", business: "", businessType: "", city: "", note: "" })
+      setConsent(false)
     } catch (err) {
       setError(err instanceof Error ? err.message : "Bir hata oluştu. Lütfen daha sonra tekrar deneyin.")
     } finally {
@@ -77,11 +89,11 @@ export function ContactSection() {
   }
 
   return (
-    <section id="iletisim" className="py-16 lg:py-24">
+    <section id="iletisim" className="py-16 lg:py-24 overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid lg:grid-cols-2 gap-8 lg:gap-12">
           {/* Left - Contact Info */}
-          <div className="space-y-8">
+          <Reveal direction="left" className="space-y-8">
             <div>
               <h2 className="font-[family-name:var(--font-heading)] text-2xl sm:text-3xl lg:text-4xl font-bold text-foreground mb-4">
                 Ücretsiz keşif <span className="text-primary">randevusu</span> alın
@@ -92,25 +104,29 @@ export function ContactSection() {
             </div>
 
             <div className="space-y-4">
-              {contactInfo.map((item) => (
-                <div
-                  key={item.label}
-                  className="flex items-center gap-4 p-4 bg-card border border-border rounded-lg"
-                >
-                  <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center">
-                    <item.icon className="h-5 w-5 text-primary" />
-                  </div>
-                  <div>
-                    <p className="text-sm text-muted-foreground">{item.label}</p>
-                    <p className="font-semibold text-foreground">{item.value}</p>
-                  </div>
-                </div>
-              ))}
+              {contactInfo.map((item) => {
+                const Tag = item.href ? "a" : "div"
+                return (
+                  <Tag
+                    key={item.label}
+                    {...(item.href ? { href: item.href } : {})}
+                    className="flex items-center gap-4 p-4 bg-card border border-border rounded-lg hover:border-primary/50 transition-colors"
+                  >
+                    <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center">
+                      <item.icon className="h-5 w-5 text-primary" />
+                    </div>
+                    <div>
+                      <p className="text-sm text-muted-foreground">{item.label}</p>
+                      <p className="font-semibold text-foreground">{item.value}</p>
+                    </div>
+                  </Tag>
+                )
+              })}
             </div>
-          </div>
+          </Reveal>
 
           {/* Right - Contact Form */}
-          <div className="bg-card border border-border rounded-xl p-6 lg:p-8">
+          <Reveal direction="right" delay={150} className="bg-card border border-border rounded-xl p-6 lg:p-8">
             {isSubmitted ? (
               <div className="flex flex-col items-center justify-center h-full text-center py-12">
                 <div className="w-16 h-16 rounded-full bg-success/20 flex items-center justify-center mb-4">
@@ -232,6 +248,24 @@ export function ContactSection() {
                   />
                 </div>
 
+                <div className="flex items-start gap-2.5">
+                  <input
+                    id="kvkkOnay"
+                    name="kvkkOnay"
+                    type="checkbox"
+                    required
+                    checked={consent}
+                    onChange={(e) => setConsent(e.target.checked)}
+                    className="mt-0.5 h-4 w-4 shrink-0 rounded border-border text-primary focus:ring-primary"
+                  />
+                  <label htmlFor="kvkkOnay" className="text-xs text-muted-foreground leading-relaxed">
+                    <Link href="/kvkk" target="_blank" className="text-primary hover:underline">
+                      KVKK Aydınlatma Metni
+                    </Link>
+                    &apos;ni okudum, kişisel verilerimin belirtilen amaçlarla işlenmesini kabul ediyorum.
+                  </label>
+                </div>
+
                 <Button
                   type="submit"
                   size="lg"
@@ -242,7 +276,7 @@ export function ContactSection() {
                 </Button>
               </form>
             )}
-          </div>
+          </Reveal>
         </div>
       </div>
     </section>

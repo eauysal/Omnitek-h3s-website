@@ -1,5 +1,8 @@
 "use client"
 
+import { QuoteRequestDialog } from "@/components/quote-request-dialog"
+import { Reveal } from "@/components/ui/reveal"
+
 const lossCards = [
   { label: "Günlük misafir", value: "~100 Kişi", unit: "kişi bağlanıyor" },
   { label: "Tanınmayan misafir", value: "%35", unit: "bir daha gelmiyor" },
@@ -8,7 +11,7 @@ const lossCards = [
 
 const beforeItems = [
   "Kafe doluydu, hafta sonu yoğunluk neden düşüyor bilinmiyordu",
-  "Wi-fi vardı, kim bağlandı yoktu",
+  "Wi-Fi vardı, kim bağlandı yoktu",
   "Kaç müşteri geri döndü, hiç ölçülmedi",
 ]
 
@@ -81,7 +84,7 @@ export function BenefitsSection() {
   return (
     <section id="faydalar" className="bg-[#1A365D] scroll-mt-auto py-16 lg:py-24 relative overflow-hidden">
       
-      {/* Görünmeyen Wifi İkonu yerine Garanti Saf SVG Wifi Sinyali */}
+      {/* Görünmeyen Wi-Fi İkonu yerine Garanti Saf SVG Wi-Fi Sinyali */}
       <div className="absolute top-4 left-4 z-50 bg-white/10 p-2 rounded-xl flex items-center gap-2 backdrop-blur-sm border border-white/10">
         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#22c55e" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="animate-pulse">
           <path d="M12 18l.01 0" /><path d="M9.17 15.17a4 4 0 0 1 5.66 0" /><path d="M6.34 12.34a8 8 0 0 1 11.32 0" /><path d="M3.51 9.51a12 12 0 0 1 16.98 0" />
@@ -92,27 +95,27 @@ export function BenefitsSection() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col gap-3">
 
         {/* ── Section heading ── */}
-        <div className="text-center mb-6">
+        <Reveal className="text-center mb-6">
           <h2 className="font-[family-name:var(--font-heading)] text-3xl sm:text-4xl lg:text-5xl font-bold text-white mb-2">
-            Wi-Fi sadece internet değil 
+            Wi-Fi sadece internet değil
           </h2>
           <p className="font-[family-name:var(--font-heading)] text-4xl sm:text-4xl lg:text-4xl font-bold bg-gradient-to-r from-primary to-cyan-400 bg-clip-text text-transparent">
             Bir Pazarlama Aracı
           </p>
-        </div>
+        </Reveal>
 
         {/* ── Hook ── */}
-        <div className="bg-[#0B1221] border border-[#1E2D4A] rounded-2xl px-8 py-6 text-center shadow-lg cursor-default">
-            <p className="text-gray-100 font-semibold text-[26px] mb-2.5 tracking-wide"> 
+        <Reveal delay={80} className="bg-[#0B1221] border border-[#1E2D4A] rounded-2xl px-8 py-6 text-center shadow-lg cursor-default">
+            <p className="text-gray-100 font-semibold text-[26px] mb-2.5 tracking-wide">
                 Wi-Fi'ınız her gün kaç müşteri kaydediyor — siz görüyor musunuz?
             </p>
           <p className="text-white/85 text-medium text-[18px] leading-relaxed">
-            Çoğu işletme wi-fi kullanan müşteri sayısını tam olarak bilmiyor. Hangi müşteriler geri döndü veya hangi müşteriler ilk defa geldi bu altın değerindeki veriyi bilen yok. Bu veriyi bilmeyen işletmeler, müşterilerinin yarısını kaybediyor olabilir.
+            Çoğu işletme Wi-Fi kullanan müşteri sayısını tam olarak bilmiyor. Hangi müşteriler geri döndü veya hangi müşteriler ilk defa geldi bu altın değerindeki veriyi bilen yok. Bu veriyi bilmeyen işletmeler, müşterilerinin yarısını kaybediyor olabilir.
           </p>
-        </div>
+        </Reveal>
 
         {/* ── Kayıp hesabı ── */}
-        <div className="bg-[#FCEBEB] border border-[#F09595] rounded-2xl px-6 py-5 hover:border-cyan-500/50 transition-all duration-300">
+        <Reveal delay={160} className="bg-[#FCEBEB] border border-[#F09595] rounded-2xl px-6 py-5 hover:border-cyan-500/50 transition-all duration-300">
           <p className="text-[11px] font-medium text-[#791F1F] uppercase tracking-wide mb-4">
             Doğrulanmış Kayıp Hesabı — 50 sandalyeli kafe
           </p>
@@ -129,10 +132,10 @@ export function BenefitsSection() {
             35 kayıp müşteri/gün × %50 geri dönüş × 220 ₺ sepet × 365 gün.{" "}
             <strong className="text-[#501313]">Sistemi olmayan her işletme bu tabloyla yaşıyor.</strong>
           </p>
-        </div>
+        </Reveal>
 
         {/* ── Before / After ── */}
-        <div className="bg-white/25 border border-white/15 rounded-2xl overflow-hidden">
+        <Reveal delay={240} className="bg-white/25 border border-white/15 rounded-2xl overflow-hidden">
 
           {/* Owner photo + quote */}
           <div className="flex items-center gap-4 px-6 pt-5 pb-4 border-b border-white/10">
@@ -197,10 +200,10 @@ export function BenefitsSection() {
               </div>
             ))}
           </div>
-        </div>
+        </Reveal>
 
         {/* ── Hero card ── */}
-        <div className="relative bg-white/8 border-2 border-[#639922] rounded-2xl px-6 py-5">
+        <Reveal delay={320} className="relative bg-white/8 border-2 border-[#639922] rounded-2xl px-6 py-5">
           <span className="absolute -top-px right-4 bg-[#639922] text-[#EAF3DE] text-[24px] font-medium px-3 py-1 rounded-b-lg uppercase tracking-wide">
             En kritik Kazanç: Kayıp müşteriyi geri getirin
           </span>
@@ -222,38 +225,40 @@ export function BenefitsSection() {
           <div className="text-[14px] text-[#185FA5] bg-[#E6F1FB] border-l-2 border-[#185FA5] px-3 py-2 leading-relaxed">
             Burro Kafe'de ilk kampanya sonrası hafta sonu doluluk %38 arttı — 7 günde.
           </div>
-        </div>
+        </Reveal>
 
         {/* ── Secondary cards ── */}
         <div className="grid grid-cols-3 gap-3">
           {secondaryCards.map((card, i) => {
             const IconComponent = card.icon;
             return (
-              <div key={i} className="bg-white/8 border border-white/15 rounded-2xl p-4">
-                <div className="flex items-center gap-2 mb-3">
-                  <div className="w-8 h-8 rounded-lg bg-white/10 flex items-center justify-center flex-shrink-0 text-white/80">
-                    <IconComponent />
+              <Reveal key={i} delay={400 + i * 80}>
+                <div className="bg-white/8 border border-white/15 rounded-2xl p-4 h-full">
+                  <div className="flex items-center gap-2 mb-3">
+                    <div className="w-8 h-8 rounded-lg bg-white/10 flex items-center justify-center flex-shrink-0 text-white/80">
+                      <IconComponent />
+                    </div>
+                    <p className="text-white font-medium text-[14px]">{card.title}</p>
                   </div>
-                  <p className="text-white font-medium text-[14px]">{card.title}</p>
+                  <ul className="space-y-1.5 mb-3">
+                    {card.points.map((p, j) => (
+                      <li key={j} className="flex items-center gap-1.5 text-[14px] text-white/85 leading-snug">
+                        <span className="w-1H h-1 rounded-full bg-white/25 flex-shrink-0" />
+                        {p}
+                      </li>
+                    ))}
+                  </ul>
+                  <div className="text-[14px] text-[#185FA5] bg-[#E6F1FB] border-l-2 border-[#185FA5] px-2.5 py-1.5 leading-relaxed">
+                    {card.insight}
+                  </div>
                 </div>
-                <ul className="space-y-1.5 mb-3">
-                  {card.points.map((p, j) => (
-                    <li key={j} className="flex items-center gap-1.5 text-[14px] text-white/85 leading-snug">
-                      <span className="w-1H h-1 rounded-full bg-white/25 flex-shrink-0" />
-                      {p}
-                    </li>
-                  ))}
-                </ul>
-                <div className="text-[14px] text-[#185FA5] bg-[#E6F1FB] border-l-2 border-[#185FA5] px-2.5 py-1.5 leading-relaxed">
-                  {card.insight}
-                </div>
-              </div>
+              </Reveal>
             );
           })}
         </div>
 
         {/* ── CTA ── */}
-        <div className="bg-[#EAF3DE] border border-[#97C459] rounded-2xl px-6 py-5 flex items-center justify-between gap-4 flex-wrap">
+        <Reveal delay={680} className="bg-[#EAF3DE] border border-[#97C459] rounded-2xl px-6 py-5 flex items-center justify-between gap-4 flex-wrap">
           <div>
             <p className="text-[#27500A] font-medium text-[15px] mb-1">
               Sizin işletmenizde ne kadar potansiyel var?
@@ -263,14 +268,13 @@ export function BenefitsSection() {
               <span className="font-medium text-[#27500A]">15 dakikada sistem analizini yapalım, taahhütsüz.</span>
             </p>
           </div>
-          <a
-            href="#iletisim"
-            className="inline-flex items-center gap-2 bg-[#3B6D11] text-[#EAF3DE] text-[13px] font-medium px-5 py-2.5 rounded-xl whitespace-nowrap hover:bg-[#27500A] transition-colors flex-shrink-0"
-          >
-            Ücretsiz keşif talep et
-            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12l14 0" /><path d="M13 18l6 -6" /><path d="M13 6l6 -6" /></svg>
-          </a>
-        </div>
+          <QuoteRequestDialog>
+            <button className="inline-flex items-center gap-2 bg-[#3B6D11] text-[#EAF3DE] text-[13px] font-medium px-5 py-2.5 rounded-xl whitespace-nowrap hover:bg-[#27500A] transition-colors flex-shrink-0">
+              Teklif Al
+              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12l14 0" /><path d="M13 18l6 -6" /><path d="M13 6l6 -6" /></svg>
+            </button>
+          </QuoteRequestDialog>
+        </Reveal>
 
       </div>
     </section>

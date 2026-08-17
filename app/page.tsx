@@ -6,6 +6,7 @@ import { ProcessSection } from "@/components/process-section"
 import { ComparisonSection } from "@/components/comparison-section"
 import { SectorsSection } from "@/components/sectors-section"
 import { LegalSection } from "@/components/legal-section"
+import { FaqSection } from "@/components/faq-section"
 import { ContactSection } from "@/components/contact-section"
 import { Footer } from "@/components/footer"
 
@@ -20,6 +21,7 @@ export default function Home() {
       <ComparisonSection />
       <SectorsSection />
       <LegalSection />
+      <FaqSection />
       <ContactSection />
       <Footer />
     </main>

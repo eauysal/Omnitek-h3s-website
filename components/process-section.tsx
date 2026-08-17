@@ -1,6 +1,7 @@
 "use client"
 
 import { Phone, Search, FileText, Settings, Shield } from "lucide-react"
+import { Reveal } from "@/components/ui/reveal"
 
 const steps = [
   {
@@ -39,14 +40,14 @@ export function ProcessSection() {
   return (
     <section id="surec" className="py-16 lg:py-24">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-12">
+        <Reveal className="text-center mb-12">
           <h2 className="font-[family-name:var(--font-heading)] text-2xl sm:text-3xl lg:text-4xl font-bold text-foreground mb-4">
             Nasıl <span className="text-primary">Çalışıyoruz?</span>
           </h2>
           <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
             Baştan sona profesyonel süreç yönetimi ile yanınızdayız.
           </p>
-        </div>
+        </Reveal>
 
         {/* Desktop Process Flow */}
         <div className="hidden lg:block relative">
@@ -55,7 +56,7 @@ export function ProcessSection() {
 
           <div className="grid grid-cols-5 gap-4 relative">
             {steps.map((step, index) => (
-              <div key={step.id} className="flex flex-col items-center text-center">
+              <Reveal key={step.id} delay={index * 100} className="flex flex-col items-center text-center">
                 <div className="relative mb-4 transition-transform duration-300 hover:scale-125 hover:-translate-y-2">
                   <div className="w-16 h-16 rounded-full bg-card border-2 border-primary flex items-center justify-center relative z-10">
                     <step.icon className="h-7 w-7 text-primary" />
@@ -66,7 +67,7 @@ export function ProcessSection() {
                 </div>
                 <h3 className="font-semibold text-foreground mb-2">{step.title}</h3>
                 <p className="text-sm text-muted-foreground">{step.description}</p>
-              </div>
+              </Reveal>
             ))}
           </div>
         </div>
@@ -74,7 +75,7 @@ export function ProcessSection() {
         {/* Mobile Process Flow */}
         <div className="lg:hidden space-y-6">
           {steps.map((step, index) => (
-            <div key={step.id} className="flex gap-4">
+            <Reveal key={step.id} delay={index * 100} className="flex gap-4">
               <div className="flex flex-col items-center">
                 <div className="w-12 h-12 rounded-full bg-card border-2 border-primary flex items-center justify-center transition-transform duration-300 hover:scale-125 hover:-translate-y-2">
                   <step.icon className="h-5 w-5 text-primary" />
@@ -90,7 +91,7 @@ export function ProcessSection() {
                 </div>
                 <p className="text-sm text-muted-foreground">{step.description}</p>
               </div>
-            </div>
+            </Reveal>
           ))}
         </div>
       </div>

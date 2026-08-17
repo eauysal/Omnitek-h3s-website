@@ -1,0 +1,40 @@
+{
+  "cezaTutariNotu": "Kesin ceza tutarları için BTK'nın güncel tebliğleri veya Resmi Gazete kontrol edilmelidir; tutarlar her yıl yeniden değerleme oranıyla güncellenir.",
+  "maddeler": {
+    "madde-3-2": {
+      "no": "Madde 3/2",
+      "yukumluTaraf": "İçerik / Yer / Erişim Sağlayıcı",
+      "konu": "Bilgilendirme yükümlülüğü",
+      "yaptirimTuru": "İdari para cezası",
+      "agirlik": "orta"
+    },
+    "madde-5": {
+      "no": "Madde 5",
+      "yukumluTaraf": "Yer Sağlayıcı",
+      "konu": "Log / trafik bilgisi tutma ve muhafaza",
+      "yaptirimTuru": "İdari para cezası",
+      "agirlik": "yuksek"
+    },
+    "madde-6": {
+      "no": "Madde 6",
+      "yukumluTaraf": "Erişim Sağlayıcı",
+      "konu": "Trafik bilgisi saklama yükümlülüğü",
+      "yaptirimTuru": "İdari para cezası",
+      "agirlik": "orta"
+    },
+    "madde-7": {
+      "no": "Madde 7",
+      "yukumluTaraf": "Toplu Kullanım Sağlayıcı (işyeri, otel, kafe, ofis vb.)",
+      "konu": "İzin belgesi ve log tutma yükümlülüğü",
+      "yaptirimTuru": "İdari para cezası",
+      "agirlik": "yuksek"
+    },
+    "madde-8": {
+      "no": "Madde 8 / 8-A",
+      "yukumluTaraf": "Erişim Sağlayıcı",
+      "konu": "BTK erişim engelleme / tedbir kararına uymama",
+      "yaptirimTuru": "İdari para cezası, tekrarında ağırlaştırılmış yaptırım ve erişim engeli riski",
+      "agirlik": "en-yuksek"
+    }
+  }
+}

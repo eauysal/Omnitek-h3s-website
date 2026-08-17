@@ -5,6 +5,7 @@ import Image from "next/image"
 import Link from "next/link"
 import { Menu, X } from "lucide-react"
 import { Button } from "@/components/ui/button"
+import { QuoteRequestDialog } from "@/components/quote-request-dialog"
 
 const navLinks = [
   { href: "#teshis", label: "Sorunlar" },
@@ -38,21 +39,15 @@ export function Navbar() {
         href="/"
         className="shrink-0 flex items-center gap-2.5"
       >
-        <Image
-          src="/images/h3s-icon.png"
-          alt="Omnitek H3S"
-          width={44}
-          height={44}
-          className="h-9 w-9 lg:h-11 lg:w-11 object-contain rounded-full"
-          priority
-        />
-        <Image
-          src="/images/omnitek-wordmark.png"
-          alt="Omnitek"
-          width={3044}
-          height={1408}
-          className="hidden sm:block h-9 lg:h-11 w-auto object-contain"
-        />
+        <div className="relative h-14 w-14 lg:h-16 lg:w-16 overflow-hidden shrink-0">
+          <Image
+            src="/images/h3s-logo-full.webp"
+            alt="Omnitek H3S"
+            fill
+            className="object-cover scale-[1.35] object-[50%_52%]"
+            priority
+          />
+        </div>
       </Link>
 
           {/* Desktop Navigation */}
@@ -66,9 +61,11 @@ export function Navbar() {
                 {link.label}
               </Link>
             ))}
-            <Button asChild className="bg-primary text-primary-foreground hover:bg-primary/90">
-              <Link href="#iletisim">Ücretsiz Keşif</Link>
-            </Button>
+            <QuoteRequestDialog>
+              <Button className="bg-primary text-primary-foreground hover:bg-primary/90">
+                Teklif Al
+              </Button>
+            </QuoteRequestDialog>
           </div>
 
           {/* Mobile Menu Button */}
@@ -95,11 +92,14 @@ export function Navbar() {
                   {link.label}
                 </Link>
               ))}
-              <Button asChild className="bg-primary text-primary-foreground hover:bg-primary/90 w-full">
-                <Link href="#iletisim" onClick={() => setIsMobileMenuOpen(false)}>
-                  Ücretsiz Keşif
-                </Link>
-              </Button>
+              <QuoteRequestDialog>
+                <Button
+                  className="bg-primary text-primary-foreground hover:bg-primary/90 w-full"
+                  onClick={() => setIsMobileMenuOpen(false)}
+                >
+                  Teklif Al
+                </Button>
+              </QuoteRequestDialog>
             </div>
           </div>
         )}
