@@ -2,7 +2,7 @@
 
 import { useState } from "react"
 import Link from "next/link"
-import { Phone, Mail, MapPin, CheckCircle, AlertCircle } from "lucide-react"
+import { Mail, MapPin, CheckCircle, AlertCircle } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Reveal } from "@/components/ui/reveal"
@@ -18,8 +18,7 @@ const businessTypes = [
 ]
 
 const contactInfo = [
-  { icon: Phone, label: "Telefon", value: "+90 536 920 22 14", href: "tel:+905369202214" },
-  { icon: Mail, label: "E-posta", value: "eauysal@omnitek.com.tr", href: "mailto:eauysal@omnitek.com.tr" },
+  { icon: Mail, label: "E-posta", value: "info@omnitek.com.tr", href: "mailto:info@omnitek.com.tr" },
   { icon: MapPin, label: "Konum", value: "İstanbul, Antalya, Ankara" },
 ]
 

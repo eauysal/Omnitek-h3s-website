@@ -4,11 +4,11 @@ import Image from "next/image"
 import Link from "next/link"
 
 const footerLinks = [
-  { href: "#teshis", label: "Sorunlar" },
-  { href: "#faydalar", label: "Kazançlar" },
-  { href: "#sektorler", label: "Sektörler" },
-  { href: "#sss", label: "SSS" },
-  { href: "#iletisim", label: "İletişim" },
+  { href: "/#teshis", label: "Sorunlar" },
+  { href: "/#faydalar", label: "Kazançlar" },
+  { href: "/#sektorler", label: "Sektörler" },
+  { href: "/#sss", label: "SSS" },
+  { href: "/#iletisim", label: "İletişim" },
 ]
 
 const legalLinks = [
@@ -40,16 +40,10 @@ export function Footer() {
             </p>
             <div className="flex flex-wrap justify-center md:justify-start gap-x-4 gap-y-1">
               <a
-                href="tel:+905369202214"
+                href="mailto:info@omnitek.com.tr"
                 className="text-sm text-muted-foreground hover:text-primary transition-colors"
               >
-                +90 536 920 22 14
-              </a>
-              <a
-                href="mailto:eauysal@omnitek.com.tr"
-                className="text-sm text-muted-foreground hover:text-primary transition-colors"
-              >
-                eauysal@omnitek.com.tr
+                info@omnitek.com.tr
               </a>
             </div>
           </div>

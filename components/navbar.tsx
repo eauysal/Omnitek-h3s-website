@@ -8,10 +8,10 @@ import { Button } from "@/components/ui/button"
 import { QuoteRequestDialog } from "@/components/quote-request-dialog"
 
 const navLinks = [
-  { href: "#teshis", label: "Sorunlar" },
-  { href: "#faydalar", label: "Kazançlar" },
-  { href: "#sektorler", label: "Sektörler" },
-  { href: "#iletisim", label: "İletişim" },
+  { href: "/#teshis", label: "Sorunlar" },
+  { href: "/#faydalar", label: "Kazançlar" },
+  { href: "/#sektorler", label: "Sektörler" },
+  { href: "/#iletisim", label: "İletişim" },
 ]
 
 export function Navbar() {
@@ -63,7 +63,7 @@ export function Navbar() {
             ))}
             <QuoteRequestDialog>
               <Button className="bg-primary text-primary-foreground hover:bg-primary/90">
-                Teklif Al
+                Demo Talep Et
               </Button>
             </QuoteRequestDialog>
           </div>
@@ -81,7 +81,7 @@ export function Navbar() {
         {/* Mobile Navigation */}
         {isMobileMenuOpen && (
           <div className="md:hidden py-4 border-t border-gray-200 bg-white">
-            <div className="flex flex-col gap-4">
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col gap-4">
               {navLinks.map((link) => (
                 <Link
                   key={link.href}
@@ -97,7 +97,7 @@ export function Navbar() {
                   className="bg-primary text-primary-foreground hover:bg-primary/90 w-full"
                   onClick={() => setIsMobileMenuOpen(false)}
                 >
-                  Teklif Al
+                  Demo Talep Et
                 </Button>
               </QuoteRequestDialog>
             </div>

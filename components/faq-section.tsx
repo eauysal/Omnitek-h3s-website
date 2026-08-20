@@ -36,6 +36,8 @@ const faqs = [
         </Link>
         &apos;ni inceleyebilirsiniz.
       </>,
+    plainAnswer:
+      "Evet. Toplanan misafir verileri (ad, telefon, e-posta) ve log kayıtları şifreli olarak saklanır, yalnızca yasal yükümlülükler ve belirtilen amaçlarla işlenir.",
   },
   {
     question: "Uzun süreli bir sözleşme veya taahhüt zorunlu mu?",
@@ -44,9 +46,26 @@ const faqs = [
   },
 ]
 
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: faqs.map((faq) => ({
+    "@type": "Question",
+    name: faq.question,
+    acceptedAnswer: {
+      "@type": "Answer",
+      text: faq.plainAnswer ?? (faq.answer as string),
+    },
+  })),
+}
+
 export function FaqSection() {
   return (
     <section id="sss" className="py-16 lg:py-24 bg-secondary/30">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
+      />
       <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
         <Reveal className="text-center mb-12">
           <h2 className="font-[family-name:var(--font-heading)] text-2xl sm:text-3xl lg:text-4xl font-bold text-foreground mb-4">

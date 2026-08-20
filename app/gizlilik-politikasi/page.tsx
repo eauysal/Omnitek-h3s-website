@@ -6,6 +6,9 @@ import { Footer } from "@/components/footer"
 export const metadata: Metadata = {
   title: "Gizlilik Politikası | Omnitek H3S",
   description: "Omnitek H3S gizlilik politikası — hangi verileri topluyoruz, nasıl işliyoruz ve saklıyoruz.",
+  alternates: {
+    canonical: "/gizlilik-politikasi",
+  },
 }
 
 export default function GizlilikPolitikasiPage() {
@@ -69,8 +72,8 @@ export default function GizlilikPolitikasiPage() {
             <h2 className="font-semibold text-foreground text-lg mb-2">6. İletişim</h2>
             <p>
               Gizlilik politikamız hakkında sorularınız için{" "}
-              <a href="mailto:eauysal@omnitek.com.tr" className="text-primary hover:underline">
-                eauysal@omnitek.com.tr
+              <a href="mailto:info@omnitek.com.tr" className="text-primary hover:underline">
+                info@omnitek.com.tr
               </a>{" "}
               adresinden bize ulaşabilirsiniz. Kişisel verilerinizle ilgili haklarınız için{" "}
               <Link href="/kvkk" className="text-primary hover:underline">

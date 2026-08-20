@@ -5,6 +5,9 @@ import { Footer } from "@/components/footer"
 export const metadata: Metadata = {
   title: "KVKK Aydınlatma Metni | Omnitek H3S",
   description: "6698 sayılı Kişisel Verilerin Korunması Kanunu kapsamında Omnitek H3S aydınlatma metni.",
+  alternates: {
+    canonical: "/kvkk",
+  },
 }
 
 export default function KvkkPage() {
@@ -71,8 +74,8 @@ export default function KvkkPage() {
             <h2 className="font-semibold text-foreground text-lg mb-2">6. Başvuru</h2>
             <p>
               Haklarınızı kullanmak için{" "}
-              <a href="mailto:eauysal@omnitek.com.tr" className="text-primary hover:underline">
-                eauysal@omnitek.com.tr
+              <a href="mailto:info@omnitek.com.tr" className="text-primary hover:underline">
+                info@omnitek.com.tr
               </a>{" "}
               adresine yazılı olarak başvurabilirsiniz.
             </p>

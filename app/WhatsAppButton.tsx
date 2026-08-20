@@ -17,8 +17,8 @@ export default function WhatsAppButton() {
       href={whatsappUrl}
       target="_blank"
       rel="noopener noreferrer"
-      className="fixed bottom-6 right-6 z-50 flex items-center justify-center w-14 h-14 bg-[#25D366] text-white rounded-full shadow-lg hover:bg-[#20ba5a] transition-all duration-300 hover:scale-110 group"
-      aria-label="WhatsApp ile İletişime Geçin"
+      className="fixed bottom-24 right-6 md:bottom-6 z-50 flex items-center justify-center w-14 h-14 bg-[#25D366] text-white rounded-full shadow-lg hover:bg-[#20ba5a] transition-all duration-300 hover:scale-110 group"
+      aria-label="Demo Talep Et"
     >
       {/* Yeşil WhatsApp Logosu Simgesi */}
       <svg 
@@ -30,7 +30,7 @@ export default function WhatsAppButton() {
       
       {/* Üzerine gelince açılan ufak bir "Bizimle İletişime Geçin" balonu */}
       <span className="absolute right-16 bg-white text-gray-800 text-xs font-medium px-3 py-1.5 rounded-lg shadow-md opacity-0 group-hover:opacity-100 transition-opacity duration-300 whitespace-nowrap pointer-events-none border border-gray-100">
-        WhatsApp'tan Hemen İletişime Geçin
+        Demo Talep Et
       </span>
     </a>
   );

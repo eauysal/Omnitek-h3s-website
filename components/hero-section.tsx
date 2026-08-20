@@ -56,8 +56,8 @@ export function HeroSection() {
 
   return (
     <>
-      <section className="min-h-screen pt-20 lg:pt-24 pb-12 relative overflow-hidden">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+      <section className="min-h-screen pt-24 lg:pt-28 pb-12 relative overflow-hidden">
+        <div className="max-w-7xl mx-auto px-6 sm:px-6 lg:px-8 relative z-10">
           <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
             {/* Left Column */}
             <Reveal direction="left" className="space-y-8">
@@ -127,7 +127,16 @@ export function HeroSection() {
           <div className="mt-12 lg:mt-16 flex items-center justify-center gap-2 text-sm">
             <ShieldCheck className="h-4 w-4 text-primary shrink-0" />
             <span className="text-muted-foreground">
-              <span className="font-semibold text-foreground">1986&apos;dan beri</span> Omnitek Telekom güvencesiyle
+              <span className="font-semibold text-foreground">1986&apos;dan beri</span>{" "}
+              <a
+                href="https://www.omnitek.com.tr"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="hover:text-primary hover:underline transition-colors"
+              >
+                Omnitek Telekom
+              </a>{" "}
+              güvencesiyle
             </span>
           </div>
         </div>
@@ -201,7 +210,7 @@ export function HeroSection() {
                 </div>
               </div>
               <p className="text-sm text-muted-foreground mb-4">
-                Son 6 ayda <span className="text-foreground font-semibold">24+ işletme</span> güvenliğini H3S&apos;e emanet etti.
+                Son 6 ayda <span className="text-foreground font-semibold">20'den fazla işletme </span> siber güvenliğini H3S&apos;e emanet etti.
               </p>
 
               {/* Testimonial */}
