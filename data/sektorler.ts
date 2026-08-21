@@ -36,12 +36,13 @@ export interface Paket {
 export interface Sektor {
   slug: string
   title: string
-  possessiveTitle: string
+  h1Title: string
   pluralLocative: string
   icon: LucideIcon
   shortDescription: string
   tags: string[]
   metaDescription: string
+  heroImage?: { url: string; width: number; height: number }
   intro: string
   painPoints: SektorSorun[]
   packages?: Paket[]
@@ -101,13 +102,14 @@ export const sektorler: Sektor[] = [
   {
     slug: "kafe",
     title: "Kafe",
-    possessiveTitle: "Kafeniz",
+    h1Title: "Kafeler İçin Misafir Wi-Fi ve 5651 Uyum Çözümü",
     pluralLocative: "Kafelerde",
     icon: Coffee,
     shortDescription: "Misafir Wi-Fi, POS güvenliği ve yasal uyumluluk için özel çözümler.",
     tags: ["Misafir Wi-Fi", "POS Güvenliği", "5651 Uyum"],
     metaDescription:
       "Kafeler için kurumsal misafir Wi-Fi, POS ağ ayrımı ve 5651/KVKK uyumlu log kaydı. Ücretsiz saha keşfi ile H3S çözümünü öğrenin.",
+    heroImage: { url: "/images/h3s-sistem-diyagrami.webp", width: 1800, height: 1005 },
     intro:
       "Kafenizde misafir Wi-Fi'ı sunarken kasa ve POS cihazlarınızın aynı ağda olması ciddi bir güvenlik açığı yaratır. H3S, misafir ağını POS/kasa sisteminden tamamen ayırırken, 5651 sayılı kanun gereği zorunlu olan log kaydını da otomatik olarak yönetir.",
     painPoints: [
@@ -135,13 +137,14 @@ export const sektorler: Sektor[] = [
   {
     slug: "restoran",
     title: "Restoran",
-    possessiveTitle: "Restoranınız",
+    h1Title: "Restoranlar İçin Güvenli Misafir Wi-Fi ve 5651 Loglama",
     pluralLocative: "Restoranlarda",
     icon: UtensilsCrossed,
     shortDescription: "Yoğun müşteri trafiğine uygun, güvenli ve hızlı ağ altyapısı.",
     tags: ["Yüksek Kapasite", "Güvenli Ödeme", "Log Kaydı"],
     metaDescription:
       "Restoranlar için yüksek kapasiteli, güvenli misafir Wi-Fi altyapısı. POS güvenliği ve 5651 uyumlu log kaydı ile H3S.",
+    heroImage: { url: "/images/h3s-sistem-diyagrami.webp", width: 1800, height: 1005 },
     intro:
       "Yoğun saatlerde onlarca cihazın aynı anda bağlandığı bir restoran ağında, hem misafir deneyimi hem de ödeme güvenliği aynı anda korunmalı. H3S, yüksek kapasiteli misafir Wi-Fi'ı POS/adisyon sisteminizden ayrı bir ağda tutarak her ikisini de güvence altına alır.",
     painPoints: [
@@ -169,13 +172,14 @@ export const sektorler: Sektor[] = [
   {
     slug: "otel-pansiyon",
     title: "Otel & Pansiyon",
-    possessiveTitle: "Otel & Pansiyonunuz",
+    h1Title: "Oteller İçin Misafir Wi-Fi Altyapısı ve 5651 Uyum",
     pluralLocative: "Otel & Pansiyonlarda",
     icon: Building2,
     shortDescription: "Oda bazlı ağ yönetimi ve 7/24 kesintisiz bağlantı.",
     tags: ["Oda Yönetimi", "7/24 Bağlantı", "Misafir Portal"],
     metaDescription:
       "Otel ve pansiyonlar için oda bazlı ağ yönetimi, 7/24 kesintisiz misafir Wi-Fi ve 5651/KVKK uyumlu altyapı. H3S ile tanışın.",
+    heroImage: { url: "/images/h3s-sistem-diyagrami.webp", width: 1800, height: 1005 },
     intro:
       "Otel ve pansiyonlarda misafir memnuniyetinin önemli bir parçası kesintisiz ve güvenli internet erişimidir. H3S, oda bazlı ağ yönetimi ile her misafire ayrı ve güvenli bir bağlantı sağlarken, 7/24 aktif izleme ile olası kesintileri önceden tespit eder.",
     painPoints: [
@@ -203,7 +207,7 @@ export const sektorler: Sektor[] = [
   {
     slug: "dis-mekan-etkinlik",
     title: "Dış Mekan & Etkinlik",
-    possessiveTitle: "Dış Mekan & Etkinlik Alanınız",
+    h1Title: "Etkinlik Alanları İçin Wi-Fi ve 5651 Uyumlu Loglama",
     pluralLocative: "Dış Mekan & Etkinlik Alanlarında",
     icon: Sun,
     shortDescription: "Müşteri memnuniyeti için hızlı ve güvenli internet deneyimi.",
@@ -236,7 +240,7 @@ export const sektorler: Sektor[] = [
   {
     slug: "ofis-koworking",
     title: "Ofis & Koworking",
-    possessiveTitle: "Ofisiniz",
+    h1Title: "Ofisler İçin Kurumsal Ağ Güvenliği ve VLAN Ayrımı",
     pluralLocative: "Ofis & Koworking Alanlarında",
     icon: Building,
     shortDescription: "Çoklu kullanıcı yönetimi ve kurumsal düzeyde güvenlik.",
@@ -269,7 +273,7 @@ export const sektorler: Sektor[] = [
   {
     slug: "market-perakende",
     title: "Market & Perakende",
-    possessiveTitle: "Marketiniz",
+    h1Title: "Marketler İçin POS Güvenliği ve Misafir Wi-Fi",
     pluralLocative: "Market & Perakendede",
     icon: ShoppingCart,
     shortDescription: "POS entegrasyonu ve müşteri Wi-Fi için optimize çözümler.",

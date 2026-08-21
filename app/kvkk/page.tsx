@@ -1,12 +1,35 @@
 import type { Metadata } from "next"
 import { Navbar } from "@/components/navbar"
 import { Footer } from "@/components/footer"
+import { siteConfig } from "@/lib/seo"
+
+const pageTitle = "KVKK Aydınlatma Metni | Omnitek H3S"
+const pageDescription =
+  "6698 sayılı Kişisel Verilerin Korunması Kanunu kapsamında Omnitek H3S aydınlatma metni."
 
 export const metadata: Metadata = {
-  title: "KVKK Aydınlatma Metni | Omnitek H3S",
-  description: "6698 sayılı Kişisel Verilerin Korunması Kanunu kapsamında Omnitek H3S aydınlatma metni.",
+  title: pageTitle,
+  description: pageDescription,
   alternates: {
     canonical: "/kvkk",
+  },
+  robots: {
+    index: false,
+    follow: true,
+  },
+  openGraph: {
+    title: pageTitle,
+    description: pageDescription,
+    url: `${siteConfig.url}/kvkk`,
+    siteName: siteConfig.name,
+    locale: siteConfig.locale,
+    type: siteConfig.ogType,
+    images: [siteConfig.defaultImage],
+  },
+  twitter: {
+    title: pageTitle,
+    description: pageDescription,
+    images: [siteConfig.defaultImage.url],
   },
 }
 

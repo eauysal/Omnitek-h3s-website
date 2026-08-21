@@ -2,12 +2,35 @@ import type { Metadata } from "next"
 import Link from "next/link"
 import { Navbar } from "@/components/navbar"
 import { Footer } from "@/components/footer"
+import { siteConfig } from "@/lib/seo"
+
+const pageTitle = "Gizlilik Politikası | Omnitek H3S"
+const pageDescription =
+  "Omnitek H3S gizlilik politikası — hangi verileri topluyoruz, nasıl işliyoruz ve saklıyoruz."
 
 export const metadata: Metadata = {
-  title: "Gizlilik Politikası | Omnitek H3S",
-  description: "Omnitek H3S gizlilik politikası — hangi verileri topluyoruz, nasıl işliyoruz ve saklıyoruz.",
+  title: pageTitle,
+  description: pageDescription,
   alternates: {
     canonical: "/gizlilik-politikasi",
+  },
+  robots: {
+    index: false,
+    follow: true,
+  },
+  openGraph: {
+    title: pageTitle,
+    description: pageDescription,
+    url: `${siteConfig.url}/gizlilik-politikasi`,
+    siteName: siteConfig.name,
+    locale: siteConfig.locale,
+    type: siteConfig.ogType,
+    images: [siteConfig.defaultImage],
+  },
+  twitter: {
+    title: pageTitle,
+    description: pageDescription,
+    images: [siteConfig.defaultImage.url],
   },
 }
 

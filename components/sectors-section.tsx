@@ -12,7 +12,7 @@ export function SectorsSection() {
       <div className="absolute inset-0 z-0">
         <Image
           src="/images/happy-guests-3.jpg"
-          alt="Happy business people in a modern cafe"
+          alt="Kafede güvenli misafir Wi-Fi kullanan müşteriler"
           fill
           className="object-cover opacity-10"
         />

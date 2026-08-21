@@ -29,7 +29,7 @@ export function ComparisonSection() {
       <div className="absolute inset-0 z-0">
         <Image
           src="/images/happy-guests-2.jpg"
-          alt="Happy couple at hotel reception"
+          alt="Otel resepsiyonunda misafir Wi-Fi ile bağlanan konuklar"
           fill
           className="object-cover opacity-10"
         />

@@ -15,17 +15,5 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: 'monthly' as const,
       priority: 0.8,
     })),
-    {
-      url: 'https://omnitekh3s.com/gizlilik-politikasi',
-      lastModified: new Date(),
-      changeFrequency: 'yearly',
-      priority: 0.3,
-    },
-    {
-      url: 'https://omnitekh3s.com/kvkk',
-      lastModified: new Date(),
-      changeFrequency: 'yearly',
-      priority: 0.3,
-    },
   ]
 }

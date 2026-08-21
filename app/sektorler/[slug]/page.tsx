@@ -14,6 +14,8 @@ import Image from "next/image"
 import { SectorPackages } from "@/components/sector-packages"
 import { SectorProblems } from "@/components/sector-problems"
 import { Reveal } from "@/components/ui/reveal"
+import { siteConfig } from "@/lib/seo"
+import { BreadcrumbJsonLd, ServiceJsonLd } from "@/components/json-ld"
 
 export function generateStaticParams() {
   return sektorler.map((s) => ({ slug: s.slug }))
@@ -28,11 +30,36 @@ export async function generateMetadata({
   const sektor = getSektorBySlug(slug)
   if (!sektor) return {}
 
+  const pageTitle = `${sektor.title} için H3S Wi-Fi & Güvenlik Çözümü | Omnitek H3S`
+  const pageUrl = `${siteConfig.url}/sektorler/${sektor.slug}`
+  const ogImage = sektor.heroImage
+    ? {
+        url: sektor.heroImage.url,
+        width: sektor.heroImage.width,
+        height: sektor.heroImage.height,
+        alt: `${sektor.title} için Omnitek H3S çözümü`,
+      }
+    : siteConfig.defaultImage
+
   return {
-    title: `${sektor.title} için H3S Wi-Fi & Güvenlik Çözümü | Omnitek H3S`,
+    title: pageTitle,
     description: sektor.metaDescription,
     alternates: {
       canonical: `/sektorler/${sektor.slug}`,
+    },
+    openGraph: {
+      title: pageTitle,
+      description: sektor.metaDescription,
+      url: pageUrl,
+      siteName: siteConfig.name,
+      locale: siteConfig.locale,
+      type: siteConfig.ogType,
+      images: [ogImage],
+    },
+    twitter: {
+      title: pageTitle,
+      description: sektor.metaDescription,
+      images: [ogImage.url],
     },
   }
 }
@@ -46,7 +73,8 @@ export default async function SektorPage({
   const sektor = getSektorBySlug(slug)
   if (!sektor) notFound()
 
-  const showDiagram = ["kafe", "restoran", "otel-pansiyon"].includes(sektor.slug)
+  const showDiagram = Boolean(sektor.heroImage)
+  const pageUrl = `${siteConfig.url}/sektorler/${sektor.slug}`
 
   const ctaButtons = (
     <div className="flex flex-col sm:flex-row gap-4 justify-center">
@@ -69,26 +97,40 @@ export default async function SektorPage({
 
   return (
     <main className="min-h-screen">
+      <BreadcrumbJsonLd
+        items={[
+          { name: "Ana Sayfa", url: siteConfig.url },
+          { name: "Sektörler", url: `${siteConfig.url}/#sektorler` },
+          { name: sektor.title, url: pageUrl },
+        ]}
+      />
+      <ServiceJsonLd
+        sectorTitle={sektor.title}
+        serviceType={`${sektor.title} için Wi-Fi ve Ağ Güvenliği Hizmeti`}
+        description={sektor.metaDescription}
+        url={pageUrl}
+      />
+
       <Navbar />
 
       {/* Sector Hero */}
       <section className="pt-24 lg:pt-28 pb-16 lg:pb-20 overflow-hidden">
         <div className="max-w-4xl mx-auto px-6 sm:px-6 lg:px-8 text-center">
           <h1 className="font-[family-name:var(--font-heading)] text-3xl sm:text-4xl lg:text-5xl font-bold text-foreground mb-4 text-balance">
-            {sektor.possessiveTitle} İçin <span className="text-primary">H3S Çözümü</span>
+            {sektor.h1Title}
           </h1>
 
-          {showDiagram && (
+          {sektor.heroImage && (
             <>
               <Reveal className="mb-8 relative">
                 <div className="absolute inset-4 -z-10 rounded-[2rem] bg-gradient-to-br from-primary/30 via-cyan-400/20 to-success/30 blur-3xl" />
                 <div className="relative rounded-2xl bg-gradient-to-br from-primary via-cyan-400 to-success p-[2px] shadow-2xl">
                   <div className="relative w-full rounded-[calc(1rem-2px)] overflow-hidden bg-card">
                     <Image
-                      src="/images/h3s-sistem-diyagrami.webp"
+                      src={sektor.heroImage.url}
                       alt="Omnitek H3S Ekosistemi: Siber Güvenlik Kalkanı (VLAN), Yasal Uyumluluk (5651), Aktif İnternet Kontrolü (ACL), merkezi yönetim paneli ve entegrasyon şeması"
-                      width={1800}
-                      height={1005}
+                      width={sektor.heroImage.width}
+                      height={sektor.heroImage.height}
                       className="w-full h-auto"
                       sizes="(min-width: 1024px) 896px, 100vw"
                       priority
