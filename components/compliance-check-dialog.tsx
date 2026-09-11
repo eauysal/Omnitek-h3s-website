@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react"
+import { useEffect, useRef, useState } from "react"
 import {
   Dialog,
   DialogContent,
@@ -13,6 +13,7 @@ import { Button } from "@/components/ui/button"
 import { Progress } from "@/components/ui/progress"
 import { CheckCircle2, AlertTriangle, XCircle, ArrowLeft, Scale } from "lucide-react"
 import maddeData from "@/data/5651-maddeler.json"
+import { QuoteRequestDialog } from "@/components/quote-request-dialog"
 
 type Answer = "Evet" | "Hayır" | "Bilmiyorum"
 
@@ -150,9 +151,11 @@ export function ComplianceCheckDialog({ children }: { children: React.ReactNode 
   const [open, setOpen] = useState(false)
   const [step, setStep] = useState(0)
   const [answers, setAnswers] = useState<Record<string, Answer>>({})
+  const [showQuoteDialog, setShowQuoteDialog] = useState(false)
 
   const isResult = step === questions.length
   const progress = (Math.min(step, questions.length) / questions.length) * 100
+  const hasSubmittedRef = useRef(false)
 
   const handleAnswer = (answer: Answer) => {
     setAnswers((prev) => ({ ...prev, [questions[step].id]: answer }))
@@ -166,6 +169,7 @@ export function ComplianceCheckDialog({ children }: { children: React.ReactNode 
   const handleReset = () => {
     setStep(0)
     setAnswers({})
+    hasSubmittedRef.current = false
   }
 
   const handleOpenChange = (next: boolean) => {
@@ -182,6 +186,27 @@ export function ComplianceCheckDialog({ children }: { children: React.ReactNode 
   const resultLevel = getResultLevel(totalScore)
   const result = resultContent[resultLevel]
   const ResultIcon = result.icon
+
+  useEffect(() => {
+    if (!isResult || hasSubmittedRef.current) return
+    hasSubmittedRef.current = true
+
+    const formDataToSend = new FormData()
+    formDataToSend.append("Kaynak", "Hero - 5651 Uyum Analizi")
+    formDataToSend.append("Risk Seviyesi", result.title)
+    questions.forEach((q) => {
+      formDataToSend.append(q.text, answers[q.id] ?? "")
+    })
+
+    fetch("https://formspree.io/f/xeaqrzbo", {
+      method: "POST",
+      body: formDataToSend,
+      headers: { Accept: "application/json" },
+    }).catch(() => {
+      // Sessizce yut: kullanıcı akışını bozmasın, ziyaretçi zaten sonuç ekranını görüyor
+    })
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isResult])
 
   // Riskli görülen sorular — scoreForAnswer > 0 olan her cevap bir eksiklik/belirsizlik işaretidir
   // (posWifi gibi mantığı ters olan sorularda da doğru çalışır)
@@ -201,6 +226,7 @@ export function ComplianceCheckDialog({ children }: { children: React.ReactNode 
   const hasSanctionContent = triggeredMaddeIds.length > 0 || riskyNonMaddeQuestions.length > 0
 
   return (
+    <>
     <Dialog open={open} onOpenChange={handleOpenChange}>
       <DialogTrigger asChild>{children}</DialogTrigger>
       <DialogContent className="sm:max-w-md max-h-[85vh] overflow-y-auto">
@@ -326,11 +352,13 @@ export function ComplianceCheckDialog({ children }: { children: React.ReactNode 
 
             <div className="flex flex-col gap-2.5 mt-2">
               <Button
-                asChild
                 className="bg-primary text-primary-foreground hover:bg-primary/90"
-                onClick={() => handleOpenChange(false)}
+                onClick={() => {
+                  handleOpenChange(false)
+                  setShowQuoteDialog(true)
+                }}
               >
-                <a href="#iletisim">Teklif Al</a>
+                Teklif Al
               </Button>
               <button
                 onClick={handleReset}
@@ -343,5 +371,7 @@ export function ComplianceCheckDialog({ children }: { children: React.ReactNode 
         )}
       </DialogContent>
     </Dialog>
+    <QuoteRequestDialog open={showQuoteDialog} onOpenChange={setShowQuoteDialog} />
+    </>
   )
 }
