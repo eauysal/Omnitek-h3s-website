@@ -14,13 +14,22 @@ import { Progress } from "@/components/ui/progress"
 import { CheckCircle2, AlertTriangle, XCircle, ArrowLeft, Scale } from "lucide-react"
 import maddeData from "@/data/5651-maddeler.json"
 import { QuoteRequestDialog } from "@/components/quote-request-dialog"
+import { useLanguage, type Locale } from "@/lib/i18n/language-context"
 
+// Cevapların iç değerleri her zaman Türkçe kalır (skorlama mantığı buna göre kurulu);
+// arayüzde gösterilen metin ayrıca "answerLabels" ile dile göre çevrilir.
 type Answer = "Evet" | "Hayır" | "Bilmiyorum"
+
+const answerOptions: Answer[] = ["Evet", "Hayır", "Bilmiyorum"]
+
+const answerLabels: Record<Locale, Record<Answer, string>> = {
+  tr: { Evet: "Evet", Hayır: "Hayır", Bilmiyorum: "Bilmiyorum" },
+  en: { Evet: "Yes", Hayır: "No", Bilmiyorum: "I don't know" },
+}
 
 interface Question {
   id: string
   text: string
-  options: Answer[]
   /** 5651 sayılı Kanun madde referansları — bu sorunun "Hayır"/"Bilmiyorum" cevabı hangi maddelerle ilişkili */
   maddeRefs: string[]
   /** Riskli cevap durumunda gösterilecek tek cümlelik aksiyon önerisi */
@@ -29,44 +38,74 @@ interface Question {
   nonMaddeNote?: string
 }
 
-const questions: Question[] = [
-  {
-    id: "firewall",
-    text: "Kurumsal bir güvenlik duvarı kullanıyor musunuz?",
-    options: ["Evet", "Hayır", "Bilmiyorum"],
-    maddeRefs: ["madde-7"],
-    riskAction: "Kurumsal bir güvenlik duvarı kurulumu ile bu riski ortadan kaldırabilirsiniz.",
-  },
-  {
-    id: "log",
-    text: "5651 yasası gereğince log kaydı tutuluyor mu?",
-    options: ["Evet", "Hayır", "Bilmiyorum"],
-    maddeRefs: ["madde-5", "madde-6", "madde-7"],
-    riskAction: "5651 uyumlu log kayıt sistemi kurarak yasal saklama yükümlülüğünü karşılayabilirsiniz.",
-  },
-  {
-    id: "kvkk",
-    text: "KVKK uyumlu veri işleme süreciniz var mı?",
-    options: ["Evet", "Hayır", "Bilmiyorum"],
-    maddeRefs: [],
-    nonMaddeNote: "6698 sayılı KVKK kapsamında ayrıca değerlendirilir",
-    riskAction: "Misafir verilerinizin toplanma ve saklanma sürecini KVKK'ya uygun hale getirmenizi öneririz.",
-  },
-  {
-    id: "posWifi",
-    text: "POS ve adisyon sistemleriniz ile Misafir Wi-Fi'nız aynı ağda mı?",
-    options: ["Evet", "Hayır", "Bilmiyorum"],
-    maddeRefs: [],
-    riskAction: "POS/adisyon cihazlarınızı misafir ağından ayrı bir VLAN'a alarak ödeme güvenliğini artırabilirsiniz.",
-  },
-  {
-    id: "equipment",
-    text: "İşletmenizde Access Point, switch ve kilitli kabin bulunuyor mu?",
-    options: ["Evet", "Hayır", "Bilmiyorum"],
-    maddeRefs: ["madde-7"],
-    riskAction: "Kurumsal ağ ekipmanı ve kilitli kabin kurulumu ile fiziksel/log altyapı bütünlüğünü sağlayabilirsiniz.",
-  },
-]
+const questions: Record<Locale, Question[]> = {
+  tr: [
+    {
+      id: "firewall",
+      text: "Kurumsal bir güvenlik duvarı kullanıyor musunuz?",
+      maddeRefs: ["madde-7"],
+      riskAction: "Kurumsal bir güvenlik duvarı kurulumu ile bu riski ortadan kaldırabilirsiniz.",
+    },
+    {
+      id: "log",
+      text: "5651 yasası gereğince log kaydı tutuluyor mu?",
+      maddeRefs: ["madde-5", "madde-6", "madde-7"],
+      riskAction: "5651 uyumlu log kayıt sistemi kurarak yasal saklama yükümlülüğünü karşılayabilirsiniz.",
+    },
+    {
+      id: "kvkk",
+      text: "KVKK uyumlu veri işleme süreciniz var mı?",
+      maddeRefs: [],
+      nonMaddeNote: "6698 sayılı KVKK kapsamında ayrıca değerlendirilir",
+      riskAction: "Misafir verilerinizin toplanma ve saklanma sürecini KVKK'ya uygun hale getirmenizi öneririz.",
+    },
+    {
+      id: "posWifi",
+      text: "POS ve adisyon sistemleriniz ile Misafir Wi-Fi'nız aynı ağda mı?",
+      maddeRefs: [],
+      riskAction: "POS/adisyon cihazlarınızı misafir ağından ayrı bir VLAN'a alarak ödeme güvenliğini artırabilirsiniz.",
+    },
+    {
+      id: "equipment",
+      text: "İşletmenizde Access Point, switch ve kilitli kabin bulunuyor mu?",
+      maddeRefs: ["madde-7"],
+      riskAction: "Kurumsal ağ ekipmanı ve kilitli kabin kurulumu ile fiziksel/log altyapı bütünlüğünü sağlayabilirsiniz.",
+    },
+  ],
+  en: [
+    {
+      id: "firewall",
+      text: "Do you use an enterprise-grade firewall?",
+      maddeRefs: ["madde-7"],
+      riskAction: "You can eliminate this risk by installing an enterprise-grade firewall.",
+    },
+    {
+      id: "log",
+      text: "Are connection logs kept as required by Law No. 5651?",
+      maddeRefs: ["madde-5", "madde-6", "madde-7"],
+      riskAction: "You can meet the legal retention obligation by setting up a 5651-compliant logging system.",
+    },
+    {
+      id: "kvkk",
+      text: "Do you have a KVKK-compliant data processing process?",
+      maddeRefs: [],
+      nonMaddeNote: "Assessed separately under KVKK Law No. 6698",
+      riskAction: "We recommend bringing how you collect and store guest data in line with KVKK.",
+    },
+    {
+      id: "posWifi",
+      text: "Are your POS and till systems on the same network as your guest Wi-Fi?",
+      maddeRefs: [],
+      riskAction: "You can improve payment security by putting POS/till devices on a separate VLAN from the guest network.",
+    },
+    {
+      id: "equipment",
+      text: "Does your business have an Access Point, switch and a locked cabinet?",
+      maddeRefs: ["madde-7"],
+      riskAction: "You can ensure physical and log infrastructure integrity by installing enterprise network equipment and a locked cabinet.",
+    },
+  ],
+}
 
 const { maddeler, cezaTutariNotu } = maddeData as {
   cezaTutariNotu: string
@@ -97,36 +136,68 @@ function getResultLevel(score: number): ResultLevel {
 }
 
 const resultContent: Record<
-  ResultLevel,
-  { title: string; description: string; icon: typeof CheckCircle2; className: string }
+  Locale,
+  Record<ResultLevel, { title: string; description: string; icon: typeof CheckCircle2; className: string }>
 > = {
-  low: {
-    title: "Düşük Risk",
-    description:
-      "Altyapınız genel olarak sağlam görünüyor. Birkaç ince ayarla tam uyumlu hale gelebilirsiniz — ücretsiz saha keşfiyle netleştirelim.",
-    icon: CheckCircle2,
-    className: "text-success bg-success/10 border-success/30",
+  tr: {
+    low: {
+      title: "Düşük Risk",
+      description:
+        "Altyapınız genel olarak sağlam görünüyor. Birkaç ince ayarla tam uyumlu hale gelebilirsiniz — ücretsiz saha keşfiyle netleştirelim.",
+      icon: CheckCircle2,
+      className: "text-success-ink bg-success/10 border-success/30",
+    },
+    medium: {
+      title: "Orta Risk",
+      description:
+        "İşletmenizde bazı önemli eksikler var. Ücretsiz saha keşfi ile mevcut durumu netleştirip size özel bir çözüm planı çıkaralım.",
+      icon: AlertTriangle,
+      className: "text-warning-ink bg-warning/10 border-warning/30",
+    },
+    high: {
+      title: "Yüksek Risk",
+      description:
+        "İşletmeniz hem güvenlik hem 5651/KVKK uyumluluğu açısından ciddi risk taşıyor. En kısa sürede ücretsiz saha keşfi planlamanızı öneririz.",
+      icon: XCircle,
+      className: "text-destructive bg-destructive/10 border-destructive/30",
+    },
   },
-  medium: {
-    title: "Orta Risk",
-    description:
-      "İşletmenizde bazı önemli eksikler var. Ücretsiz saha keşfi ile mevcut durumu netleştirip size özel bir çözüm planı çıkaralım.",
-    icon: AlertTriangle,
-    className: "text-warning bg-warning/10 border-warning/30",
-  },
-  high: {
-    title: "Yüksek Risk",
-    description:
-      "İşletmeniz hem güvenlik hem 5651/KVKK uyumluluğu açısından ciddi risk taşıyor. En kısa sürede ücretsiz saha keşfi planlamanızı öneririz.",
-    icon: XCircle,
-    className: "text-destructive bg-destructive/10 border-destructive/30",
+  en: {
+    low: {
+      title: "Low Risk",
+      description:
+        "Your infrastructure generally looks solid. A few fine adjustments could make it fully compliant — let's clarify that with a free site survey.",
+      icon: CheckCircle2,
+      className: "text-success-ink bg-success/10 border-success/30",
+    },
+    medium: {
+      title: "Medium Risk",
+      description:
+        "Your business has some notable gaps. Let's clarify the current situation with a free site survey and put together a tailored solution plan.",
+      icon: AlertTriangle,
+      className: "text-warning-ink bg-warning/10 border-warning/30",
+    },
+    high: {
+      title: "High Risk",
+      description:
+        "Your business carries serious risk on both security and 5651/KVKK compliance. We recommend scheduling a free site survey as soon as possible.",
+      icon: XCircle,
+      className: "text-destructive bg-destructive/10 border-destructive/30",
+    },
   },
 }
 
-const sanctionIntro: Record<ResultLevel, string> = {
-  high: "Bu eksiklikler devam ederse idari para cezası ve tekrarında ağırlaştırılmış yaptırım, ayrıca erişim engeli riski ile karşı karşıya kalabilirsiniz.",
-  medium: "Şu an kesin bir ihlal görünmüyor; ancak aşağıdaki eksiklik(ler) giderilmezse ilgili madde kapsamına girme riski var.",
-  low: "Mevcut durumda madde ihlali riski görünmüyor.",
+const sanctionIntro: Record<Locale, Record<ResultLevel, string>> = {
+  tr: {
+    high: "Bu eksiklikler devam ederse idari para cezası ve tekrarında ağırlaştırılmış yaptırım, ayrıca erişim engeli riski ile karşı karşıya kalabilirsiniz.",
+    medium: "Şu an kesin bir ihlal görünmüyor; ancak aşağıdaki eksiklik(ler) giderilmezse ilgili madde kapsamına girme riski var.",
+    low: "Mevcut durumda madde ihlali riski görünmüyor.",
+  },
+  en: {
+    high: "If these gaps continue, you may face administrative fines, more severe sanctions on repeat violations, and the risk of an access block.",
+    medium: "There's no clear violation right now; but if the gap(s) below aren't addressed, there's a risk of falling under the related article.",
+    low: "There's currently no visible risk of an article violation.",
+  },
 }
 
 const agirlikStyles: Record<string, string> = {
@@ -141,24 +212,71 @@ const agirlikBadgeStyles: Record<string, string> = {
   "en-yuksek": "bg-destructive text-destructive-foreground",
 }
 
-const agirlikLabel: Record<string, string> = {
-  orta: "Orta",
-  yuksek: "Yüksek",
-  "en-yuksek": "En Yüksek",
+const agirlikLabel: Record<Locale, Record<string, string>> = {
+  tr: { orta: "Orta", yuksek: "Yüksek", "en-yuksek": "En Yüksek" },
+  en: { orta: "Medium", yuksek: "High", "en-yuksek": "Highest" },
+}
+
+const content: Record<Locale, {
+  dialogTitle: string
+  questionOf: (step: number, total: number) => string
+  back: string
+  resultTitle: string
+  sanctionSectionTitle: string
+  muhatapLabel: string
+  noSanctionNote: string
+  additionalRiskFactor: string
+  disclaimerBefore: string
+  quoteButton: string
+  restartButton: string
+}> = {
+  tr: {
+    dialogTitle: "5651 Yasası Uyum Analizi",
+    questionOf: (step, total) => `${step}. soru / ${total}`,
+    back: "Geri",
+    resultTitle: "Sonucunuz",
+    sanctionSectionTitle: "Olası Yaptırım",
+    muhatapLabel: "Muhatap",
+    noSanctionNote:
+      "Mevcut altyapınızı düzenli denetimlerle bu seviyede tutmanızı, ek olarak 7/24 izleme ile performansı da artırmanızı öneririz.",
+    additionalRiskFactor: "İlave risk faktörü",
+    disclaimerBefore:
+      "Bu anket sonucu genel bir ön değerlendirmedir ve hukuki danışmanlık niteliği taşımaz. 5651 sayılı Kanun kapsamındaki idari para cezası tutarları her yıl yeniden değerleme oranıyla güncellenmektedir.",
+    quoteButton: "Teklif Al",
+    restartButton: "Analizi tekrar yap",
+  },
+  en: {
+    dialogTitle: "Law No. 5651 Compliance Analysis",
+    questionOf: (step, total) => `Question ${step} of ${total}`,
+    back: "Back",
+    resultTitle: "Your Result",
+    sanctionSectionTitle: "Possible Sanction",
+    muhatapLabel: "Responsible party",
+    noSanctionNote:
+      "We recommend keeping your current infrastructure at this level with regular audits, and further improving performance with 24/7 monitoring.",
+    additionalRiskFactor: "Additional risk factor",
+    disclaimerBefore:
+      "This questionnaire result is a general preliminary assessment and does not constitute legal advice. Administrative fine amounts under Law No. 5651 are updated annually per the revaluation rate. (Article details below are kept in the original Turkish legal wording.)",
+    quoteButton: "Get a Quote",
+    restartButton: "Retake the analysis",
+  },
 }
 
 export function ComplianceCheckDialog({ children }: { children: React.ReactNode }) {
+  const { locale } = useLanguage()
+  const t = content[locale]
+  const questionList = questions[locale]
   const [open, setOpen] = useState(false)
   const [step, setStep] = useState(0)
   const [answers, setAnswers] = useState<Record<string, Answer>>({})
   const [showQuoteDialog, setShowQuoteDialog] = useState(false)
 
-  const isResult = step === questions.length
-  const progress = (Math.min(step, questions.length) / questions.length) * 100
+  const isResult = step === questionList.length
+  const progress = (Math.min(step, questionList.length) / questionList.length) * 100
   const hasSubmittedRef = useRef(false)
 
   const handleAnswer = (answer: Answer) => {
-    setAnswers((prev) => ({ ...prev, [questions[step].id]: answer }))
+    setAnswers((prev) => ({ ...prev, [questionList[step].id]: answer }))
     setStep((prev) => prev + 1)
   }
 
@@ -184,17 +302,18 @@ export function ComplianceCheckDialog({ children }: { children: React.ReactNode 
     0
   )
   const resultLevel = getResultLevel(totalScore)
-  const result = resultContent[resultLevel]
+  const result = resultContent[locale][resultLevel]
   const ResultIcon = result.icon
 
   useEffect(() => {
     if (!isResult || hasSubmittedRef.current) return
     hasSubmittedRef.current = true
 
+    const trQuestions = questions.tr
     const formDataToSend = new FormData()
     formDataToSend.append("Kaynak", "Hero - 5651 Uyum Analizi")
-    formDataToSend.append("Risk Seviyesi", result.title)
-    questions.forEach((q) => {
+    formDataToSend.append("Risk Seviyesi", resultContent.tr[resultLevel].title)
+    trQuestions.forEach((q) => {
       formDataToSend.append(q.text, answers[q.id] ?? "")
     })
 
@@ -210,7 +329,7 @@ export function ComplianceCheckDialog({ children }: { children: React.ReactNode 
 
   // Riskli görülen sorular — scoreForAnswer > 0 olan her cevap bir eksiklik/belirsizlik işaretidir
   // (posWifi gibi mantığı ters olan sorularda da doğru çalışır)
-  const riskyQuestions = questions.filter((q) => {
+  const riskyQuestions = questionList.filter((q) => {
     const answer = answers[q.id]
     return answer && scoreForAnswer(q.id, answer) > 0
   })
@@ -233,9 +352,9 @@ export function ComplianceCheckDialog({ children }: { children: React.ReactNode 
         {!isResult ? (
           <>
             <DialogHeader className="text-center sm:text-center items-center">
-              <DialogTitle>5651 Yasası Uyum Analizi</DialogTitle>
+              <DialogTitle>{t.dialogTitle}</DialogTitle>
               <DialogDescription>
-                {step + 1}. soru / {questions.length}
+                {t.questionOf(step + 1, questionList.length)}
               </DialogDescription>
             </DialogHeader>
 
@@ -243,16 +362,16 @@ export function ComplianceCheckDialog({ children }: { children: React.ReactNode 
 
             <div className="py-2">
               <p className="text-foreground font-medium text-lg mb-5">
-                {questions[step].text}
+                {questionList[step].text}
               </p>
               <div className="flex flex-col gap-2.5">
-                {questions[step].options.map((option) => (
+                {answerOptions.map((option) => (
                   <button
                     key={option}
                     onClick={() => handleAnswer(option)}
                     className="text-left px-4 py-3 rounded-lg border border-border bg-card hover:border-primary hover:bg-primary/5 transition-colors font-medium text-foreground"
                   >
-                    {option}
+                    {answerLabels[locale][option]}
                   </button>
                 ))}
               </div>
@@ -264,14 +383,14 @@ export function ComplianceCheckDialog({ children }: { children: React.ReactNode 
                 className="inline-flex items-center gap-1 text-sm text-muted-foreground hover:text-foreground transition-colors w-fit"
               >
                 <ArrowLeft className="h-3.5 w-3.5" />
-                Geri
+                {t.back}
               </button>
             )}
           </>
         ) : (
           <>
             <DialogHeader>
-              <DialogTitle>Sonucunuz</DialogTitle>
+              <DialogTitle>{t.resultTitle}</DialogTitle>
             </DialogHeader>
 
             <div className={`rounded-xl border p-5 flex flex-col items-center text-center gap-3 ${result.className}`}>
@@ -286,10 +405,10 @@ export function ComplianceCheckDialog({ children }: { children: React.ReactNode 
             <div className="rounded-xl border border-border bg-card p-5">
               <div className="flex items-center gap-2 mb-3">
                 <Scale className="h-4 w-4 text-muted-foreground" />
-                <h3 className="font-semibold text-foreground text-sm">Olası Yaptırım</h3>
+                <h3 className="font-semibold text-foreground text-sm">{t.sanctionSectionTitle}</h3>
               </div>
 
-              <p className="text-sm text-muted-foreground mb-4">{sanctionIntro[resultLevel]}</p>
+              <p className="text-sm text-muted-foreground mb-4">{sanctionIntro[locale][resultLevel]}</p>
 
               {hasSanctionContent ? (
                 <div className="space-y-3 mb-4">
@@ -310,11 +429,11 @@ export function ComplianceCheckDialog({ children }: { children: React.ReactNode 
                               agirlikBadgeStyles[madde.agirlik] ?? ""
                             }`}
                           >
-                            {agirlikLabel[madde.agirlik] ?? madde.agirlik}
+                            {agirlikLabel[locale][madde.agirlik] ?? madde.agirlik}
                           </span>
                         </div>
                         <p className="text-xs text-muted-foreground mt-1">
-                          Muhatap: {madde.yukumluTaraf} · {madde.yaptirimTuru}
+                          {t.muhatapLabel}: {madde.yukumluTaraf} · {madde.yaptirimTuru}
                         </p>
                       </div>
                     )
@@ -323,7 +442,7 @@ export function ComplianceCheckDialog({ children }: { children: React.ReactNode 
                   {riskyNonMaddeQuestions.map((q) => (
                     <div key={q.id} className="rounded-lg border border-border p-3">
                       <p className="font-semibold text-sm text-foreground">
-                        {q.nonMaddeNote ?? "İlave risk faktörü"}
+                        {q.nonMaddeNote ?? t.additionalRiskFactor}
                       </p>
                     </div>
                   ))}
@@ -338,15 +457,12 @@ export function ComplianceCheckDialog({ children }: { children: React.ReactNode 
                 </div>
               ) : (
                 <p className="text-sm text-muted-foreground mb-4">
-                  Mevcut altyapınızı düzenli denetimlerle bu seviyede tutmanızı, ek olarak 7/24 izleme ile
-                  performansı da artırmanızı öneririz.
+                  {t.noSanctionNote}
                 </p>
               )}
 
               <p className="text-[11px] text-muted-foreground/70 leading-relaxed border-t border-border pt-3">
-                Bu anket sonucu genel bir ön değerlendirmedir ve hukuki danışmanlık niteliği taşımaz. 5651 sayılı
-                Kanun kapsamındaki idari para cezası tutarları her yıl yeniden değerleme oranıyla
-                güncellenmektedir. {cezaTutariNotu}
+                {t.disclaimerBefore} {locale === "tr" ? cezaTutariNotu : ""}
               </p>
             </div>
 
@@ -358,13 +474,13 @@ export function ComplianceCheckDialog({ children }: { children: React.ReactNode 
                   setShowQuoteDialog(true)
                 }}
               >
-                Teklif Al
+                {t.quoteButton}
               </Button>
               <button
                 onClick={handleReset}
                 className="text-sm text-muted-foreground hover:text-foreground transition-colors"
               >
-                Analizi tekrar yap
+                {t.restartButton}
               </button>
             </div>
           </>

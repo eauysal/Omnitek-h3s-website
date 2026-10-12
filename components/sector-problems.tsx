@@ -15,7 +15,8 @@ import {
   type LucideIcon,
 } from "lucide-react"
 import { Reveal } from "@/components/ui/reveal"
-import type { SektorSorun, SorunIkon } from "@/data/sektorler"
+import type { Sektor, SorunIkon } from "@/data/sektorler"
+import { useLanguage, type Locale } from "@/lib/i18n/language-context"
 
 const iconMap: Record<SorunIkon, LucideIcon> = {
   LockOpen,
@@ -31,29 +32,48 @@ const iconMap: Record<SorunIkon, LucideIcon> = {
   ShoppingCart,
 }
 
-interface SectorProblemsProps {
-  sectorTitle: string
-  pluralLocative: string
-  problems: SektorSorun[]
+const riskLabel: Record<Locale, { high: string; medium: string }> = {
+  tr: { high: "Yüksek risk", medium: "Orta risk" },
+  en: { high: "High risk", medium: "Medium risk" },
 }
 
-export function SectorProblems({ sectorTitle, pluralLocative, problems }: SectorProblemsProps) {
+interface SectorProblemsProps {
+  sektor: Omit<Sektor, "icon">
+}
+
+export function SectorProblems({ sektor }: SectorProblemsProps) {
+  const { locale } = useLanguage()
+  const subtitle =
+    locale === "en"
+      ? "The vast majority of businesses like yours experience at least one of these problems."
+      : `${sektor.title} işletmelerinin büyük çoğunluğu bu problemlerden en az birini yaşıyor.`
+
   return (
-    <section className="py-16 lg:py-24 bg-secondary/30">
+    <section className="flow-problems-sector py-16 lg:py-24">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <Reveal className="text-center mb-12">
           <h2 className="font-[family-name:var(--font-heading)] text-2xl sm:text-3xl lg:text-4xl font-bold text-foreground mb-4">
-            {pluralLocative} Sık Karşılaşılan <span className="text-primary">Sorunlar</span>
+            {locale === "en" ? (
+              <>
+                Common Problems in <span className="text-primary">{sektor.titleEn}</span>
+              </>
+            ) : (
+              <>
+                {sektor.pluralLocative} Sık Karşılaşılan <span className="text-primary">Sorunlar</span>
+              </>
+            )}
           </h2>
           <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
-            {sectorTitle} işletmelerinin büyük çoğunluğu bu problemlerden en az birini yaşıyor.
+            {subtitle}
           </p>
         </Reveal>
 
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          {problems.map((problem, index) => {
+          {sektor.painPoints.map((problem, index) => {
             const Icon = iconMap[problem.icon]
             const isHigh = problem.risk === "red"
+            const title = locale === "en" ? problem.titleEn : problem.title
+            const description = locale === "en" ? problem.descriptionEn : problem.description
             return (
             <Reveal key={problem.title} delay={index * 80}>
               <div
@@ -70,7 +90,7 @@ export function SectorProblems({ sectorTitle, pluralLocative, problems }: Sector
                 />
                 <span
                   className={`absolute -top-2 -right-2 text-6xl font-bold font-mono select-none ${
-                    isHigh ? "text-destructive/10" : "text-warning/10"
+                    isHigh ? "text-destructive/10" : "text-warning-ink/10"
                   }`}
                 >
                   {String(index + 1).padStart(2, "0")}
@@ -81,19 +101,19 @@ export function SectorProblems({ sectorTitle, pluralLocative, problems }: Sector
                     isHigh ? "bg-destructive/10" : "bg-warning/10"
                   }`}
                 >
-                  <Icon className={`h-6 w-6 ${isHigh ? "text-destructive" : "text-warning"}`} />
+                  <Icon className={`h-6 w-6 ${isHigh ? "text-destructive" : "text-warning-ink"}`} />
                 </div>
 
-                <h3 className="relative font-semibold text-foreground mb-2">{problem.title}</h3>
-                <p className="relative text-sm text-muted-foreground mb-4">{problem.description}</p>
+                <h3 className="relative font-semibold text-foreground mb-2">{title}</h3>
+                <p className="relative text-sm text-muted-foreground mb-4">{description}</p>
                 <span
                   className={`relative inline-block text-xs font-semibold px-2.5 py-1 rounded-full ${
                     isHigh
                       ? "bg-destructive/20 text-destructive"
-                      : "bg-warning/20 text-warning"
+                      : "bg-warning/20 text-warning-ink"
                   }`}
                 >
-                  {isHigh ? "Yüksek risk" : "Orta risk"}
+                  {isHigh ? riskLabel[locale].high : riskLabel[locale].medium}
                 </span>
               </div>
             </Reveal>

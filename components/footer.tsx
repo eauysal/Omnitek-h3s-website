@@ -2,23 +2,53 @@
 
 import Image from "next/image"
 import Link from "next/link"
+import { useLanguage, type Locale } from "@/lib/i18n/language-context"
 
-const footerLinks = [
-  { href: "/#teshis", label: "Sorunlar" },
-  { href: "/#faydalar", label: "Kazançlar" },
-  { href: "/#sektorler", label: "Sektörler" },
-  { href: "/#sss", label: "SSS" },
-  { href: "/#iletisim", label: "İletişim" },
-]
+const footerLinks: Record<Locale, { href: string; label: string }[]> = {
+  tr: [
+    { href: "/#teshis", label: "Sorunlar" },
+    { href: "/#faydalar", label: "Kazançlar" },
+    { href: "/#sektorler", label: "Sektörler" },
+    { href: "/#sss", label: "SSS" },
+    { href: "/#iletisim", label: "İletişim" },
+  ],
+  en: [
+    { href: "/#teshis", label: "Problems" },
+    { href: "/#faydalar", label: "Benefits" },
+    { href: "/#sektorler", label: "Sectors" },
+    { href: "/#sss", label: "FAQ" },
+    { href: "/#iletisim", label: "Contact" },
+  ],
+}
 
-const legalLinks = [
-  { href: "/gizlilik-politikasi", label: "Gizlilik Politikası" },
-  { href: "/kvkk", label: "KVKK Aydınlatma Metni" },
-]
+const legalLinks: Record<Locale, { href: string; label: string }[]> = {
+  tr: [
+    { href: "/gizlilik-politikasi", label: "Gizlilik Politikası" },
+    { href: "/kvkk", label: "KVKK Aydınlatma Metni" },
+  ],
+  en: [
+    { href: "/gizlilik-politikasi", label: "Privacy Policy" },
+    { href: "/kvkk", label: "KVKK Disclosure Notice" },
+  ],
+}
+
+const content: Record<Locale, { tagline: string; copyright: string }> = {
+  tr: {
+    tagline: "Omnitek Telekom ve Teknoloji Sistem Entegratörü",
+    copyright: `© ${new Date().getFullYear()} Omnitek Telekom. Tüm hakları saklıdır.`,
+  },
+  en: {
+    tagline: "Omnitek Telekom & Technology Systems Integrator",
+    copyright: `© ${new Date().getFullYear()} Omnitek Telekom. All rights reserved.`,
+  },
+}
 
 export function Footer() {
+  const { locale } = useLanguage()
+  const t = content[locale]
+
   return (
-    <footer className="py-12 border-t border-border">
+    <footer className="relative -mt-px bg-[#12203F] py-12">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex flex-col md:flex-row items-center justify-between gap-6">
           {/* Logo */}
@@ -28,20 +58,20 @@ export function Footer() {
               alt="Omnitek H3S Logo"
               width={300}
                   height={140}
-                  quality={100} 
+                  quality={100}
                   priority
-                  className="h-8 lg:h-12 w-auto object-contain"
+                  className="h-11 lg:h-16 w-auto object-contain rounded-lg bg-white p-1.5"
             />
-            <p className="text-sm text-muted-foreground">
-              Omnitek Telekom ve Teknoloji Sistem Entegratörü
+            <p className="text-sm text-[#C7D4F5]">
+              {t.tagline}
             </p>
-            <p className="text-sm text-muted-foreground text-center md:text-left">
+            <p className="text-sm text-[#C7D4F5] text-center md:text-left">
               Barbaros Mahallesi Begonya Sokak No. 1/2, Nida Kule Batı, Ataşehir, İstanbul
             </p>
             <div className="flex flex-wrap justify-center md:justify-start gap-x-4 gap-y-1">
               <a
                 href="mailto:info@omnitek.com.tr"
-                className="text-sm text-muted-foreground hover:text-primary transition-colors"
+                className="text-sm text-[#C7D4F5] hover:text-white transition-colors"
               >
                 info@omnitek.com.tr
               </a>
@@ -50,11 +80,11 @@ export function Footer() {
 
           {/* Links */}
           <nav className="flex flex-wrap justify-center gap-6">
-            {footerLinks.map((link) => (
+            {footerLinks[locale].map((link) => (
               <Link
                 key={link.href}
                 href={link.href}
-                className="text-sm text-muted-foreground hover:text-primary transition-colors"
+                className="text-sm text-[#C7D4F5] hover:text-white transition-colors"
               >
                 {link.label}
               </Link>
@@ -62,16 +92,16 @@ export function Footer() {
           </nav>
         </div>
 
-        <div className="mt-8 pt-8 border-t border-border flex flex-col md:flex-row items-center justify-between gap-4 text-center md:text-left">
-          <p className="text-sm text-muted-foreground">
-            © {new Date().getFullYear()} Omnitek Telekom. Tüm hakları saklıdır.
+        <div className="mt-8 pt-8 border-t border-white/10 flex flex-col md:flex-row items-center justify-between gap-4 text-center md:text-left">
+          <p className="text-sm text-[#C7D4F5]">
+            {t.copyright}
           </p>
           <nav className="flex flex-wrap justify-center gap-4">
-            {legalLinks.map((link) => (
+            {legalLinks[locale].map((link) => (
               <Link
                 key={link.href}
                 href={link.href}
-                className="text-xs text-muted-foreground hover:text-primary transition-colors"
+                className="text-xs text-[#C7D4F5] hover:text-white transition-colors"
               >
                 {link.label}
               </Link>

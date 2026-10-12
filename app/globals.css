@@ -4,31 +4,34 @@
 @custom-variant dark (&:is(.dark *));
 
 :root {
- --background: #E0E0E0; 
-  --foreground: #1A1A1A;
-  --card: #EBEBEB;       /* Kartların arkasına koyacağımız, pürüzsüz açık ton */
-  --card-border: #C0C0C0;/* Kartların ve logonun etrafındaki şık teknolojik çizgi */
-  --accent-glow: rgba(0, 180, 216, 0.15);
-  --popover: #F5F5F5;
-  --popover-foreground: #1A1A1A;
-  --primary: #2a81f4;
+  --background: #F4F7FF;
+  --foreground: #12203F;
+  --card: #FFFFFF;
+  --card-border: #DCE5F8;
+  --accent-glow: rgba(25, 198, 224, 0.18);
+  --popover: #FFFFFF;
+  --popover-foreground: #12203F;
+  --primary: #2F5FF0;
   --primary-foreground: #FFFFFF;
-  --secondary: #ECECEC;
-  --secondary-foreground: #1A1A1A;
-  --muted: #ECECEC;
-  --muted-foreground: #888888;
-  --accent: #2a81f4;
-  --accent-foreground: #08121F;
-  --destructive: #DC2626;
+  --secondary: #EAF0FF;
+  --secondary-foreground: #12203F;
+  --muted: #EAF0FF;
+  --muted-foreground: #5B6B8C;
+  --accent: #E3EBFF;
+  --accent-foreground: #12203F;
+  --destructive: #A91F34;
   --destructive-foreground: #FFFFFF;
   --warning: #FFB020;
-  --warning-foreground: #08121F;
-  --success: #00D26A;
-  --success-foreground: #08121F;
-  --border: #C0C0C0;
-  --input: #F5F5F5;
-  --ring: #DC2626;
+  --warning-foreground: #3D2600;
+  --warning-ink: #8A5600;
+  --success: #2BD9A0;
+  --success-foreground: #0B2A22;
+  --success-ink: #0B7A59;
+  --border: #DCE5F8;
+  --input: #FFFFFF;
+  --ring: #2F5FF0;
   --radius: 0.625rem;
+  --flow-blend: 3.5rem;
 }
 
 @theme inline {
@@ -52,8 +55,10 @@
   --color-destructive-foreground: var(--destructive-foreground);
   --color-warning: var(--warning);
   --color-warning-foreground: var(--warning-foreground);
+  --color-warning-ink: var(--warning-ink);
   --color-success: var(--success);
   --color-success-foreground: var(--success-foreground);
+  --color-success-ink: var(--success-ink);
   --color-border: var(--border);
   --color-input: var(--input);
   --color-ring: var(--ring);
@@ -90,6 +95,66 @@ html {
 
 .animate-fade-in-up {
   animation: fadeInUp 0.6s ease-out forwards;
+}
+
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-marquee {
+  animation: marquee 56s linear infinite;
+}
+
+.marquee-pause:hover .animate-marquee {
+  animation-play-state: paused;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-marquee {
+    animation: none;
+  }
+}
+
+/* Bölümler arası renk akışı: her bölüm kendi renginde başlar, alt kısmında bir sonrakinin rengine geçer. */
+.flow-hero { background: linear-gradient(180deg, #F4F7FF 0, #F4F7FF calc(100% - var(--flow-blend)), #E6EEFF 100%); }
+.flow-proof { background: linear-gradient(180deg, #E6EEFF 0, #E6EEFF calc(100% - var(--flow-blend)), #FFF1F3 100%); }
+.flow-problems { background: linear-gradient(180deg, #FFF1F3 0, #FFF1F3 calc(100% - var(--flow-blend)), #ECE8FF 100%); }
+.flow-process { background: linear-gradient(180deg, #F4F7FF 0, #F4F7FF calc(100% - var(--flow-blend)), #E8F8FC 100%); }
+.flow-compare { background: linear-gradient(180deg, #E8F8FC 0, #E8F8FC calc(100% - var(--flow-blend)), #F6F3FF 100%); }
+.flow-sectors { background: linear-gradient(180deg, #F6F3FF 0, #F6F3FF calc(100% - var(--flow-blend)), #FFF6E3 100%); }
+.flow-legal { background: linear-gradient(180deg, #FFF6E3 0, #FFF6E3 calc(100% - var(--flow-blend)), #F4F7FF 100%); }
+.flow-faq { background: linear-gradient(180deg, #F4F7FF 0, #F4F7FF calc(100% - var(--flow-blend)), #E3FAF1 100%); }
+.flow-contact { background: linear-gradient(180deg, #E3FAF1 0, #E3FAF1 calc(100% - var(--flow-blend)), #12203F 100%); }
+.flow-sector-hero { background: linear-gradient(180deg, #F4F7FF 0, #F4F7FF calc(100% - var(--flow-blend)), #FFF1F3 100%); }
+.flow-problems-sector { background: linear-gradient(180deg, #FFF1F3 0, #FFF1F3 calc(100% - var(--flow-blend)), #ECE8FF 100%); }
+.flow-packages { background: linear-gradient(180deg, #ECE8FF 0, #ECE8FF calc(100% - var(--flow-blend)), #F4F7FF 100%); }
+
+.flow-photo-fade {
+  -webkit-mask-image: linear-gradient(to bottom, transparent 0, black var(--flow-blend), black calc(100% - var(--flow-blend)), transparent 100%);
+  mask-image: linear-gradient(to bottom, transparent 0, black var(--flow-blend), black calc(100% - var(--flow-blend)), transparent 100%);
+}
+
+/* Koyu "Faydalar" bölümü: kavisli kenarlar komşu bölümlerin üzerine biner, komşular bu payı ekstra dolguyla karşılar. */
+.flow-benefits {
+  position: relative;
+  z-index: 2;
+  background: #13255C;
+  margin-block: -34px;
+  border-radius: 50% / 34px;
+  padding-block: calc(4rem + 34px);
+}
+.flow-problems { padding-bottom: calc(4rem + 34px); }
+.flow-process { padding-top: calc(4rem + 34px); }
+@media (min-width: 1024px) {
+  :root { --flow-blend: 5rem; }
+  .flow-benefits { padding-block: calc(6rem + 34px); }
+  .flow-problems { padding-bottom: calc(6rem + 34px); }
+  .flow-process { padding-top: calc(6rem + 34px); }
 }
 
 /* Tabular numbers alignment */

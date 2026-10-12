@@ -6,23 +6,131 @@ import { Mail, MapPin, CheckCircle, AlertCircle } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Reveal } from "@/components/ui/reveal"
+import { useLanguage, type Locale } from "@/lib/i18n/language-context"
 
-const businessTypes = [
-  "Kafe",
-  "Restoran",
-  "Otel & Pansiyon",
-  "Dış Mekan & Etkinlik",
-  "Ofis & Koworking",
-  "Market & Perakende",
-  "Diğer",
-]
+const businessTypeIds = [
+  "kafe",
+  "restoran",
+  "otel-pansiyon",
+  "dis-mekan-etkinlik",
+  "ofis-koworking",
+  "market-perakende",
+  "diger",
+] as const
+type BusinessTypeId = (typeof businessTypeIds)[number]
 
-const contactInfo = [
-  { icon: Mail, label: "E-posta", value: "info@omnitek.com.tr", href: "mailto:info@omnitek.com.tr" },
-  { icon: MapPin, label: "Konum", value: "İstanbul, Antalya, Ankara" },
-]
+const businessTypeLabels: Record<Locale, Record<BusinessTypeId, string>> = {
+  tr: {
+    kafe: "Kafe",
+    restoran: "Restoran",
+    "otel-pansiyon": "Otel & Pansiyon",
+    "dis-mekan-etkinlik": "Dış Mekan & Etkinlik",
+    "ofis-koworking": "Ofis & Koworking",
+    "market-perakende": "Market & Perakende",
+    diger: "Diğer",
+  },
+  en: {
+    kafe: "Café",
+    restoran: "Restaurant",
+    "otel-pansiyon": "Hotel & Guesthouse",
+    "dis-mekan-etkinlik": "Outdoor Venue & Event",
+    "ofis-koworking": "Office & Coworking",
+    "market-perakende": "Retail & Grocery",
+    diger: "Other",
+  },
+}
+
+const contactInfo: Record<Locale, { icon: typeof Mail; label: string; value: string; href?: string }[]> = {
+  tr: [
+    { icon: Mail, label: "E-posta", value: "info@omnitek.com.tr", href: "mailto:info@omnitek.com.tr" },
+    { icon: MapPin, label: "Konum", value: "İstanbul, Antalya, Ankara" },
+  ],
+  en: [
+    { icon: Mail, label: "Email", value: "info@omnitek.com.tr", href: "mailto:info@omnitek.com.tr" },
+    { icon: MapPin, label: "Location", value: "Istanbul, Antalya, Ankara — Türkiye" },
+  ],
+}
+
+const content: Record<Locale, {
+  heading: string
+  headingHighlight: string
+  subtitle: string
+  consentError: string
+  genericError: string
+  successTitle: string
+  successBody: string
+  nameLabel: string
+  namePlaceholder: string
+  phoneLabel: string
+  phonePlaceholder: string
+  businessLabel: string
+  businessPlaceholder: string
+  businessTypeLabel: string
+  businessTypeSelect: string
+  cityLabel: string
+  cityPlaceholder: string
+  noteLabel: string
+  notePlaceholder: string
+  consentLinkLabel: string
+  consentAfter: string
+  submitting: string
+  submitButton: string
+}> = {
+  tr: {
+    heading: "Ücretsiz keşif",
+    headingHighlight: "randevusu",
+    subtitle: "Formu doldurun, size en kısa sürede ulaşalım ve ücretsiz saha keşfi için randevu oluşturalım.",
+    consentError: "Devam etmek için KVKK Aydınlatma Metni'ni onaylamanız gerekiyor.",
+    genericError: "Bir hata oluştu. Lütfen daha sonra tekrar deneyin.",
+    successTitle: "Talebiniz Alındı!",
+    successBody: "En kısa sürede sizinle iletişime geçeceğiz.",
+    nameLabel: "Ad Soyad",
+    namePlaceholder: "Adınız Soyadınız",
+    phoneLabel: "Telefon",
+    phonePlaceholder: "05XX XXX XX XX",
+    businessLabel: "İşletme Adı",
+    businessPlaceholder: "İşletmenizin adı",
+    businessTypeLabel: "İşletme Türü",
+    businessTypeSelect: "Seçiniz",
+    cityLabel: "Şehir",
+    cityPlaceholder: "İstanbul, Ankara, İzmir...",
+    noteLabel: "Kısa Not (Opsiyonel)",
+    notePlaceholder: "Eklemek istediğiniz notlar...",
+    consentLinkLabel: "KVKK Aydınlatma Metni",
+    consentAfter: "'ni okudum, kişisel verilerimin belirtilen amaçlarla işlenmesini kabul ediyorum.",
+    submitting: "Gönderiliyor...",
+    submitButton: "Randevu Talep Et →",
+  },
+  en: {
+    heading: "Book a free",
+    headingHighlight: "site survey",
+    subtitle: "Fill out the form and we'll reach out as soon as possible to schedule your free on-site survey.",
+    consentError: "You must accept the KVKK Disclosure Notice to continue.",
+    genericError: "Something went wrong. Please try again later.",
+    successTitle: "Your Request Has Been Received!",
+    successBody: "We'll get in touch with you as soon as possible.",
+    nameLabel: "Full Name",
+    namePlaceholder: "Your full name",
+    phoneLabel: "Phone",
+    phonePlaceholder: "+90 5XX XXX XX XX",
+    businessLabel: "Business Name",
+    businessPlaceholder: "Your business's name",
+    businessTypeLabel: "Business Type",
+    businessTypeSelect: "Select",
+    cityLabel: "City",
+    cityPlaceholder: "Istanbul, Ankara, Izmir...",
+    noteLabel: "Short Note (Optional)",
+    notePlaceholder: "Anything you'd like to add...",
+    consentLinkLabel: "KVKK Disclosure Notice",
+    consentAfter: " (Turkish), and I consent to my personal data being processed for the stated purposes.",
+    submitting: "Sending...",
+    submitButton: "Request an Appointment →",
+  },
+}
 
 export function ContactSection() {
+  const { locale } = useLanguage()
+  const t = content[locale]
   const [isSubmitted, setIsSubmitted] = useState(false)
   const [isLoading, setIsLoading] = useState(false)
   const [error, setError] = useState("")
@@ -31,7 +139,7 @@ export function ContactSection() {
     name: "",
     phone: "",
     business: "",
-    businessType: "",
+    businessType: "" as BusinessTypeId | "",
     city: "",
     note: "",
   })
@@ -40,7 +148,7 @@ export function ContactSection() {
     e.preventDefault()
 
     if (!consent) {
-      setError("Devam etmek için KVKK Aydınlatma Metni'ni onaylamanız gerekiyor.")
+      setError(t.consentError)
       return
     }
 
@@ -52,7 +160,10 @@ export function ContactSection() {
       formDataToSend.append("name", formData.name)
       formDataToSend.append("phone", formData.phone)
       formDataToSend.append("business", formData.business)
-      formDataToSend.append("businessType", formData.businessType)
+      formDataToSend.append(
+        "businessType",
+        formData.businessType ? businessTypeLabels.tr[formData.businessType] : ""
+      )
       formDataToSend.append("city", formData.city)
       formDataToSend.append("note", formData.note)
       formDataToSend.append("kvkkOnay", "Evet")
@@ -73,8 +184,8 @@ export function ContactSection() {
       setIsSubmitted(true)
       setFormData({ name: "", phone: "", business: "", businessType: "", city: "", note: "" })
       setConsent(false)
-    } catch (err) {
-      setError(err instanceof Error ? err.message : "Bir hata oluştu. Lütfen daha sonra tekrar deneyin.")
+    } catch {
+      setError(t.genericError)
     } finally {
       setIsLoading(false)
     }
@@ -88,22 +199,22 @@ export function ContactSection() {
   }
 
   return (
-    <section id="iletisim" className="py-16 lg:py-24 overflow-hidden">
+    <section id="iletisim" className="flow-contact py-16 lg:py-24 overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid lg:grid-cols-2 gap-8 lg:gap-12">
           {/* Left - Contact Info */}
           <Reveal direction="left" className="space-y-8">
             <div>
               <h2 className="font-[family-name:var(--font-heading)] text-2xl sm:text-3xl lg:text-4xl font-bold text-foreground mb-4">
-                Ücretsiz keşif <span className="text-primary">randevusu</span> alın
+                {t.heading} <span className="text-primary">{t.headingHighlight}</span>
               </h2>
               <p className="text-muted-foreground text-lg">
-                Formu doldurun, size en kısa sürede ulaşalım ve ücretsiz saha keşfi için randevu oluşturalım.
+                {t.subtitle}
               </p>
             </div>
 
             <div className="space-y-4">
-              {contactInfo.map((item) => {
+              {contactInfo[locale].map((item) => {
                 const Tag = item.href ? "a" : "div"
                 return (
                   <Tag
@@ -129,13 +240,13 @@ export function ContactSection() {
             {isSubmitted ? (
               <div className="flex flex-col items-center justify-center h-full text-center py-12">
                 <div className="w-16 h-16 rounded-full bg-success/20 flex items-center justify-center mb-4">
-                  <CheckCircle className="h-8 w-8 text-success" />
+                  <CheckCircle className="h-8 w-8 text-success-ink" />
                 </div>
                 <h3 className="font-[family-name:var(--font-heading)] text-xl font-semibold text-foreground mb-2">
-                  Talebiniz Alındı!
+                  {t.successTitle}
                 </h3>
                 <p className="text-muted-foreground">
-                  En kısa sürede sizinle iletişime geçeceğiz.
+                  {t.successBody}
                 </p>
               </div>
             ) : (
@@ -149,7 +260,7 @@ export function ContactSection() {
                 <div className="grid sm:grid-cols-2 gap-4">
                   <div>
                     <label htmlFor="name" className="block text-sm font-medium text-foreground mb-1.5">
-                      Ad Soyad
+                      {t.nameLabel}
                     </label>
                     <Input
                       id="name"
@@ -159,12 +270,12 @@ export function ContactSection() {
                       value={formData.name}
                       onChange={handleChange}
                       className="bg-secondary border-border focus:border-primary"
-                      placeholder="Adınız Soyadınız"
+                      placeholder={t.namePlaceholder}
                     />
                   </div>
                   <div>
                     <label htmlFor="phone" className="block text-sm font-medium text-foreground mb-1.5">
-                      Telefon
+                      {t.phoneLabel}
                     </label>
                     <Input
                       id="phone"
@@ -174,14 +285,14 @@ export function ContactSection() {
                       value={formData.phone}
                       onChange={handleChange}
                       className="bg-secondary border-border focus:border-primary"
-                      placeholder="05XX XXX XX XX"
+                      placeholder={t.phonePlaceholder}
                     />
                   </div>
                 </div>
 
                 <div>
                   <label htmlFor="business" className="block text-sm font-medium text-foreground mb-1.5">
-                    İşletme Adı
+                    {t.businessLabel}
                   </label>
                   <Input
                     id="business"
@@ -191,13 +302,13 @@ export function ContactSection() {
                     value={formData.business}
                     onChange={handleChange}
                     className="bg-secondary border-border focus:border-primary"
-                    placeholder="İşletmenizin adı"
+                    placeholder={t.businessPlaceholder}
                   />
                 </div>
 
                 <div>
                   <label htmlFor="businessType" className="block text-sm font-medium text-foreground mb-1.5">
-                    İşletme Türü
+                    {t.businessTypeLabel}
                   </label>
                   <select
                     id="businessType"
@@ -207,10 +318,10 @@ export function ContactSection() {
                     onChange={handleChange}
                     className="w-full h-10 px-3 rounded-md bg-secondary border border-border text-foreground focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary"
                   >
-                    <option value="">Seçiniz</option>
-                    {businessTypes.map((type) => (
-                      <option key={type} value={type}>
-                        {type}
+                    <option value="">{t.businessTypeSelect}</option>
+                    {businessTypeIds.map((id) => (
+                      <option key={id} value={id}>
+                        {businessTypeLabels[locale][id]}
                       </option>
                     ))}
                   </select>
@@ -218,7 +329,7 @@ export function ContactSection() {
 
                 <div>
                   <label htmlFor="city" className="block text-sm font-medium text-foreground mb-1.5">
-                    Şehir
+                    {t.cityLabel}
                   </label>
                   <Input
                     id="city"
@@ -228,13 +339,13 @@ export function ContactSection() {
                     value={formData.city}
                     onChange={handleChange}
                     className="bg-secondary border-border focus:border-primary"
-                    placeholder="İstanbul, Ankara, İzmir..."
+                    placeholder={t.cityPlaceholder}
                   />
                 </div>
 
                 <div>
                   <label htmlFor="note" className="block text-sm font-medium text-foreground mb-1.5">
-                    Kısa Not (Opsiyonel)
+                    {t.noteLabel}
                   </label>
                   <textarea
                     id="note"
@@ -243,7 +354,7 @@ export function ContactSection() {
                     value={formData.note}
                     onChange={handleChange}
                     className="w-full px-3 py-2 rounded-md bg-secondary border border-border text-foreground focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary resize-none"
-                    placeholder="Eklemek istediğiniz notlar..."
+                    placeholder={t.notePlaceholder}
                   />
                 </div>
 
@@ -259,9 +370,9 @@ export function ContactSection() {
                   />
                   <label htmlFor="kvkkOnay" className="text-xs text-muted-foreground leading-relaxed">
                     <Link href="/kvkk" target="_blank" className="text-primary hover:underline">
-                      KVKK Aydınlatma Metni
+                      {t.consentLinkLabel}
                     </Link>
-                    &apos;ni okudum, kişisel verilerimin belirtilen amaçlarla işlenmesini kabul ediyorum.
+                    {t.consentAfter}
                   </label>
                 </div>
 
@@ -271,7 +382,7 @@ export function ContactSection() {
                   className="w-full bg-primary text-primary-foreground hover:bg-primary/90"
                   disabled={isLoading}
                 >
-                  {isLoading ? "Gönderiliyor..." : "Randevu Talep Et →"}
+                  {isLoading ? t.submitting : t.submitButton}
                 </Button>
               </form>
             )}

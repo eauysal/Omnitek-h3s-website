@@ -8,6 +8,7 @@ import CookieBanner from '@/components/cookie-banner'
 import { LocalBusinessJsonLd } from '@/components/json-ld'
 import { StickyCta } from '@/components/sticky-cta'
 import { siteConfig } from '@/lib/seo'
+import { LanguageProvider } from '@/lib/i18n/language-context'
 
 const plusJakarta = Plus_Jakarta_Sans({ 
   subsets: ['latin'],
@@ -57,12 +58,14 @@ export default function RootLayout({
   return (
     <html lang="tr" className={`${plusJakarta.variable} ${inter.variable}`}>
       <body className="font-sans antialiased bg-background text-foreground relative">
-        <LocalBusinessJsonLd />
-        {children}
+        <LanguageProvider>
+          <LocalBusinessJsonLd />
+          {children}
 
-        <WhatsAppButton />
-        <StickyCta />
-        <CookieBanner />
+          <WhatsAppButton />
+          <StickyCta />
+          <CookieBanner />
+        </LanguageProvider>
 
         {process.env.NODE_ENV === 'production' && <Analytics />}
       </body>

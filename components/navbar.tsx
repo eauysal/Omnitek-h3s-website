@@ -6,17 +6,34 @@ import Link from "next/link"
 import { Menu, X } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { QuoteRequestDialog } from "@/components/quote-request-dialog"
+import { LanguageSwitcher } from "@/components/language-switcher"
+import { useLanguage, type Locale } from "@/lib/i18n/language-context"
 
-const navLinks = [
-  { href: "/#teshis", label: "Sorunlar" },
-  { href: "/#faydalar", label: "Kazançlar" },
-  { href: "/#sektorler", label: "Sektörler" },
-  { href: "/#iletisim", label: "İletişim" },
-]
+const navLinks: Record<Locale, { href: string; label: string }[]> = {
+  tr: [
+    { href: "/#teshis", label: "Sorunlar" },
+    { href: "/#faydalar", label: "Kazançlar" },
+    { href: "/#sektorler", label: "Sektörler" },
+    { href: "/#iletisim", label: "İletişim" },
+  ],
+  en: [
+    { href: "/#teshis", label: "Problems" },
+    { href: "/#faydalar", label: "Benefits" },
+    { href: "/#sektorler", label: "Sectors" },
+    { href: "/#iletisim", label: "Contact" },
+  ],
+}
+
+const ctaLabel: Record<Locale, string> = {
+  tr: "Demo Talep Et",
+  en: "Request a Demo",
+}
 
 export function Navbar() {
+  const { locale } = useLanguage()
   const [isScrolled, setIsScrolled] = useState(false)
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
+  const links = navLinks[locale]
 
   useEffect(() => {
     const handleScroll = () => {
@@ -41,18 +58,18 @@ export function Navbar() {
       >
         <div className="relative h-14 w-14 lg:h-16 lg:w-16 overflow-hidden shrink-0">
           <Image
-            src="/images/h3s-logo-full.webp"
+            src="/images/h3s-logo-nav.webp"
             alt="Omnitek H3S"
             fill
-            className="object-cover scale-[1.35] object-[50%_52%]"
+            className="object-cover scale-[1.35] origin-[50%_35%] object-[50%_52%]"
             priority
           />
         </div>
       </Link>
 
           {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center gap-8">
-            {navLinks.map((link) => (
+          <div className="hidden md:flex items-center gap-6 lg:gap-8">
+            {links.map((link) => (
               <Link
                 key={link.href}
                 href={link.href}
@@ -61,28 +78,32 @@ export function Navbar() {
                 {link.label}
               </Link>
             ))}
+            <LanguageSwitcher />
             <QuoteRequestDialog>
               <Button className="bg-primary text-primary-foreground hover:bg-primary/90">
-                Demo Talep Et
+                {ctaLabel[locale]}
               </Button>
             </QuoteRequestDialog>
           </div>
 
           {/* Mobile Menu Button */}
-          <button
-            className="md:hidden p-2 text-gray-800 transition-colors"
-            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            aria-label="Toggle menu"
-          >
-            {isMobileMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
-          </button>
+          <div className="md:hidden flex items-center gap-2">
+            <LanguageSwitcher />
+            <button
+              className="p-2 text-gray-800 transition-colors"
+              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+              aria-label="Toggle menu"
+            >
+              {isMobileMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+            </button>
+          </div>
         </div>
 
         {/* Mobile Navigation */}
         {isMobileMenuOpen && (
           <div className="md:hidden py-4 border-t border-gray-200 bg-white">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col gap-4">
-              {navLinks.map((link) => (
+              {links.map((link) => (
                 <Link
                   key={link.href}
                   href={link.href}
@@ -97,7 +118,7 @@ export function Navbar() {
                   className="bg-primary text-primary-foreground hover:bg-primary/90 w-full"
                   onClick={() => setIsMobileMenuOpen(false)}
                 >
-                  Demo Talep Et
+                  {ctaLabel[locale]}
                 </Button>
               </QuoteRequestDialog>
             </div>

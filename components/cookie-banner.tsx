@@ -3,10 +3,28 @@
 import { useEffect, useState } from "react"
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
+import { useLanguage, type Locale } from "@/lib/i18n/language-context"
 
 const STORAGE_KEY = "h3s-cerez-onay"
 
+const content: Record<Locale, { textBefore: string; linkLabel: string; textAfter: string; accept: string }> = {
+  tr: {
+    textBefore: "Sitemizi kullanırken çalışma ve analiz amaçlı çerezler kullanılabilir. Detaylar için",
+    linkLabel: "Gizlilik Politikası",
+    textAfter: "'nı inceleyebilirsiniz.",
+    accept: "Anladım",
+  },
+  en: {
+    textBefore: "We may use functional and analytics cookies while you use our site. For details, see our",
+    linkLabel: "Privacy Policy",
+    textAfter: ".",
+    accept: "Got it",
+  },
+}
+
 export default function CookieBanner() {
+  const { locale } = useLanguage()
+  const t = content[locale]
   const [visible, setVisible] = useState(false)
 
   useEffect(() => {
@@ -25,18 +43,18 @@ export default function CookieBanner() {
     <div className="fixed bottom-0 left-0 right-0 z-[60] bg-foreground text-background px-4 py-4 sm:pr-28">
       <div className="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-3">
         <p className="text-sm text-background/85 text-center sm:text-left">
-          Sitemizi kullanırken çalışma ve analiz amaçlı çerezler kullanılabilir. Detaylar için{" "}
+          {t.textBefore}{" "}
           <Link href="/gizlilik-politikasi" className="underline hover:no-underline">
-            Gizlilik Politikası
+            {t.linkLabel}
           </Link>
-          &apos;nı inceleyebilirsiniz.
+          {t.textAfter}
         </p>
         <Button
           onClick={accept}
           size="sm"
           className="bg-primary text-primary-foreground hover:bg-primary/90 shrink-0"
         >
-          Anladım
+          {t.accept}
         </Button>
       </div>
     </div>

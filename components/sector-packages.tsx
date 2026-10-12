@@ -5,27 +5,57 @@ import { Reveal } from "@/components/ui/reveal"
 import { Button } from "@/components/ui/button"
 import { QuoteRequestDialog } from "@/components/quote-request-dialog"
 import type { Paket } from "@/data/sektorler"
+import { useLanguage, type Locale } from "@/lib/i18n/language-context"
 
 interface SectorPackagesProps {
-  sectorTitle: string
   packages: Paket[]
 }
 
-export function SectorPackages({ sectorTitle, packages }: SectorPackagesProps) {
+const content: Record<Locale, {
+  heading: string
+  headingHighlight: string
+  subtitle: string
+  recommended: string
+  askButton: string
+}> = {
+  tr: {
+    heading: "İşletmeniz İçin",
+    headingHighlight: "Çözüm Paketleri",
+    subtitle: "İhtiyacınıza göre üç seviyede tasarlandı. Size uygun paketi birlikte netleştirelim.",
+    recommended: "Tavsiye Edilen",
+    askButton: "Bu Paketi Sorun",
+  },
+  en: {
+    heading: "Solution Packages",
+    headingHighlight: "for Your Business",
+    subtitle: "Designed across three tiers based on your needs. Let's figure out the right package together.",
+    recommended: "Recommended",
+    askButton: "Ask About This Package",
+  },
+}
+
+export function SectorPackages({ packages }: SectorPackagesProps) {
+  const { locale } = useLanguage()
+  const t = content[locale]
+
   return (
-    <section className="py-16 lg:py-24">
+    <section className="flow-packages py-16 lg:py-24">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         <Reveal className="text-center mb-12 lg:mb-16">
           <h2 className="font-[family-name:var(--font-heading)] text-2xl sm:text-3xl lg:text-4xl font-bold text-foreground mb-4 text-balance">
-            {sectorTitle} İşletmeniz İçin <span className="text-primary">Çözüm Paketleri</span>
+            {t.heading} <span className="text-primary">{t.headingHighlight}</span>
           </h2>
           <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
-            İhtiyacınıza göre üç seviyede tasarlandı. Size uygun paketi birlikte netleştirelim.
+            {t.subtitle}
           </p>
         </Reveal>
 
         <div className="grid md:grid-cols-3 gap-6 lg:gap-8 items-start">
-          {packages.map((pkg, index) => (
+          {packages.map((pkg, index) => {
+            const name = locale === "en" ? pkg.nameEn : pkg.name
+            const description = locale === "en" ? pkg.descriptionEn : pkg.description
+            const recommendedLabel = locale === "en" ? pkg.recommendedLabelEn : pkg.recommendedLabel
+            return (
             <Reveal key={pkg.name} delay={index * 100} className="h-full">
               <div
                 className={`cursor-pointer transition-transform duration-300 hover:scale-105 ${
@@ -37,10 +67,10 @@ export function SectorPackages({ sectorTitle, packages }: SectorPackagesProps) {
                 {pkg.recommended && (
                   <div className="rounded-t-xl bg-foreground text-background text-center px-4 py-3">
                     <p className="font-[family-name:var(--font-heading)] text-sm font-bold tracking-wide uppercase">
-                      Tavsiye Edilen
+                      {t.recommended}
                     </p>
-                    {pkg.recommendedLabel && (
-                      <p className="text-xs text-background/80 mt-0.5">{pkg.recommendedLabel}</p>
+                    {recommendedLabel && (
+                      <p className="text-xs text-background/80 mt-0.5">{recommendedLabel}</p>
                     )}
                   </div>
                 )}
@@ -52,15 +82,15 @@ export function SectorPackages({ sectorTitle, packages }: SectorPackagesProps) {
                   }`}
                 >
                   <h3 className="text-xl lg:text-2xl font-bold text-foreground mb-3">
-                    {pkg.name}
+                    {name}
                   </h3>
-                  <p className="text-sm text-muted-foreground mb-6 leading-relaxed">{pkg.description}</p>
+                  <p className="text-sm text-muted-foreground mb-6 leading-relaxed">{description}</p>
 
                   <ul className="space-y-3 mb-8 flex-1">
                     {pkg.features.map((feature, i) => (
                       <li key={i} className="flex items-start gap-2.5">
                         {feature.included ? (
-                          <Check className="h-4 w-4 text-success flex-shrink-0 mt-0.5" />
+                          <Check className="h-4 w-4 text-success-ink flex-shrink-0 mt-0.5" />
                         ) : (
                           <X className="h-4 w-4 text-destructive/70 flex-shrink-0 mt-0.5" />
                         )}
@@ -69,7 +99,7 @@ export function SectorPackages({ sectorTitle, packages }: SectorPackagesProps) {
                             feature.included ? "text-foreground" : "text-muted-foreground"
                           }`}
                         >
-                          {feature.text}
+                          {locale === "en" ? feature.textEn : feature.text}
                         </span>
                       </li>
                     ))}
@@ -84,13 +114,14 @@ export function SectorPackages({ sectorTitle, packages }: SectorPackagesProps) {
                           : "w-full"
                       }
                     >
-                      Bu Paketi Sorun
+                      {t.askButton}
                     </Button>
                   </QuoteRequestDialog>
                 </div>
               </div>
             </Reveal>
-          ))}
+            )
+          })}
         </div>
       </div>
     </section>

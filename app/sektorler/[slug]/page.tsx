@@ -7,13 +7,9 @@ import { ComparisonSection } from "@/components/comparison-section"
 import { ProcessSection } from "@/components/process-section"
 import { FaqSection } from "@/components/faq-section"
 import { ContactSection } from "@/components/contact-section"
-import { Button } from "@/components/ui/button"
-import { QuoteRequestDialog } from "@/components/quote-request-dialog"
-import { ComplianceCheckDialog } from "@/components/compliance-check-dialog"
-import Image from "next/image"
+import { SectorHero } from "@/components/sector-hero"
 import { SectorPackages } from "@/components/sector-packages"
 import { SectorProblems } from "@/components/sector-problems"
-import { Reveal } from "@/components/ui/reveal"
 import { siteConfig } from "@/lib/seo"
 import { BreadcrumbJsonLd, ServiceJsonLd } from "@/components/json-ld"
 
@@ -73,27 +69,10 @@ export default async function SektorPage({
   const sektor = getSektorBySlug(slug)
   if (!sektor) notFound()
 
-  const showDiagram = Boolean(sektor.heroImage)
   const pageUrl = `${siteConfig.url}/sektorler/${sektor.slug}`
-
-  const ctaButtons = (
-    <div className="flex flex-col sm:flex-row gap-4 justify-center">
-      <QuoteRequestDialog>
-        <Button size="lg" className="bg-primary text-primary-foreground hover:bg-primary/90 text-base px-8">
-          Teklif Al
-        </Button>
-      </QuoteRequestDialog>
-      <ComplianceCheckDialog>
-        <Button
-          variant="outline"
-          size="lg"
-          className="bg-[#7AC143] text-white border border-[#7AC143] hover:bg-[#A5E06B] hover:text-[#1F3A0E] hover:border-[#A5E06B] text-base px-8 transition-colors"
-        >
-          5651 Denetimine Hazır Mısınız?
-        </Button>
-      </ComplianceCheckDialog>
-    </div>
-  )
+  // Lucide icon bileşeni (fonksiyon) Server -> Client Component sınırından geçemez,
+  // bu yüzden client bileşenlere aktarmadan önce sektor nesnesinden çıkarılır.
+  const { icon: _icon, ...sektorForClient } = sektor
 
   return (
     <main className="min-h-screen">
@@ -113,62 +92,11 @@ export default async function SektorPage({
 
       <Navbar />
 
-      {/* Sector Hero */}
-      <section className="pt-24 lg:pt-28 pb-16 lg:pb-20 overflow-hidden">
-        <div className="max-w-4xl mx-auto px-6 sm:px-6 lg:px-8 text-center">
-          <h1 className="font-[family-name:var(--font-heading)] text-3xl sm:text-4xl lg:text-5xl font-bold text-foreground mb-4 text-balance">
-            {sektor.h1Title}
-          </h1>
+      <SectorHero sektor={sektorForClient} />
 
-          {sektor.heroImage && (
-            <>
-              <Reveal className="mb-8 relative">
-                <div className="absolute inset-4 -z-10 rounded-[2rem] bg-gradient-to-br from-primary/30 via-cyan-400/20 to-success/30 blur-3xl" />
-                <div className="relative rounded-2xl bg-gradient-to-br from-primary via-cyan-400 to-success p-[2px] shadow-2xl">
-                  <div className="relative w-full rounded-[calc(1rem-2px)] overflow-hidden bg-card">
-                    <Image
-                      src={sektor.heroImage.url}
-                      alt="Omnitek H3S Ekosistemi: Siber Güvenlik Kalkanı (VLAN), Yasal Uyumluluk (5651), Aktif İnternet Kontrolü (ACL), merkezi yönetim paneli ve entegrasyon şeması"
-                      width={sektor.heroImage.width}
-                      height={sektor.heroImage.height}
-                      className="w-full h-auto"
-                      sizes="(min-width: 1024px) 896px, 100vw"
-                      priority
-                    />
-                  </div>
-                </div>
-              </Reveal>
+      <SectorProblems sektor={sektorForClient} />
 
-              <div className="mb-8">{ctaButtons}</div>
-            </>
-          )}
-
-          <p className="text-muted-foreground text-lg lg:text-xl leading-relaxed mb-8">
-            {sektor.intro}
-          </p>
-
-          <div className={`flex flex-wrap justify-center gap-2 ${showDiagram ? "" : "mb-8"}`}>
-            {sektor.tags.map((tag) => (
-              <span
-                key={tag}
-                className="text-sm bg-primary/10 text-primary px-3 py-1.5 rounded-full font-medium"
-              >
-                {tag}
-              </span>
-            ))}
-          </div>
-
-          {!showDiagram && ctaButtons}
-        </div>
-      </section>
-
-      <SectorProblems
-        sectorTitle={sektor.title}
-        pluralLocative={sektor.pluralLocative}
-        problems={sektor.painPoints}
-      />
-
-      {sektor.packages && <SectorPackages sectorTitle={sektor.title} packages={sektor.packages} />}
+      {sektor.packages && <SectorPackages packages={sektor.packages} />}
 
       <ComparisonSection />
       <ProcessSection />

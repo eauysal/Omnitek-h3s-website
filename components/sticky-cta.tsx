@@ -3,8 +3,15 @@
 import { useEffect, useState } from "react"
 import { Button } from "@/components/ui/button"
 import { QuoteRequestDialog } from "@/components/quote-request-dialog"
+import { useLanguage } from "@/lib/i18n/language-context"
+
+const ctaLabel = {
+  tr: "Demo Talep Et",
+  en: "Request a Demo",
+}
 
 export function StickyCta() {
+  const { locale } = useLanguage()
   const [visible, setVisible] = useState(false)
 
   useEffect(() => {
@@ -34,7 +41,7 @@ export function StickyCta() {
     >
       <QuoteRequestDialog>
         <Button size="lg" className="w-full bg-primary text-primary-foreground hover:bg-primary/90">
-          Demo Talep Et
+          {ctaLabel[locale]}
         </Button>
       </QuoteRequestDialog>
     </div>
