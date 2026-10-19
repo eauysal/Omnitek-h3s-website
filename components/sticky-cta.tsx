@@ -2,12 +2,12 @@
 
 import { useEffect, useState } from "react"
 import { Button } from "@/components/ui/button"
-import { QuoteRequestDialog } from "@/components/quote-request-dialog"
+import Link from "next/link"
 import { useLanguage } from "@/lib/i18n/language-context"
 
 const ctaLabel = {
-  tr: "Demo Talep Et",
-  en: "Request a Demo",
+  tr: "Pilot Planlayın",
+  en: "Plan a Pilot",
 }
 
 export function StickyCta() {
@@ -39,11 +39,9 @@ export function StickyCta() {
         visible ? "translate-y-0" : "translate-y-full"
       }`}
     >
-      <QuoteRequestDialog>
-        <Button size="lg" className="w-full bg-primary text-primary-foreground hover:bg-primary/90">
-          {ctaLabel[locale]}
-        </Button>
-      </QuoteRequestDialog>
+      <Button asChild size="lg" className="w-full bg-primary text-primary-foreground hover:bg-primary/90">
+        <Link href="/#pilot">{ctaLabel[locale]}</Link>
+      </Button>
     </div>
   )
 }

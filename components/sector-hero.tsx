@@ -10,13 +10,13 @@ import type { Sektor } from "@/data/sektorler"
 
 const content: Record<Locale, { quoteButton: string; complianceButton: string; diagramAlt: string }> = {
   tr: {
-    quoteButton: "Teklif Al",
+    quoteButton: "Görüşme Planlayın",
     complianceButton: "5651 Denetimine Hazır Mısınız?",
     diagramAlt:
       "Omnitek H3S Ekosistemi: Siber Güvenlik Kalkanı (VLAN), Yasal Uyumluluk (5651), Aktif İnternet Kontrolü (ACL), merkezi yönetim paneli ve entegrasyon şeması",
   },
   en: {
-    quoteButton: "Get a Quote",
+    quoteButton: "Plan a Call",
     complianceButton: "Ready for a 5651 Audit?",
     diagramAlt:
       "Omnitek H3S Ecosystem: Cyber Security Shield (VLAN), Legal Compliance (5651), Active Internet Control (ACL), central management panel and integration diagram",

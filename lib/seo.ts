@@ -7,6 +7,6 @@ export const siteConfig = {
     url: "/images/h3s-diagram.webp",
     width: 1131,
     height: 926,
-    alt: "Omnitek H3S - Kurumsal Hotspot ve 5651 Uyumlu Güvenlik",
+    alt: "Omnitek H3S - Zincirler için Wi-Fi Pazarlama ve Yönetilen Misafir Ağı",
   },
 }

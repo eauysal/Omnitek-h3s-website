@@ -4,8 +4,8 @@ import React from 'react';
 import { useLanguage } from '@/lib/i18n/language-context';
 
 const tooltipLabel = {
-  tr: "Demo Talep Et",
-  en: "Request a Demo",
+  tr: "WhatsApp'tan Yazın",
+  en: "Message Us on WhatsApp",
 };
 
 export default function WhatsAppButton() {
@@ -15,7 +15,7 @@ export default function WhatsAppButton() {
   const phoneNumber = "905369202214";
 
   // Esnafın sana göndereceği hazır mesaj şablonu (sahibi Türkçe okuyacağı için mesaj dil değişse de Türkçe kalır)
-  const message = "Merhaba Omnitek, kafem/restoranım için Wi-Fi hotspot (H3S) çözümleri hakkında bilgi almak ve hızlı randevu oluşturmak istiyorum.";
+  const message = "Merhaba Omnitek, işletmem/şubelerim için Wi-Fi pazarlama ve güvenlik (H3S) çözümleri hakkında bilgi almak ve görüşme planlamak istiyorum.";
 
   // URL formatına dönüştürme
   const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;

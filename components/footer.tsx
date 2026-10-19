@@ -6,16 +6,22 @@ import { useLanguage, type Locale } from "@/lib/i18n/language-context"
 
 const footerLinks: Record<Locale, { href: string; label: string }[]> = {
   tr: [
-    { href: "/#teshis", label: "Sorunlar" },
-    { href: "/#faydalar", label: "Kazançlar" },
+    { href: "/#pazarlama", label: "Pazarlama" },
+    { href: "/#zincirler", label: "Zincirler" },
+    { href: "/#guvenlik", label: "Güvenlik" },
+    { href: "/#pilot", label: "Pilot" },
     { href: "/#sektorler", label: "Sektörler" },
+    { href: "/isletmeler", label: "Tek şubeli işletmeler" },
     { href: "/#sss", label: "SSS" },
     { href: "/#iletisim", label: "İletişim" },
   ],
   en: [
-    { href: "/#teshis", label: "Problems" },
-    { href: "/#faydalar", label: "Benefits" },
+    { href: "/#pazarlama", label: "Marketing" },
+    { href: "/#zincirler", label: "Chains" },
+    { href: "/#guvenlik", label: "Security" },
+    { href: "/#pilot", label: "Pilot" },
     { href: "/#sektorler", label: "Sectors" },
+    { href: "/isletmeler", label: "Single-branch businesses" },
     { href: "/#sss", label: "FAQ" },
     { href: "/#iletisim", label: "Contact" },
   ],

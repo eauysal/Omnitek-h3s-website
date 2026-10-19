@@ -162,10 +162,10 @@ const content: Record<Locale, {
       "Çoğu işletme Wi-Fi kullanan müşteri sayısını tam olarak bilmiyor. Hangi müşteriler geri döndü veya hangi müşteriler ilk defa geldi bu altın değerindeki veriyi bilen yok. Bu veriyi bilmeyen işletmeler, müşterilerinin yarısını kaybediyor olabilir.",
     heroBadge: "En kritik Kazanç: Kayıp müşteriyi geri getirin",
     heroTitle: "Kaybettiğiniz müşteriyi geri getirin",
-    ctaTitle: "Sizin işletmenizde ne kadar potansiyel var?",
+    ctaTitle: "Sizin şubelerinizde ne kadar potansiyel var?",
     ctaBodyBefore: "Ücretsiz görüşme —",
     ctaBodyStrong: "15 dakikada sistem analizini yapalım, taahhütsüz.",
-    ctaButton: "Teklif Al",
+    ctaButton: "Pilot Planlayın",
   },
   en: {
     headingLine1: "Wi-Fi isn't just internet",
@@ -178,10 +178,10 @@ const content: Record<Locale, {
       "Most businesses don't actually know how many customers use their Wi-Fi. Nobody tracks this golden data — which customers came back, and which came for the first time. Businesses that don't know this may be losing half their customers.",
     heroBadge: "The Biggest Win: Bring lost customers back",
     heroTitle: "Bring back the customers you've lost",
-    ctaTitle: "How much potential is there in your business?",
+    ctaTitle: "How much potential is there across your branches?",
     ctaBodyBefore: "Free consultation —",
     ctaBodyStrong: "let's do a 15-minute system analysis, no commitment.",
-    ctaButton: "Get a Quote",
+    ctaButton: "Plan a Pilot",
   },
 }
 

@@ -5,28 +5,34 @@ import Image from "next/image"
 import Link from "next/link"
 import { Menu, X } from "lucide-react"
 import { Button } from "@/components/ui/button"
-import { QuoteRequestDialog } from "@/components/quote-request-dialog"
 import { LanguageSwitcher } from "@/components/language-switcher"
 import { useLanguage, type Locale } from "@/lib/i18n/language-context"
 
 const navLinks: Record<Locale, { href: string; label: string }[]> = {
   tr: [
-    { href: "/#teshis", label: "Sorunlar" },
-    { href: "/#faydalar", label: "Kazançlar" },
-    { href: "/#sektorler", label: "Sektörler" },
+    { href: "/#pazarlama", label: "Pazarlama" },
+    { href: "/#zincirler", label: "Zincirler" },
+    { href: "/#guvenlik", label: "Güvenlik" },
+    { href: "/#pilot", label: "Pilot" },
     { href: "/#iletisim", label: "İletişim" },
   ],
   en: [
-    { href: "/#teshis", label: "Problems" },
-    { href: "/#faydalar", label: "Benefits" },
-    { href: "/#sektorler", label: "Sectors" },
+    { href: "/#pazarlama", label: "Marketing" },
+    { href: "/#zincirler", label: "Chains" },
+    { href: "/#guvenlik", label: "Security" },
+    { href: "/#pilot", label: "Pilot" },
     { href: "/#iletisim", label: "Contact" },
   ],
 }
 
 const ctaLabel: Record<Locale, string> = {
-  tr: "Demo Talep Et",
-  en: "Request a Demo",
+  tr: "Pilot Planlayın",
+  en: "Plan a Pilot",
+}
+
+const singleBranchLabel: Record<Locale, string> = {
+  tr: "Tek şubeli işletmeler",
+  en: "Single-branch businesses",
 }
 
 export function Navbar() {
@@ -78,12 +84,16 @@ export function Navbar() {
                 {link.label}
               </Link>
             ))}
+            <Link
+              href="/isletmeler"
+              className="hidden lg:inline text-xs font-medium text-gray-600 underline-offset-4 hover:text-primary hover:underline"
+            >
+              {singleBranchLabel[locale]}
+            </Link>
             <LanguageSwitcher />
-            <QuoteRequestDialog>
-              <Button className="bg-primary text-primary-foreground hover:bg-primary/90">
-                {ctaLabel[locale]}
-              </Button>
-            </QuoteRequestDialog>
+            <Button asChild className="bg-primary text-primary-foreground hover:bg-primary/90">
+              <Link href="/#pilot">{ctaLabel[locale]}</Link>
+            </Button>
           </div>
 
           {/* Mobile Menu Button */}
@@ -113,14 +123,20 @@ export function Navbar() {
                   {link.label}
                 </Link>
               ))}
-              <QuoteRequestDialog>
-                <Button
-                  className="bg-primary text-primary-foreground hover:bg-primary/90 w-full"
-                  onClick={() => setIsMobileMenuOpen(false)}
-                >
-                  {ctaLabel[locale]}
-                </Button>
-              </QuoteRequestDialog>
+              <Link
+                href="/isletmeler"
+                className="transition-colors text-sm font-medium py-2 text-gray-600 hover:text-primary"
+                onClick={() => setIsMobileMenuOpen(false)}
+              >
+                {singleBranchLabel[locale]}
+              </Link>
+              <Button
+                asChild
+                className="bg-primary text-primary-foreground hover:bg-primary/90 w-full"
+                onClick={() => setIsMobileMenuOpen(false)}
+              >
+                <Link href="/#pilot">{ctaLabel[locale]}</Link>
+              </Button>
             </div>
           </div>
         )}

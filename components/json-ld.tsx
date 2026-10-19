@@ -12,7 +12,7 @@ const localBusinessSchema = {
   name: "Omnitek H3S",
   legalName: "Omnitek Telekom ve Teknoloji Sistem Entegratörü",
   description:
-    "Kafe, restoran, otel ve ofisler için kurumsal misafir Wi-Fi, ağ güvenliği ve 5651/KVKK uyumlu log kaydı çözümü.",
+    "Çok şubeli işletmeler için Wi-Fi pazarlama, yönetilen misafir ağı, kurumsal ağ güvenliği ve 5651/KVKK uyumlu log kaydı çözümü.",
   url: siteConfig.url,
   logo: `${siteConfig.url}/images/logo.jpeg`,
   email: "info@omnitek.com.tr",

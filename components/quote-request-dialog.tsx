@@ -1,6 +1,7 @@
 "use client"
 
 import { useEffect, useRef, useState } from "react"
+import Link from "next/link"
 import {
   Dialog,
   DialogContent,
@@ -29,11 +30,10 @@ const quoteQuestions: Record<Locale, QuoteQuestion[]> = {
       label: "İşletme türü",
       text: "İşletme türünüz nedir?",
       options: [
+        "Zincir / Franchise",
         "Kafe",
         "Restoran",
         "Otel & Pansiyon",
-        "Dış Mekan & Etkinlik",
-        "Ofis & Koworking",
         "Market & Perakende",
         "Diğer",
       ],
@@ -42,13 +42,13 @@ const quoteQuestions: Record<Locale, QuoteQuestion[]> = {
       id: "branchCount",
       label: "Şube sayısı",
       text: "Kaç şubeniz var?",
-      options: ["Tek şube", "2-5 şube", "5+ şube"],
+      options: ["1", "2–4", "5–10", "11–25", "25+"],
     },
     {
-      id: "dailyGuests",
-      label: "Günlük misafir",
-      text: "Günlük ortalama misafir sayınız kaç?",
-      options: ["0-50", "50-150", "150+"],
+      id: "position",
+      label: "Pozisyon",
+      text: "İşletmedeki pozisyonunuz nedir?",
+      options: ["İşletme sahibi / Kurucu", "Pazarlama", "IT", "Operasyon", "Diğer"],
     },
     {
       id: "existingInfra",
@@ -59,7 +59,7 @@ const quoteQuestions: Record<Locale, QuoteQuestion[]> = {
     {
       id: "timeline",
       label: "Zamanlama",
-      text: "Kurulumu ne zaman planlıyorsunuz?",
+      text: "Pilotu ne zaman planlıyorsunuz?",
       options: ["Hemen", "1 ay içinde", "Sadece bilgi alıyorum"],
     },
   ],
@@ -69,11 +69,10 @@ const quoteQuestions: Record<Locale, QuoteQuestion[]> = {
       label: "Business type",
       text: "What type of business do you run?",
       options: [
+        "Chain / Franchise",
         "Café",
         "Restaurant",
         "Hotel & Guesthouse",
-        "Outdoor Venue & Event",
-        "Office & Coworking",
         "Retail & Grocery",
         "Other",
       ],
@@ -82,13 +81,13 @@ const quoteQuestions: Record<Locale, QuoteQuestion[]> = {
       id: "branchCount",
       label: "Number of branches",
       text: "How many branches do you have?",
-      options: ["Single branch", "2-5 branches", "5+ branches"],
+      options: ["1", "2–4", "5–10", "11–25", "25+"],
     },
     {
-      id: "dailyGuests",
-      label: "Daily guests",
-      text: "What's your average daily guest count?",
-      options: ["0-50", "50-150", "150+"],
+      id: "position",
+      label: "Role",
+      text: "What is your role in the business?",
+      options: ["Business owner / Founder", "Marketing", "IT", "Operations", "Other"],
     },
     {
       id: "existingInfra",
@@ -99,7 +98,7 @@ const quoteQuestions: Record<Locale, QuoteQuestion[]> = {
     {
       id: "timeline",
       label: "Timeline",
-      text: "When are you planning to install?",
+      text: "When are you planning the pilot?",
       options: ["Right away", "Within 1 month", "Just gathering information"],
     },
   ],
@@ -142,6 +141,9 @@ const content: Record<Locale, {
   resultIntro: string
   submitButton: string
   restartButton: string
+  singleBranchNoteBefore: string
+  singleBranchNoteLink: string
+  singleBranchNoteAfter: string
 }> = {
   tr: {
     successTitle: "Talebiniz Elimize Ulaştı!",
@@ -157,13 +159,16 @@ const content: Record<Locale, {
     phonePlaceholder: "05XX XXX XX XX",
     continueButton: "Devam Et",
     back: "Geri",
-    quizTitle: "Size Özel Teklif",
+    quizTitle: "Pilot Görüşmesi Planlayın",
     questionOf: (step, total) => `${step}. soru / ${total}`,
     resultTitle: "Bilgileriniz Alındı",
     resultIntro:
-      "Verdiğiniz bilgilere göre size özel bir teklif hazırlıyoruz. Aşağıdaki iletişim bilgilerinizden en kısa sürede size ulaşacağız.",
-    submitButton: "Talep Gönder",
+      "Verdiğiniz bilgilere göre pilot görüşmesini planlıyoruz. Aşağıdaki iletişim bilgilerinizden en kısa sürede size ulaşacağız.",
+    submitButton: "Görüşme Talep Et",
     restartButton: "Baştan başla",
+    singleBranchNoteBefore: "Tek şubeli işletmeler için hazır paketlerimizi ",
+    singleBranchNoteLink: "İşletmeler sayfasında",
+    singleBranchNoteAfter: " inceleyebilirsiniz.",
   },
   en: {
     successTitle: "Your Request Has Reached Us!",
@@ -179,13 +184,16 @@ const content: Record<Locale, {
     phonePlaceholder: "+90 5XX XXX XX XX",
     continueButton: "Continue",
     back: "Back",
-    quizTitle: "A Quote Just for You",
+    quizTitle: "Plan a Pilot Call",
     questionOf: (step, total) => `Question ${step} of ${total}`,
     resultTitle: "We've Got Your Info",
     resultIntro:
-      "We're preparing a tailored quote based on the information you provided. We'll reach out to you at the contact details below as soon as possible.",
-    submitButton: "Submit Request",
+      "Based on the information you provided, we're planning your pilot call. We'll reach out to you at the contact details below as soon as possible.",
+    submitButton: "Request a Call",
     restartButton: "Start over",
+    singleBranchNoteBefore: "For single-branch businesses, you can explore our ready-made packages on the ",
+    singleBranchNoteLink: "Businesses page",
+    singleBranchNoteAfter: ".",
   },
 }
 
@@ -245,7 +253,7 @@ export function QuoteRequestDialog({ children, open: openProp, onOpenChange: onO
 
     const trQuestions = quoteQuestions.tr
     const formDataToSend = new FormData()
-    formDataToSend.append("Kaynak", "Hero - Teklif Al Anketi")
+    formDataToSend.append("Kaynak", "Pilot Planlama Anketi")
     formDataToSend.append("Ad Soyad", contact.name)
     formDataToSend.append("İşletme Adı", contact.business)
     formDataToSend.append("Telefon", contact.phone)
@@ -429,6 +437,16 @@ export function QuoteRequestDialog({ children, open: openProp, onOpenChange: onO
                 </div>
               ))}
             </div>
+
+            {answers.branchCount === "1" && (
+              <p className="text-sm text-muted-foreground bg-primary/5 border border-primary/20 rounded-lg p-3">
+                {t.singleBranchNoteBefore}
+                <Link href="/isletmeler" className="text-primary font-medium hover:underline">
+                  {t.singleBranchNoteLink}
+                </Link>
+                {t.singleBranchNoteAfter}
+              </p>
+            )}
 
             <div className="flex flex-col gap-2.5 mt-2">
               <Button

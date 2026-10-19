@@ -1,6 +1,9 @@
 import { MetadataRoute } from 'next'
 import { sektorler } from '@/data/sektorler'
 
+// Bu sektör sayfaları yayında kalır ancak ana sayfa listesinden ve sitemap'ten çıkarıldı.
+const sitemapDisindaSlugs = ['ofis-koworking', 'dis-mekan-etkinlik']
+
 export default function sitemap(): MetadataRoute.Sitemap {
   return [
     {
@@ -9,11 +12,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: 'monthly',
       priority: 1,
     },
-    ...sektorler.map((sektor) => ({
-      url: `https://omnitekh3s.com/sektorler/${sektor.slug}`,
-      lastModified: new Date(),
-      changeFrequency: 'monthly' as const,
-      priority: 0.8,
-    })),
+    ...sektorler
+      .filter((sektor) => !sitemapDisindaSlugs.includes(sektor.slug))
+      .map((sektor) => ({
+        url: `https://omnitekh3s.com/sektorler/${sektor.slug}`,
+        lastModified: new Date(),
+        changeFrequency: 'monthly' as const,
+        priority: 0.8,
+      })),
   ]
 }

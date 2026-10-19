@@ -9,6 +9,7 @@ import { Reveal } from "@/components/ui/reveal"
 import { useLanguage, type Locale } from "@/lib/i18n/language-context"
 
 const businessTypeIds = [
+  "zincir-franchise",
   "kafe",
   "restoran",
   "otel-pansiyon",
@@ -21,6 +22,7 @@ type BusinessTypeId = (typeof businessTypeIds)[number]
 
 const businessTypeLabels: Record<Locale, Record<BusinessTypeId, string>> = {
   tr: {
+    "zincir-franchise": "Zincir / Franchise",
     kafe: "Kafe",
     restoran: "Restoran",
     "otel-pansiyon": "Otel & Pansiyon",
@@ -30,12 +32,35 @@ const businessTypeLabels: Record<Locale, Record<BusinessTypeId, string>> = {
     diger: "Diğer",
   },
   en: {
+    "zincir-franchise": "Chain / Franchise",
     kafe: "Café",
     restoran: "Restaurant",
     "otel-pansiyon": "Hotel & Guesthouse",
     "dis-mekan-etkinlik": "Outdoor Venue & Event",
     "ofis-koworking": "Office & Coworking",
     "market-perakende": "Retail & Grocery",
+    diger: "Other",
+  },
+}
+
+const branchCountOptions = ["1", "2–4", "5–10", "11–25", "25+"] as const
+
+const positionIds = ["sahip-kurucu", "pazarlama", "it", "operasyon", "diger"] as const
+type PositionId = (typeof positionIds)[number]
+
+const positionLabels: Record<Locale, Record<PositionId, string>> = {
+  tr: {
+    "sahip-kurucu": "İşletme sahibi / Kurucu",
+    pazarlama: "Pazarlama",
+    it: "IT",
+    operasyon: "Operasyon",
+    diger: "Diğer",
+  },
+  en: {
+    "sahip-kurucu": "Business owner / Founder",
+    pazarlama: "Marketing",
+    it: "IT",
+    operasyon: "Operations",
     diger: "Other",
   },
 }
@@ -67,6 +92,11 @@ const content: Record<Locale, {
   businessPlaceholder: string
   businessTypeLabel: string
   businessTypeSelect: string
+  branchCountLabel: string
+  positionLabel: string
+  singleBranchNoteBefore: string
+  singleBranchNoteLink: string
+  singleBranchNoteAfter: string
   cityLabel: string
   cityPlaceholder: string
   noteLabel: string
@@ -77,9 +107,9 @@ const content: Record<Locale, {
   submitButton: string
 }> = {
   tr: {
-    heading: "Ücretsiz keşif",
-    headingHighlight: "randevusu",
-    subtitle: "Formu doldurun, size en kısa sürede ulaşalım ve ücretsiz saha keşfi için randevu oluşturalım.",
+    heading: "Projenizi",
+    headingHighlight: "konuşalım",
+    subtitle: "Formu doldurun, size en kısa sürede ulaşalım ve ihtiyacınıza uygun bir görüşme planlayalım.",
     consentError: "Devam etmek için KVKK Aydınlatma Metni'ni onaylamanız gerekiyor.",
     genericError: "Bir hata oluştu. Lütfen daha sonra tekrar deneyin.",
     successTitle: "Talebiniz Alındı!",
@@ -92,6 +122,11 @@ const content: Record<Locale, {
     businessPlaceholder: "İşletmenizin adı",
     businessTypeLabel: "İşletme Türü",
     businessTypeSelect: "Seçiniz",
+    branchCountLabel: "Şube Sayısı",
+    positionLabel: "Pozisyonunuz",
+    singleBranchNoteBefore: "Tek şubeli işletmeler için hazır paketlerimizi ",
+    singleBranchNoteLink: "İşletmeler sayfasında",
+    singleBranchNoteAfter: " inceleyebilirsiniz.",
     cityLabel: "Şehir",
     cityPlaceholder: "İstanbul, Ankara, İzmir...",
     noteLabel: "Kısa Not (Opsiyonel)",
@@ -99,12 +134,12 @@ const content: Record<Locale, {
     consentLinkLabel: "KVKK Aydınlatma Metni",
     consentAfter: "'ni okudum, kişisel verilerimin belirtilen amaçlarla işlenmesini kabul ediyorum.",
     submitting: "Gönderiliyor...",
-    submitButton: "Randevu Talep Et →",
+    submitButton: "Görüşme Talep Et →",
   },
   en: {
-    heading: "Book a free",
-    headingHighlight: "site survey",
-    subtitle: "Fill out the form and we'll reach out as soon as possible to schedule your free on-site survey.",
+    heading: "Let's talk",
+    headingHighlight: "about your project",
+    subtitle: "Fill out the form and we'll reach out as soon as possible to plan a call that fits your needs.",
     consentError: "You must accept the KVKK Disclosure Notice to continue.",
     genericError: "Something went wrong. Please try again later.",
     successTitle: "Your Request Has Been Received!",
@@ -117,6 +152,11 @@ const content: Record<Locale, {
     businessPlaceholder: "Your business's name",
     businessTypeLabel: "Business Type",
     businessTypeSelect: "Select",
+    branchCountLabel: "Number of Branches",
+    positionLabel: "Your Role",
+    singleBranchNoteBefore: "For single-branch businesses, you can explore our ready-made packages on the ",
+    singleBranchNoteLink: "Businesses page",
+    singleBranchNoteAfter: ".",
     cityLabel: "City",
     cityPlaceholder: "Istanbul, Ankara, Izmir...",
     noteLabel: "Short Note (Optional)",
@@ -124,7 +164,7 @@ const content: Record<Locale, {
     consentLinkLabel: "KVKK Disclosure Notice",
     consentAfter: " (Turkish), and I consent to my personal data being processed for the stated purposes.",
     submitting: "Sending...",
-    submitButton: "Request an Appointment →",
+    submitButton: "Request a Call →",
   },
 }
 
@@ -140,6 +180,8 @@ export function ContactSection() {
     phone: "",
     business: "",
     businessType: "" as BusinessTypeId | "",
+    branchCount: "",
+    position: "" as PositionId | "",
     city: "",
     note: "",
   })
@@ -164,8 +206,14 @@ export function ContactSection() {
         "businessType",
         formData.businessType ? businessTypeLabels.tr[formData.businessType] : ""
       )
+      formDataToSend.append("branchCount", formData.branchCount)
+      formDataToSend.append(
+        "position",
+        formData.position ? positionLabels.tr[formData.position] : ""
+      )
       formDataToSend.append("city", formData.city)
       formDataToSend.append("note", formData.note)
+      formDataToSend.append("Kaynak", "İletişim Formu")
       formDataToSend.append("kvkkOnay", "Evet")
 
       // Submit to Formspree
@@ -182,7 +230,7 @@ export function ContactSection() {
       }
 
       setIsSubmitted(true)
-      setFormData({ name: "", phone: "", business: "", businessType: "", city: "", note: "" })
+      setFormData({ name: "", phone: "", business: "", businessType: "", branchCount: "", position: "", city: "", note: "" })
       setConsent(false)
     } catch {
       setError(t.genericError)
@@ -326,6 +374,59 @@ export function ContactSection() {
                     ))}
                   </select>
                 </div>
+
+                <div className="grid sm:grid-cols-2 gap-4">
+                  <div>
+                    <label htmlFor="branchCount" className="block text-sm font-medium text-foreground mb-1.5">
+                      {t.branchCountLabel}
+                    </label>
+                    <select
+                      id="branchCount"
+                      name="branchCount"
+                      required
+                      value={formData.branchCount}
+                      onChange={handleChange}
+                      className="w-full h-10 px-3 rounded-md bg-secondary border border-border text-foreground focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary"
+                    >
+                      <option value="">{t.businessTypeSelect}</option>
+                      {branchCountOptions.map((option) => (
+                        <option key={option} value={option}>
+                          {option}
+                        </option>
+                      ))}
+                    </select>
+                  </div>
+                  <div>
+                    <label htmlFor="position" className="block text-sm font-medium text-foreground mb-1.5">
+                      {t.positionLabel}
+                    </label>
+                    <select
+                      id="position"
+                      name="position"
+                      required
+                      value={formData.position}
+                      onChange={handleChange}
+                      className="w-full h-10 px-3 rounded-md bg-secondary border border-border text-foreground focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary"
+                    >
+                      <option value="">{t.businessTypeSelect}</option>
+                      {positionIds.map((id) => (
+                        <option key={id} value={id}>
+                          {positionLabels[locale][id]}
+                        </option>
+                      ))}
+                    </select>
+                  </div>
+                </div>
+
+                {formData.branchCount === "1" && (
+                  <p className="text-sm text-muted-foreground bg-primary/5 border border-primary/20 rounded-lg p-3">
+                    {t.singleBranchNoteBefore}
+                    <Link href="/isletmeler" className="text-primary font-medium hover:underline">
+                      {t.singleBranchNoteLink}
+                    </Link>
+                    {t.singleBranchNoteAfter}
+                  </p>
+                )}
 
                 <div>
                   <label htmlFor="city" className="block text-sm font-medium text-foreground mb-1.5">

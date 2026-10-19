@@ -16,13 +16,13 @@ const steps: Record<Locale, Step[]> = {
     {
       id: "01",
       icon: Phone,
-      title: "İlk Görüşme",
+      title: "Keşif Görüşmesi",
       description: "Sizi dinliyor, ihtiyaçlarınızı anlıyoruz.",
     },
     {
       id: "02",
       icon: Search,
-      title: "Ücretsiz Keşif",
+      title: "Şube Ağ Analizi",
       description: "Yerinde analiz ile mevcut durumu raporluyoruz.",
     },
     {
@@ -48,13 +48,13 @@ const steps: Record<Locale, Step[]> = {
     {
       id: "01",
       icon: Phone,
-      title: "First Call",
+      title: "Discovery Call",
       description: "We listen to you and understand your needs.",
     },
     {
       id: "02",
       icon: Search,
-      title: "Free Site Survey",
+      title: "Branch Network Analysis",
       description: "We report your current setup with an on-site analysis.",
     },
     {

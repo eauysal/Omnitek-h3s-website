@@ -22,9 +22,9 @@ const inter = Inter({
   display: 'swap'
 })
 
-const siteTitle = 'Omnitek H3S | Kurumsal Hotspot ve 5651 Uyumlu Güvenlik'
+const siteTitle = 'Omnitek H3S | Zincirler için Wi-Fi Pazarlama ve Yönetilen Misafir Ağı'
 const siteDescription =
-  'İşletmenizin Wi-Fi hizmetini Omnitek H3S ile güçlendirin. KVKK uyumlu loglama, güvenli internet ve ücretsiz saha keşfi için hemen tıklayın.'
+  "Şubelerinizdeki misafir Wi-Fi'ı izinli müşteri verisine ve ölçülebilir kampanyalara dönüştürün. Kurumsal güvenlik, 5651 ve KVKK uyumu dahil."
 
 export const metadata: Metadata = {
   title: siteTitle,
