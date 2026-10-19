@@ -168,23 +168,25 @@ const content: Record<Locale, {
   },
 }
 
-export function ContactSection() {
+// singleBranch: /isletmeler sayfasında şube sayısı "1" gelir ve "paketler" notu (aynı sayfaya link) gösterilmez.
+export function ContactSection({ singleBranch = false }: { singleBranch?: boolean }) {
   const { locale } = useLanguage()
   const t = content[locale]
   const [isSubmitted, setIsSubmitted] = useState(false)
   const [isLoading, setIsLoading] = useState(false)
   const [error, setError] = useState("")
   const [consent, setConsent] = useState(false)
-  const [formData, setFormData] = useState({
+  const emptyForm = {
     name: "",
     phone: "",
     business: "",
     businessType: "" as BusinessTypeId | "",
-    branchCount: "",
+    branchCount: singleBranch ? "1" : "",
     position: "" as PositionId | "",
     city: "",
     note: "",
-  })
+  }
+  const [formData, setFormData] = useState(emptyForm)
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -230,7 +232,7 @@ export function ContactSection() {
       }
 
       setIsSubmitted(true)
-      setFormData({ name: "", phone: "", business: "", businessType: "", branchCount: "", position: "", city: "", note: "" })
+      setFormData(emptyForm)
       setConsent(false)
     } catch {
       setError(t.genericError)
@@ -418,7 +420,7 @@ export function ContactSection() {
                   </div>
                 </div>
 
-                {formData.branchCount === "1" && (
+                {!singleBranch && formData.branchCount === "1" && (
                   <p className="text-sm text-muted-foreground bg-primary/5 border border-primary/20 rounded-lg p-3">
                     {t.singleBranchNoteBefore}
                     <Link href="/isletmeler" className="text-primary font-medium hover:underline">

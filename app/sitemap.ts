@@ -12,6 +12,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: 'monthly',
       priority: 1,
     },
+    {
+      url: 'https://omnitekh3s.com/isletmeler',
+      lastModified: new Date(),
+      changeFrequency: 'monthly',
+      priority: 0.9,
+    },
     ...sektorler
       .filter((sektor) => !sitemapDisindaSlugs.includes(sektor.slug))
       .map((sektor) => ({

@@ -48,7 +48,7 @@ const testimonials: Record<
   ],
 }
 
-export function TestimonialCarousel({ className = "" }: { className?: string }) {
+export function TestimonialCarousel({ className = "bg-secondary/50" }: { className?: string }) {
   const { locale } = useLanguage()
   const list = testimonials[locale]
   const [current, setCurrent] = useState(0)
@@ -63,7 +63,7 @@ export function TestimonialCarousel({ className = "" }: { className?: string }) 
   const item = list[current]
 
   return (
-    <div className={`bg-secondary/50 rounded-lg p-4 min-h-[120px] transition-all duration-500 ${className}`}>
+    <div className={`rounded-lg p-4 min-h-[120px] transition-all duration-500 ${className}`}>
       <p className="text-sm text-foreground mb-3">&ldquo;{item?.quote}&rdquo;</p>
       <div className="flex items-center gap-3 min-w-0">
         <div className="w-9 h-9 rounded-lg bg-white border border-border overflow-hidden flex items-center justify-center shrink-0">
