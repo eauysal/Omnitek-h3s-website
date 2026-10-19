@@ -21,7 +21,7 @@ const faqsForSchema: Faq[] = [
   {
     question: "5651 sayılı kanun kapsamında işletmem olarak ne yapmam gerekiyor?",
     answer:
-      "Misafirlerinize internet erişimi sunuyorsanız, 5651 sayılı kanun gereği bağlantı log kayıtlarını tutmak ve talep halinde yetkili makamlara sunmak zorundasınız. H3S bu süreci otomatikleştirir; şifreli log kaydı, saklama ve raporlama sizin için yönetilir.",
+      "Misafirlerinize internet erişimi sunuyorsanız, 5651 sayılı kanun gereği bağlantı log kayıtlarını tutmak ve talep halinde yetkili makamlara sunmak zorundasınız. H3S bu süreci otomatikleştirir; log kaydı, saklama ve raporlama sizin için yönetilir.",
   },
   {
     question: "Kurulum ne kadar sürer?",
@@ -36,7 +36,7 @@ const faqsForSchema: Faq[] = [
   {
     question: "Misafir verilerimiz KVKK'ya uygun şekilde işleniyor mu?",
     answer:
-      "Evet. Toplanan misafir verileri (ad, telefon, e-posta) ve log kayıtları şifreli olarak saklanır, yalnızca yasal yükümlülükler ve belirtilen amaçlarla işlenir.",
+      "Evet. Toplanan misafir verileri (telefon numarası zorunlu; ad isteğe bağlı) ve log kayıtları güvenli şekilde saklanır, yalnızca yasal yükümlülükler ve belirtilen amaçlarla işlenir.",
   },
   {
     question: "Uzun süreli bir sözleşme veya taahhüt zorunlu mu?",
@@ -67,7 +67,7 @@ const faqs: Record<Locale, Faq[]> = {
       question: "Misafir verilerimiz KVKK'ya uygun şekilde işleniyor mu?",
       answer: (
         <>
-          Evet. Toplanan misafir verileri (ad, telefon, e-posta) ve log kayıtları şifreli olarak saklanır, yalnızca
+          Evet. Toplanan misafir verileri (telefon numarası zorunlu; ad isteğe bağlı) ve log kayıtları güvenli şekilde saklanır, yalnızca
           yasal yükümlülükler ve belirtilen amaçlarla işlenir. Detaylar için{" "}
           <Link href="/kvkk" className="text-primary hover:underline">
             KVKK Aydınlatma Metni
@@ -82,7 +82,7 @@ const faqs: Record<Locale, Faq[]> = {
     {
       question: "What do I need to do as a business under Law No. 5651?",
       answer:
-        "If you provide internet access to guests, Law No. 5651 requires you to keep connection log records and present them to the relevant authorities on request. H3S automates this process — encrypted logging, retention and reporting are handled for you.",
+        "If you provide internet access to guests, Law No. 5651 requires you to keep connection log records and present them to the relevant authorities on request. H3S automates this process — logging, retention and reporting are handled for you.",
     },
     {
       question: "How long does installation take?",
@@ -98,7 +98,7 @@ const faqs: Record<Locale, Faq[]> = {
       question: "Is our guest data processed in compliance with KVKK?",
       answer: (
         <>
-          Yes. Collected guest data (name, phone, email) and log records are stored encrypted and are only
+          Yes. Collected guest data (phone number required; name optional) and log records are stored securely and are only
           processed for legal obligations and the stated purposes. For details, see the{" "}
           <Link href="/kvkk" className="text-primary hover:underline">
             KVKK Disclosure Notice

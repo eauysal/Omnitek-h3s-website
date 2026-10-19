@@ -1,13 +1,13 @@
 "use client"
 
-import { useState, useEffect } from "react"
 import Image from "next/image"
 import { Button } from "@/components/ui/button"
 import { ComplianceCheckDialog } from "@/components/compliance-check-dialog"
 import { QuoteRequestDialog } from "@/components/quote-request-dialog"
 import { Reveal } from "@/components/ui/reveal"
 import { PartnersMarquee } from "@/components/partners-marquee"
-import { Star, ShieldAlert, ShieldCheck, Wifi, FileText, Clock, Eye, Package } from "lucide-react"
+import { TrustStrip } from "@/components/trust-strip"
+import { ShieldAlert, ShieldCheck } from "lucide-react"
 import { useLanguage, type Locale } from "@/lib/i18n/language-context"
 
 const diagnosticItems: Record<Locale, { label: string; status: string; type: string }[]> = {
@@ -26,52 +26,6 @@ const diagnosticItems: Record<Locale, { label: string; status: string; type: str
     { label: "Up-to-date licenses", status: "OUT OF DATE", type: "amber" },
     { label: "Active monitoring", status: "MISSING", type: "red" },
     { label: "Equipment quality", status: "BASIC / HOME-GRADE", type: "amber" },
-  ],
-}
-
-const testimonials: Record<
-  Locale,
-  { name: string; role: string; city: string; initials: string; logo: string; quote: string }[]
-> = {
-  tr: [
-    {
-      name: "Emre Kepir",
-      role: "Hugg Coffee Co.",
-      city: "Suadiye",
-      initials: "EK",
-      logo: "/images/testimonials/hugg-logo.webp",
-      quote:
-        "Kafemizdeki müşterilerin internet hareketlerini artık kayıt ediyoruz. Özellikle yasadışı bahis ve kumar sitelerine erişimi engellemek istiyorduk, fazlasını elde ettik ve kurumsal bir statü kazandık.",
-    },
-    {
-      name: "Mete Balta",
-      role: "das Böcek Social",
-      city: "Moda",
-      initials: "MB",
-      logo: "/images/testimonials/bocek-logo.webp",
-      quote:
-        "Böcek Kafe olarak önceliğimiz müşterilerin internet deneyimini iyileştirmekti, hız paylaşımı yapamıyorduk, ayrıca güvenlik olarak eksiklerimiz vardı. Şimdi kurumsal karşı ekranı ve adil hız paylaşımı yaparak müşterilerimizin internet hizmetinden daha iyi yararlanmalarını sağladıkları için H3S'i kesinlikle öneriyorum.",
-    },
-  ],
-  en: [
-    {
-      name: "Emre Kepir",
-      role: "Hugg Coffee Co.",
-      city: "Suadiye",
-      initials: "EK",
-      logo: "/images/testimonials/hugg-logo.webp",
-      quote:
-        "We now log our customers' internet activity. We mainly wanted to block access to illegal betting and gambling sites — we got that and more, plus a genuinely corporate-grade setup.",
-    },
-    {
-      name: "Mete Balta",
-      role: "das Böcek Social",
-      city: "Moda",
-      initials: "MB",
-      logo: "/images/testimonials/bocek-logo.webp",
-      quote:
-        "Our priority was improving our customers' internet experience — we couldn't share bandwidth fairly and had security gaps. With a branded landing page and fair bandwidth sharing now in place, I fully recommend H3S to anyone who wants their guests to get more out of the connection.",
-    },
   ],
 }
 
@@ -103,14 +57,9 @@ const content = {
     trustBadgeEnd: " güvencesiyle",
     diagnosticTitle: "Tipik Saha Keşif Raporu",
     diagnosticNoteStrong: "%80'i",
-    diagnosticNoteBefore: "⚠️ Sahadaki işletmelerin ",
+    diagnosticNoteBefore: "Sahadaki işletmelerin ",
     diagnosticNoteAfter: " bu tabloya benziyor.",
     diagnosticFootnote: "Saha keşiflerimizdeki gözlemlere dayanan temsili bir orandır.",
-    rating: "4.9/5",
-    socialProofBefore: "Son 6 ayda ",
-    socialProofStrong: "20'den fazla işletme ",
-    socialProofAfter: "siber güvenliğini H3S'e emanet etti.",
-    verifiedCustomer: "✓ Doğrulanmış Müşteri",
   },
   en: {
     h1Before: "How Ready Is Your Business for a 5651 Audit ",
@@ -126,30 +75,15 @@ const content = {
     trustBadgeEnd: " backed and guaranteed",
     diagnosticTitle: "Typical On-Site Assessment Report",
     diagnosticNoteStrong: "80%",
-    diagnosticNoteBefore: "⚠️ ",
+    diagnosticNoteBefore: "",
     diagnosticNoteAfter: " of the businesses we visit look like this.",
     diagnosticFootnote: "A representative figure based on our on-site assessment observations.",
-    rating: "4.9/5",
-    socialProofBefore: "In the last 6 months, ",
-    socialProofStrong: "20+ businesses ",
-    socialProofAfter: "trusted H3S with their cyber security.",
-    verifiedCustomer: "✓ Verified Customer",
   },
 } satisfies Record<Locale, Record<string, string>>
 
 export function HeroSection() {
   const { locale } = useLanguage()
   const t = content[locale]
-  const [currentTestimonial, setCurrentTestimonial] = useState(0)
-  const testimonialList = testimonials[locale]
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setCurrentTestimonial((prev) => (prev + 1) % testimonialList.length)
-    }, 5000)
-    return () => clearInterval(interval)
-  }, [testimonialList.length])
-
   return (
     <>
       <section className="flow-hero min-h-screen pt-24 lg:pt-28 pb-12 relative overflow-hidden">
@@ -279,74 +213,7 @@ export function HeroSection() {
               </div>
             </Reveal>
 
-            {/* Social Proof Card */}
-            <Reveal direction="right" className="bg-card border border-primary/20 border-t-4 border-t-success rounded-xl p-6 shadow-[0_24px_60px_-24px_rgba(47,95,240,0.45)]">
-              <div className="flex items-center justify-between mb-4">
-                <div className="flex items-center gap-2">
-                  <div className="flex items-center">
-                    {[...Array(5)].map((_, i) => (
-                      <Star key={i} className="h-4 w-4 fill-primary text-primary" />
-                    ))}
-                  </div>
-                  <span className="font-semibold text-foreground">{t.rating}</span>
-                </div>
-                <div className="flex -space-x-2">
-                  {testimonialList.map((tItem, i) => (
-                    <div
-                      key={i}
-                      className="w-8 h-8 rounded-full bg-white border-2 border-background overflow-hidden flex items-center justify-center"
-                    >
-                      <Image
-                        src={tItem.logo}
-                        alt={tItem.role}
-                        width={32}
-                        height={32}
-                        className="w-full h-full object-cover"
-                      />
-                    </div>
-                  ))}
-                  <div className="w-8 h-8 rounded-full bg-secondary border-2 border-background flex items-center justify-center text-xs font-semibold text-muted-foreground">
-                    +
-                  </div>
-                </div>
-              </div>
-              <p className="text-sm text-muted-foreground mb-4">
-                {t.socialProofBefore}
-                <span className="text-foreground font-semibold">{t.socialProofStrong}</span>
-                {t.socialProofAfter}
-              </p>
-
-              {/* Testimonial */}
-              <div className="bg-secondary/50 rounded-lg p-4 min-h-[120px] transition-all duration-500">
-                <p className="text-sm text-foreground mb-3">
-                  &ldquo;{testimonialList[currentTestimonial]?.quote}&rdquo;
-                </p>
-                <div className="flex items-center justify-between gap-3">
-                  <div className="flex items-center gap-3 min-w-0">
-                    <div className="w-9 h-9 rounded-lg bg-white border border-border overflow-hidden flex items-center justify-center shrink-0">
-                      <Image
-                        src={testimonialList[currentTestimonial]?.logo}
-                        alt={testimonialList[currentTestimonial]?.role}
-                        width={36}
-                        height={36}
-                        className="w-full h-full object-cover"
-                      />
-                    </div>
-                    <div className="min-w-0">
-                      <p className="text-sm font-semibold text-foreground truncate">
-                        {testimonialList[currentTestimonial]?.name}
-                      </p>
-                      <p className="text-xs text-muted-foreground truncate">
-                        {testimonialList[currentTestimonial]?.role}, {testimonialList[currentTestimonial]?.city}
-                      </p>
-                    </div>
-                  </div>
-                  <span className="text-xs bg-success/20 text-success-ink px-2 py-1 rounded-full shrink-0">
-                    {t.verifiedCustomer}
-                  </span>
-                </div>
-              </div>
-            </Reveal>
+            <TrustStrip />
           </div>
         </div>
       </section>

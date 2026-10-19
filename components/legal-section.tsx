@@ -6,18 +6,18 @@ import { useLanguage, type Locale } from "@/lib/i18n/language-context"
 
 const h3sCompliance: Record<Locale, string[]> = {
   tr: [
-    "5651 uyumlu log kaydı ve saklama",
-    "KVKK uyumlu veri işleme",
-    "Şifreli log transferi ve depolama",
-    "Denetim raporları hazırlama",
-    "Yasal danışmanlık desteği",
+    // TODO: TEYİT — "kayıtlar sahadaki cihazda 2 yıl saklanır" iddiası teknik ekipten doğrulanmadan yayında kalmamalı
+    "5651 kapsamında log kaydı; kayıtlar sahadaki cihazda 2 yıl saklanır",
+    "KVKK aydınlatma ve açık rıza akışı misafir girişine entegre",
+    "İYS (ticari ileti izni) kaydı standart olarak yönetilir",
+    "Denetimde istenen kayıt ve raporların hazırlanması",
   ],
   en: [
-    "5651-compliant log recording and retention",
-    "KVKK-compliant data processing",
-    "Encrypted log transfer and storage",
-    "Audit report preparation",
-    "Legal advisory support",
+    // TODO: TEYİT — "records kept on the on-site device for 2 years" must be confirmed with the technical team before it stays live
+    "Log recording under Law 5651; records are kept on the on-site device for 2 years",
+    "KVKK disclosure and explicit-consent flow built into guest sign-in",
+    "IYS (commercial message consent) records managed as standard",
+    "Records and reports requested in an audit are prepared for you",
   ],
 }
 
@@ -37,8 +37,8 @@ const content: Record<Locale, {
       "İnternet erişimi sağlayan tüm işletmeler, kullanıcı log kayıtlarını tutmak ve talep halinde yetkili makamlara sunmak zorundadır. Bu yükümlülüğü yerine getirmeyen işletmelere idari para cezası ve erişim engelleme yaptırımları uygulanır.",
     kvkkTitle: "KVKK Gereksinimleri",
     kvkkBody:
-      "Kişisel Verilerin Korunması Kanunu kapsamında, toplanan veriler güvenli şekilde işlenmeli ve saklanmalıdır. Veri ihlali durumunda ciddi yaptırımlar ve itibar kaybı söz konusudur.",
-    solutionTitle: "H3S ile Tam Uyumluluk",
+      "Kişisel Verilerin Korunması Kanunu kapsamında, toplanan veriler güvenli şekilde işlenmeli ve saklanmalıdır. Veri ihlali durumunda idari yaptırımlar ve itibar kaybı söz konusudur.",
+    solutionTitle: "H3S ile Yasal Yükümlülükleriniz Kayıt Altında",
     solutionIntro: "H3S çözümü, tüm yasal gereksinimleri karşılayacak şekilde tasarlanmıştır:",
   },
   en: {
@@ -48,8 +48,8 @@ const content: Record<Locale, {
       "Every business that provides internet access must keep user log records and present them to the relevant authorities on request. Businesses that fail to meet this obligation face administrative fines and access-blocking sanctions.",
     kvkkTitle: "KVKK Requirements",
     kvkkBody:
-      "Under Turkey's Personal Data Protection Law (KVKK), collected data must be processed and stored securely. A data breach can bring serious sanctions and reputational damage.",
-    solutionTitle: "Full Compliance with H3S",
+      "Under Turkey's Personal Data Protection Law (KVKK), collected data must be processed and stored securely. A data breach can bring administrative sanctions and reputational damage.",
+    solutionTitle: "Your Legal Obligations, on Record with H3S",
     solutionIntro: "The H3S solution is designed to meet all legal requirements:",
   },
 }

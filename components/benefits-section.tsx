@@ -4,17 +4,6 @@ import { QuoteRequestDialog } from "@/components/quote-request-dialog"
 import { Reveal } from "@/components/ui/reveal"
 import { useLanguage, type Locale } from "@/lib/i18n/language-context"
 
-interface LossCard {
-  label: string
-  value: string
-  unit: string
-}
-
-interface StoryStat {
-  num: string
-  label: string
-}
-
 interface SecondaryCard {
   icon: () => JSX.Element
   title: string
@@ -35,70 +24,18 @@ const IconClockSVG = () => (
   <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0 -18 0" /><path d="M12 7v5l3 3" /></svg>
 )
 
-const lossCards: Record<Locale, LossCard[]> = {
-  tr: [
-    { label: "Günlük misafir", value: "~100 Kişi", unit: "kişi bağlanıyor" },
-    { label: "Tanınmayan misafir", value: "%35", unit: "bir daha gelmiyor" },
-    { label: "Yıllık kayıp potansiyel", value: "1.4M ₺", unit: "geri kazanılabilir ciro" },
-  ],
-  en: [
-    { label: "Daily guests", value: "~100 people", unit: "connect per day" },
-    { label: "Unrecognized guests", value: "35%", unit: "never come back" },
-    { label: "Annual lost potential", value: "1.4M ₺", unit: "recoverable revenue" },
-  ],
-}
-
-const beforeItems: Record<Locale, string[]> = {
-  tr: [
-    "Kafe doluydu, hafta sonu yoğunluk neden düşüyor bilinmiyordu",
-    "Wi-Fi vardı, kim bağlandı yoktu",
-    "Kaç müşteri geri döndü, hiç ölçülmedi",
-  ],
-  en: [
-    "The café was busy, but no one knew why weekend traffic dipped",
-    "Wi-Fi existed, but there was no record of who connected",
-    "How many customers came back was never measured",
-  ],
-}
-
-const afterItems: Record<Locale, string[]> = {
-  tr: [
-    "İlk 7 günde 345 müşteri kaydı toplandı",
-    "İlk SMS kampanyası sadece 1 dakikada gönderildi",
-    "Hafta sonu doluluk %38 arttı — bu oranı ilk kez ölçtük",
-  ],
-  en: [
-    "345 customer records collected in the first 7 days",
-    "The first SMS campaign went out in just 1 minute",
-    "Weekend occupancy rose 38% — measured for the first time",
-  ],
-}
-
-const storyStats: Record<Locale, StoryStat[]> = {
-  tr: [
-    { num: "345", label: "İlk haftada kayıt" },
-    { num: "%38", label: "Doluluk artışı" },
-    { num: "7 gün", label: "İlk sonuç" },
-  ],
-  en: [
-    { num: "345", label: "Sign-ups in week one" },
-    { num: "38%", label: "Occupancy increase" },
-    { num: "7 days", label: "First result" },
-  ],
-}
-
 const heroCardPoints: Record<Locale, string[]> = {
   tr: [
     "Tekrar gelen cihaz tanınır — kim kaç kez geldi görülür",
     "Kim bir daha gelmedi, kayıp müşteri listesi elinizde",
     "Sadık müşteriye özel kampanya, kayıp müşteriye geri dönüş teklifi",
-    "Sosyal medya reklamlarından 5× daha ucuz",
+    "Reklam bütçesi gerektirmeden",
   ],
   en: [
     "Returning devices are recognized — see who came how many times",
     "Get a ready-made list of lost customers who never came back",
     "Run loyalty campaigns for regulars and win-back offers for lost customers",
-    "5× cheaper than social media advertising",
+    "Without needing an ad budget",
   ],
 }
 
@@ -112,7 +49,7 @@ const secondaryCards: Record<Locale, SecondaryCard[]> = {
         "Doğrudan SMS / Kişi listesi oluşur",
         "Sıfır reklam bütçesiyle ulaşım",
       ],
-      insight: "345 kayıt — hiç reklam verilmedi.",
+      insight: "Bağlanan her misafir, ulaşılabilir bir kayıt.",
     },
     {
       icon: IconSpeakerphoneSVG,
@@ -144,7 +81,7 @@ const secondaryCards: Record<Locale, SecondaryCard[]> = {
         "An SMS list / contact list builds itself",
         "Reach them with zero ad spend",
       ],
-      insight: "345 sign-ups — with zero ads run.",
+      insight: "Every guest who connects becomes a reachable record.",
     },
     {
       icon: IconSpeakerphoneSVG,
@@ -207,17 +144,8 @@ const content: Record<Locale, {
   h3sActive: string
   hookTitle: string
   hookBody: string
-  lossLabel: string
-  lossFootnoteBefore: string
-  lossFootnoteStrong: string
-  ownerName: string
-  ownerRole: string
-  ownerQuote: string
-  beforeLabel: string
-  afterLabel: string
   heroBadge: string
   heroTitle: string
-  heroNote: string
   ctaTitle: string
   ctaBodyBefore: string
   ctaBodyStrong: string
@@ -232,18 +160,8 @@ const content: Record<Locale, {
     hookTitle: "Wi-Fi'ınız her gün kaç müşteri kaydediyor — siz görüyor musunuz?",
     hookBody:
       "Çoğu işletme Wi-Fi kullanan müşteri sayısını tam olarak bilmiyor. Hangi müşteriler geri döndü veya hangi müşteriler ilk defa geldi bu altın değerindeki veriyi bilen yok. Bu veriyi bilmeyen işletmeler, müşterilerinin yarısını kaybediyor olabilir.",
-    lossLabel: "Doğrulanmış Kayıp Hesabı — 50 sandalyeli kafe",
-    lossFootnoteBefore: "35 kayıp müşteri/gün × %50 geri dönüş × 220 ₺ sepet × 365 gün.",
-    lossFootnoteStrong: "Sistemi olmayan her işletme bu tabloyla yaşıyor.",
-    ownerName: "Burak Kaçmaz",
-    ownerRole: "İşletme sahibi · Burro Cafe, Kadıköy",
-    ownerQuote:
-      "\"Omnitek H3S kullanmaya başladıktan sonra sadece ilk haftada 345 kayıt topladık. Hafta sonu doluluğunu ilk kez ölçtük ve kampanyalarimizi müşterilerimizle buluşturduk.\"",
-    beforeLabel: "H3S öncesi",
-    afterLabel: "H3S sonrası",
     heroBadge: "En kritik Kazanç: Kayıp müşteriyi geri getirin",
     heroTitle: "Kaybettiğiniz müşteriyi geri getirin",
-    heroNote: "Burro Kafe'de ilk kampanya sonrası hafta sonu doluluk %38 arttı — 7 günde.",
     ctaTitle: "Sizin işletmenizde ne kadar potansiyel var?",
     ctaBodyBefore: "Ücretsiz görüşme —",
     ctaBodyStrong: "15 dakikada sistem analizini yapalım, taahhütsüz.",
@@ -258,18 +176,8 @@ const content: Record<Locale, {
     hookTitle: "How many customers does your Wi-Fi register every day — do you even see it?",
     hookBody:
       "Most businesses don't actually know how many customers use their Wi-Fi. Nobody tracks this golden data — which customers came back, and which came for the first time. Businesses that don't know this may be losing half their customers.",
-    lossLabel: "Verified Loss Calculation — a 50-seat café",
-    lossFootnoteBefore: "35 lost customers/day × 50% return rate × 220 ₺ average check × 365 days.",
-    lossFootnoteStrong: "Every business without a system lives with this table.",
-    ownerName: "Burak Kaçmaz",
-    ownerRole: "Business owner · Burro Cafe, Kadıköy",
-    ownerQuote:
-      "\"After we started using Omnitek H3S, we collected 345 sign-ups in the very first week. We measured weekend occupancy for the first time and connected our campaigns directly with our customers.\"",
-    beforeLabel: "Before H3S",
-    afterLabel: "After H3S",
     heroBadge: "The Biggest Win: Bring lost customers back",
     heroTitle: "Bring back the customers you've lost",
-    heroNote: "At Burro Café, weekend occupancy rose 38% after the first campaign — in 7 days.",
     ctaTitle: "How much potential is there in your business?",
     ctaBodyBefore: "Free consultation —",
     ctaBodyStrong: "let's do a 15-minute system analysis, no commitment.",
@@ -331,94 +239,6 @@ export function BenefitsSection() {
           </p>
         </Reveal>
 
-        {/* ── Kayıp hesabı ── */}
-        <Reveal delay={160} className="bg-[#FCEBEB] border border-[#F09595] rounded-2xl px-6 py-5 hover:border-cyan-500/50 transition-all duration-300">
-          <p className="text-[11px] font-medium text-[#791F1F] uppercase tracking-wide mb-4">
-            {t.lossLabel}
-          </p>
-          <div className="grid grid-cols-3 gap-3 mb-4">
-            {lossCards[locale].map((c, i) => (
-              <div key={i} className="bg-white border border-[#F7C1C1] rounded-xl p-3.5">
-                <p className="text-[11px] text-[#A32D2D] mb-1">{c.label}</p>
-                <p className="text-[22px] font-medium text-[#A32D2D] leading-none">{c.value}</p>
-                <p className="text-[11px] text-[#791F1F] mt-1">{c.unit}</p>
-              </div>
-            ))}
-          </div>
-          <p className="text-[12px] text-[#791F1F] border-t border-[#F7C1C1] pt-3">
-            {t.lossFootnoteBefore}{" "}
-            <strong className="text-[#501313]">{t.lossFootnoteStrong}</strong>
-          </p>
-        </Reveal>
-
-        {/* ── Before / After ── */}
-        <Reveal delay={240} className="bg-white/25 border border-white/15 rounded-2xl overflow-hidden">
-
-          {/* Owner photo + quote */}
-          <div className="flex items-center gap-4 px-6 pt-5 pb-4 border-b border-white/10">
-            <div className="relative flex-shrink-0">
-              <div className="w-14 h-14 rounded-full bg-white/10 border-2 border-white/20 overflow-hidden flex items-center justify-center">
-                <img src="/images/burro_tabela-baski.jpg" alt="Burak Bey" className="w-full h-full object-cover" />
-              </div>
-              <span className="absolute -bottom-0.5 -right-0.5 w-4 h-4 bg-green-400 border-2 border-[#1F3A5F] rounded-full" />
-            </div>
-            <div>
-              <p className="text-white font-medium text-medium">{t.ownerName}</p>
-              <p className="text-white/50 text-small">{t.ownerRole}</p>
-              <p className="text-white/90 text-[18px] italic mt-1 leading-relaxed">
-                {t.ownerQuote}
-              </p>
-            </div>
-          </div>
-
-          {/* Before / After columns */}
-          <div className="grid grid-cols-2">
-            <div className="px-5 py-4 border-r border-white/10">
-              <span className="inline-flex items-center gap-1.5 bg-[#FCEBEB] text-[#A32D2D] text-[11px] font-medium px-2.5 py-1 rounded-md uppercase tracking-wide mb-3">
-                <IconClockSVG />
-                {t.beforeLabel}
-              </span>
-              <ul className="space-y-2">
-                {beforeItems[locale].map((item, i) => (
-                  <li key={i} className="flex items-center gap-2 text-[14px] text-white/100 leading-snug">
-                    {/* Saf SVG X ikonu */}
-                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#E24B4A" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="flex-shrink-0"><path d="M18 6l-12 12" /><path d="M6 6l12 12" /></svg>
-                    {item}
-                  </li>
-                ))}
-              </ul>
-            </div>
-            <div className="px-5 py-4">
-              <span className="inline-flex items-center gap-1.5 bg-[#EAF3DE] text-[#3B6D11] text-[11px] font-medium px-2.5 py-1 rounded-md uppercase tracking-wide mb-3">
-                {/* Saf SVG Check ikonu */}
-                <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12l5 5l10 -10" /></svg>
-                {t.afterLabel}
-              </span>
-              <ul className="space-y-2">
-                {afterItems[locale].map((item, i) => (
-                  <li key={i} className="flex items-center gap-2 text-[14px] text-white/100 leading-snug">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#639922" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="flex-shrink-0"><path d="M5 12l5 5l10 -10" /></svg>
-                    {item}
-                  </li>
-                ))}
-              </ul>
-            </div>
-          </div>
-
-          {/* Stats row */}
-          <div className="grid grid-cols-3 border-t border-white/10">
-            {storyStats[locale].map((s, i) => (
-              <div
-                key={i}
-                className={`py-3.5 text-center ${i < storyStats[locale].length - 1 ? "border-r border-white/10" : ""}`}
-              >
-                <p className="text-[#97C459] text-xl font-medium leading-none">{s.num}</p>
-                <p className="text-white/90 text-[13px] mt-1">{s.label}</p>
-              </div>
-            ))}
-          </div>
-        </Reveal>
-
         {/* ── Hero card ── */}
         <Reveal delay={320} className="relative bg-white/8 border-2 border-[#639922] rounded-2xl px-6 py-5">
           <span className="absolute -top-px right-4 bg-[#639922] text-[#EAF3DE] text-[24px] font-medium px-3 py-1 rounded-b-lg uppercase tracking-wide">
@@ -439,9 +259,6 @@ export function BenefitsSection() {
               </li>
             ))}
           </ul>
-          <div className="text-[14px] text-[#185FA5] bg-[#E6F1FB] border-l-2 border-[#185FA5] px-3 py-2 leading-relaxed">
-            {t.heroNote}
-          </div>
         </Reveal>
 
         {/* ── Secondary cards ── */}

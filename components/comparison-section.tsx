@@ -11,7 +11,7 @@ const currentSystem: Record<Locale, string[]> = {
     "Güvenlik duvarı yok veya yetersiz",
     "5651 log kaydı tutulmuyor",
     "Yazılım güncellenmesi otomatik değil",
-    "Proaktif izleme yok, kameralara herkes ulaşabiliyor",
+    "Proaktif izleme yok, ağdaki cihazlar korumasız",
     "Dokümantasyon ve destek yok",
   ],
   en: [
@@ -19,7 +19,7 @@ const currentSystem: Record<Locale, string[]> = {
     "No firewall, or an inadequate one",
     "No 5651 log records kept",
     "Software updates aren't automatic",
-    "No proactive monitoring — anyone can reach the cameras",
+    "No proactive monitoring — devices on the network are unprotected",
     "No documentation or support",
   ],
 }
