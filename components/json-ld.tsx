@@ -23,6 +23,7 @@ const localBusinessSchema = {
     addressRegion: "İstanbul",
     addressCountry: "TR",
   },
+  // TODO: TEYİT — hizmet bölgesi
   areaServed: ["İstanbul", "Ankara", "Antalya"],
   foundingDate: "1986",
   parentOrganization: {

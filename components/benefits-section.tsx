@@ -155,7 +155,7 @@ const content: Record<Locale, {
     headingLine1: "Wi-Fi sadece internet değil",
     headingLine2: "Misafirleri Müşteriye Dönüştüren Pazarlama Birimi",
     headingIntro:
-      "Wi-Fi marketing'in amacı, bağlanıp giden misafiri tekrar tekrar geri gelen müşteriye çevirmek. WhatsApp ve SMS kampanyaları, sadakat uygulamaları ve kişiye özel mesajlarla misafirlerinizi doğru anda yeniden mekânınıza davet edin; memnun misafirleri Google yorumuna ve sosyal medyaya yönlendirerek itibarınızı organik olarak büyütün. Böylece ek reklam bütçesi harcamadan daha çok ziyaret, daha çok sipariş ve daha yüksek kazanç elde etmek mümkün.",
+      "Wi-Fi pazarlamanın amacı, bağlanıp giden misafiri tekrar tekrar geri gelen müşteriye çevirmek. WhatsApp ve SMS kampanyaları, sadakat uygulamaları ve kişiye özel mesajlarla misafirlerinizi doğru anda yeniden mekânınıza davet edin; memnun misafirleri Google yorumuna ve sosyal medyaya yönlendirerek itibarınızı organik olarak büyütün. Böylece ek reklam bütçesi harcamadan daha çok ziyaret, daha çok sipariş ve daha yüksek kazanç elde etmek mümkün.",
     h3sActive: "H3S Aktif",
     hookTitle: "Wi-Fi'ınız her gün kaç müşteri kaydediyor — siz görüyor musunuz?",
     hookBody:

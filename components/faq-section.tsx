@@ -19,7 +19,7 @@ interface Faq {
 // JSON-LD her zaman Türkçe içerikten üretilir (kanonik dil, tek URL üzerinden SEO tutarlılığı için)
 const faqsForSchema: Faq[] = [
   {
-    question: "5651 sayılı kanun kapsamında işletmem olarak ne yapmam gerekiyor?",
+    question: "5651 sayılı kanun kapsamında işletme olarak ne yapmam gerekiyor?",
     answer:
       "Misafirlerinize internet erişimi sunuyorsanız, 5651 sayılı kanun gereği bağlantı log kayıtlarını tutmak ve talep halinde yetkili makamlara sunmak zorundasınız. H3S bu süreci otomatikleştirir; log kaydı, saklama ve raporlama sizin için yönetilir.",
   },

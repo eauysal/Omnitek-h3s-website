@@ -12,6 +12,7 @@ interface Partner {
 }
 
 // Yeni ortak eklemek için: logoyu public/images/partners/ altına koy ve buraya bir satır ekle.
+// TODO: TEYİT — Euronet, Diverjans, NASA Bilişim, BG Tek, Vodafone logo kullanım izni
 const partners: Partner[] = [
   { name: "Vodafone", logo: "/images/partners/vodafone.webp", width: 439, height: 160, href: "https://www.vodafone.com.tr" },
   { name: "Euronet", logo: "/images/partners/euronet.webp", width: 445, height: 160, href: "https://www.euronet.com.tr" },
@@ -40,7 +41,7 @@ export function PartnersMarquee() {
         {label[locale]}
       </p>
       <div className="marquee-pause relative overflow-hidden [mask-image:linear-gradient(to_right,transparent,black_8%,black_92%,transparent)] motion-reduce:overflow-x-auto motion-reduce:[mask-image:none]">
-        <ul className="animate-marquee flex w-max items-center py-1">
+        <ul aria-label={label[locale]} className="animate-marquee flex w-max items-center py-1">
           {track.map((partner, index) => {
             const isOriginal = index < partners.length
             return (
@@ -59,7 +60,7 @@ export function PartnersMarquee() {
                 >
                   <Image
                     src={partner.logo}
-                    alt={isOriginal ? partner.name : ""}
+                    alt={partner.name}
                     width={partner.width}
                     height={partner.height}
                     loading="eager"

@@ -68,6 +68,7 @@ const positionLabels: Record<Locale, Record<PositionId, string>> = {
 const contactInfo: Record<Locale, { icon: typeof Mail; label: string; value: string; href?: string }[]> = {
   tr: [
     { icon: Mail, label: "E-posta", value: "info@omnitek.com.tr", href: "mailto:info@omnitek.com.tr" },
+    // TODO: TEYİT — hizmet bölgesi (İstanbul, Antalya, Ankara)
     { icon: MapPin, label: "Konum", value: "İstanbul, Antalya, Ankara" },
   ],
   en: [

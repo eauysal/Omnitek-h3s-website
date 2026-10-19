@@ -7,7 +7,7 @@ import { useLanguage, type Locale } from "@/lib/i18n/language-context"
 
 const currentSystem: Record<Locale, string[]> = {
   tr: [
-    "Müşteriler, kasa ve pos ile aynı interneti kullanıyor",
+    "Müşteriler, kasa ve POS ile aynı interneti kullanıyor",
     "Güvenlik duvarı yok veya yetersiz",
     "5651 log kaydı tutulmuyor",
     "Yazılım güncellenmesi otomatik değil",
