@@ -114,7 +114,7 @@ export function HeroSection() {
               <div className="relative w-full aspect-[1600/1312] rounded-2xl bg-gradient-to-br from-primary via-cyan-400 to-success p-[2px] shadow-2xl">
                 <div className="relative w-full h-full rounded-[calc(1rem-2px)] overflow-hidden">
                   <Image
-                    src={locale === "en" ? "/images/h3s-hero-en.webp" : "/images/h3s-hero.webp"}
+                    src={locale === "en" ? "/images/h3s-hero-en-v2.webp" : "/images/h3s-hero.webp"}
                     alt={t.diagramAlt}
                     width={1600}
                     height={1312}
