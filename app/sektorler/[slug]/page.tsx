@@ -26,7 +26,7 @@ export async function generateMetadata({
   const sektor = getSektorBySlug(slug)
   if (!sektor) return {}
 
-  const pageTitle = `${sektor.title} için H3S Wi-Fi & Güvenlik Çözümü | Omnitek H3S`
+  const pageTitle = `${sektor.title} için Wi-Fi Pazarlama ve Güvenli Misafir Ağı | Omnitek H3S`
   const pageUrl = `${siteConfig.url}/sektorler/${sektor.slug}`
   const ogImage = sektor.heroImage
     ? {
@@ -85,7 +85,7 @@ export default async function SektorPage({
       />
       <ServiceJsonLd
         sectorTitle={sektor.title}
-        serviceType={`${sektor.title} için Wi-Fi ve Ağ Güvenliği Hizmeti`}
+        serviceType={`${sektor.title} için Wi-Fi Pazarlama ve Ağ Güvenliği Hizmeti`}
         description={sektor.metaDescription}
         url={pageUrl}
       />

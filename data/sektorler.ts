@@ -121,8 +121,8 @@ export const sektorler: Sektor[] = [
     slug: "kafe",
     title: "Kafe",
     titleEn: "Cafés",
-    h1Title: "Kafeler İçin Misafir Wi-Fi ve 5651 Uyum Çözümü",
-    h1TitleEn: "Guest Wi-Fi and 5651 Compliance Solution for Cafés",
+    h1Title: "Şubelerinizdeki Wi-Fi, müdavimlerinizi tanımanın en kısa yolu.",
+    h1TitleEn: "The Wi-Fi in your branches is the shortest path to knowing your regulars.",
     pluralLocative: "Kafelerde",
     icon: Coffee,
     shortDescription: "Misafir Wi-Fi, POS güvenliği ve yasal uyumluluk için özel çözümler.",
@@ -130,12 +130,12 @@ export const sektorler: Sektor[] = [
     tags: ["Misafir Wi-Fi", "POS Güvenliği", "5651 Uyum"],
     tagsEn: ["Guest Wi-Fi", "POS Security", "5651 Compliance"],
     metaDescription:
-      "Kafeler için kurumsal misafir Wi-Fi, POS ağ ayrımı ve 5651/KVKK uyumlu log kaydı. Ücretsiz saha keşfi ile H3S çözümünü öğrenin.",
+      "Misafir bağlanır, tanınır, kampanyayla geri gelir. Kafeler için Wi-Fi pazarlama, ayrı POS ağı ve 5651/KVKK uyumlu altyapı tek çözümde: Omnitek H3S.",
     heroImage: { url: "/images/h3s-sistem-diyagrami.webp", width: 1800, height: 1005 },
     intro:
-      "Kafenizde misafir Wi-Fi'ı sunarken kasa ve POS cihazlarınızın aynı ağda olması ciddi bir güvenlik açığı yaratır. H3S, misafir ağını POS/kasa sisteminden tamamen ayırırken, 5651 sayılı kanun gereği zorunlu olan log kaydını da otomatik olarak yönetir.",
+      "Misafir bağlanır, tanınır, kampanyayla geri gelir. Kasa ve POS ağı ayrı, 5651/KVKK altyapıda hazır.",
     introEn:
-      "When you offer guest Wi-Fi in your café, having your till and POS devices on the same network creates a serious security gap. H3S completely separates the guest network from your POS/till system, while automatically handling the log recording required by Law No. 5651.",
+      "Guests connect, get recognized and come back through campaigns. The till and POS network is separate, and 5651/KVKK compliance is built into the infrastructure.",
     painPoints: [
       {
         icon: "LockOpen",
@@ -146,20 +146,20 @@ export const sektorler: Sektor[] = [
         risk: "red",
       },
       {
-        icon: "FileText",
-        title: "Numara ve IP kaydı tutulmuyor",
-        titleEn: "No number or IP records kept",
-        description: "Yasal ceza riski var, 5651 denetiminde işletmeniz doğrudan sorumlu tutulabilir.",
-        descriptionEn: "There's a legal penalty risk — your business can be held directly responsible in a 5651 audit.",
-        risk: "red",
-      },
-      {
         icon: "BarChart3",
         title: "Müşteri verisi ölçülmüyor",
         titleEn: "Customer data isn't measured",
         description: "Wi-Fi'a bağlanan müşteri sayısı ve geri dönüş oranı takip edilmiyor, pazarlama fırsatı kaçıyor.",
         descriptionEn: "The number of customers connecting to Wi-Fi and their return rate isn't tracked, so a marketing opportunity is missed.",
         risk: "amber",
+      },
+      {
+        icon: "FileText",
+        title: "Numara ve IP kaydı tutulmuyor",
+        titleEn: "No number or IP records kept",
+        description: "Yasal ceza riski var, 5651 denetiminde işletmeniz doğrudan sorumlu tutulabilir.",
+        descriptionEn: "There's a legal penalty risk — your business can be held directly responsible in a 5651 audit.",
+        risk: "red",
       },
     ],
     packages: tekSubePaketleri("Butik Kafeler İçin İdeal", "Ideal for Boutique Cafés"),
@@ -168,8 +168,8 @@ export const sektorler: Sektor[] = [
     slug: "restoran",
     title: "Restoran",
     titleEn: "Restaurants",
-    h1Title: "Restoranlar İçin Güvenli Misafir Wi-Fi ve 5651 Loglama",
-    h1TitleEn: "Secure Guest Wi-Fi and 5651 Logging for Restaurants",
+    h1Title: "Her masadaki bağlantı, geri dönen bir müşteri olabilir.",
+    h1TitleEn: "Every connection at every table can become a returning customer.",
     pluralLocative: "Restoranlarda",
     icon: UtensilsCrossed,
     shortDescription: "Yoğun müşteri trafiğine uygun, güvenli ve hızlı ağ altyapısı.",
@@ -177,12 +177,12 @@ export const sektorler: Sektor[] = [
     tags: ["Yüksek Kapasite", "Güvenli Ödeme", "Log Kaydı"],
     tagsEn: ["High Capacity", "Secure Payments", "Log Records"],
     metaDescription:
-      "Restoranlar için yüksek kapasiteli, güvenli misafir Wi-Fi altyapısı. POS güvenliği ve 5651 uyumlu log kaydı ile H3S.",
+      "Misafir verisi, şube bazlı ölçüm ve kampanya tek panelde. Restoranlar için Wi-Fi pazarlama, misafir ağından ayrı ödeme ağı ve 5651/KVKK uyumu: Omnitek H3S.",
     heroImage: { url: "/images/h3s-sistem-diyagrami.webp", width: 1800, height: 1005 },
     intro:
-      "Yoğun saatlerde onlarca cihazın aynı anda bağlandığı bir restoran ağında, hem misafir deneyimi hem de ödeme güvenliği aynı anda korunmalı. H3S, yüksek kapasiteli misafir Wi-Fi'ı POS/adisyon sisteminizden ayrı bir ağda tutarak her ikisini de güvence altına alır.",
+      "Misafir verisi, şube bazlı ölçüm ve kampanya tek panelde. Ödeme ağı misafir ağından ayrı.",
     introEn:
-      "In a restaurant network where dozens of devices connect at once during busy hours, both the guest experience and payment security need to be protected at the same time. H3S keeps high-capacity guest Wi-Fi on a network separate from your POS/order system, securing both.",
+      "Guest data, branch-level measurement and campaigns in one panel. The payment network is separate from the guest network.",
     painPoints: [
       {
         icon: "Gauge",
@@ -215,8 +215,8 @@ export const sektorler: Sektor[] = [
     slug: "otel-pansiyon",
     title: "Otel & Pansiyon",
     titleEn: "Hotels & Guesthouses",
-    h1Title: "Oteller İçin Misafir Wi-Fi Altyapısı ve 5651 Uyum",
-    h1TitleEn: "Guest Wi-Fi Infrastructure and 5651 Compliance for Hotels",
+    h1Title: "Misafiriniz check-out yapar, ilişkiniz devam eder.",
+    h1TitleEn: "Your guest checks out, the relationship continues.",
     pluralLocative: "Otel & Pansiyonlarda",
     icon: Building2,
     shortDescription: "Oda bazlı ağ yönetimi ve 7/24 kesintisiz bağlantı.",
@@ -224,12 +224,12 @@ export const sektorler: Sektor[] = [
     tags: ["Oda Yönetimi", "7/24 Bağlantı", "Misafir Portal"],
     tagsEn: ["Room Management", "24/7 Connectivity", "Guest Portal"],
     metaDescription:
-      "Otel ve pansiyonlar için oda bazlı ağ yönetimi, 7/24 kesintisiz misafir Wi-Fi ve 5651/KVKK uyumlu altyapı. H3S ile tanışın.",
+      "Misafir Wi-Fi'ı izinli iletişime dönüşür; oda ağı ve yönetim ağı ayrı ve izlenir. Oteller ve pansiyonlar için Wi-Fi pazarlama ve güvenli misafir ağı: Omnitek H3S.",
     heroImage: { url: "/images/h3s-sistem-diyagrami.webp", width: 1800, height: 1005 },
     intro:
-      "Otel ve pansiyonlarda misafir memnuniyetinin önemli bir parçası kesintisiz ve güvenli internet erişimidir. H3S, oda bazlı ağ yönetimi ile her misafire ayrı ve güvenli bir bağlantı sağlarken, 7/24 aktif izleme ile olası kesintileri önceden tespit eder.",
+      "Misafir Wi-Fi'ı izinli iletişime dönüşür; oda ağı ve yönetim ağı ayrı ve izlenir.",
     introEn:
-      "Uninterrupted, secure internet access is a key part of guest satisfaction at hotels and guesthouses. H3S provides each guest with a separate, secure connection through room-based network management, while 24/7 active monitoring catches potential outages before they happen.",
+      "Guest Wi-Fi turns into consented communication; the room network and management network are separate and monitored.",
     painPoints: [
       {
         icon: "WifiOff",
@@ -352,8 +352,8 @@ export const sektorler: Sektor[] = [
     slug: "market-perakende",
     title: "Market & Perakende",
     titleEn: "Retail & Grocery",
-    h1Title: "Marketler İçin POS Güvenliği ve Misafir Wi-Fi",
-    h1TitleEn: "POS Security and Guest Wi-Fi for Retail Stores",
+    h1Title: "Mağazalarınızdaki Wi-Fi, müşterinizi tanımanın en kısa yolu.",
+    h1TitleEn: "The Wi-Fi in your stores is the shortest path to knowing your customers.",
     pluralLocative: "Market & Perakendede",
     icon: ShoppingCart,
     shortDescription: "Kasa, POS ve stok sistemleri misafir ağından ayrılır; tüm mağazalar tek panelden yönetilir.",
@@ -361,11 +361,11 @@ export const sektorler: Sektor[] = [
     tags: ["POS Ayrımı", "Mağaza Kıyası", "Müşteri Verisi"],
     tagsEn: ["POS Separation", "Store Comparison", "Customer Data"],
     metaDescription:
-      "Market ve perakende işletmeleri için güvenli POS entegrasyonu, müşteri Wi-Fi ayrımı ve envanter sistemi güvenliği. H3S çözümü.",
+      "Kasa, POS ve stok sistemleri ayrı ağda; tüm mağazalar tek panelden yönetilir. Market ve perakende için Wi-Fi pazarlama ve müşteri verisi: Omnitek H3S.",
     intro:
-      "Market ve perakende işletmelerinde POS, envanter sistemleri ve müşteri Wi-Fi'ının aynı ağda olması ciddi bir güvenlik açığıdır. H3S, bu sistemleri birbirinden ayırarak hem ödeme güvenliğini hem de müşteri deneyimini korur.",
+      "Kasa, POS ve stok sistemleri ayrı ağda; tüm mağazalar tek panelden yönetilir.",
     introEn:
-      "In retail and grocery businesses, having POS, inventory systems, and customer Wi-Fi on the same network is a serious security gap. H3S separates these systems from each other, protecting both payment security and the customer experience.",
+      "Till, POS and inventory systems sit on a separate network; all stores are managed from one panel.",
     painPoints: [
       {
         icon: "ShoppingCart",

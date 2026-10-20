@@ -1,23 +1,20 @@
 "use client"
 
 import Image from "next/image"
+import Link from "next/link"
 import { Button } from "@/components/ui/button"
-import { QuoteRequestDialog } from "@/components/quote-request-dialog"
-import { ComplianceCheckDialog } from "@/components/compliance-check-dialog"
 import { Reveal } from "@/components/ui/reveal"
 import { useLanguage, type Locale } from "@/lib/i18n/language-context"
 import type { Sektor } from "@/data/sektorler"
 
-const content: Record<Locale, { quoteButton: string; complianceButton: string; diagramAlt: string }> = {
+const content: Record<Locale, { pilotButton: string; diagramAlt: string }> = {
   tr: {
-    quoteButton: "Görüşme Planlayın",
-    complianceButton: "5651 Denetimine Hazır Mısınız?",
+    pilotButton: "Pilot planlayın →",
     diagramAlt:
       "Omnitek H3S Ekosistemi: Siber Güvenlik Kalkanı (VLAN), Yasal Uyumluluk (5651), Aktif İnternet Kontrolü (ACL), merkezi yönetim paneli ve entegrasyon şeması",
   },
   en: {
-    quoteButton: "Plan a Call",
-    complianceButton: "Ready for a 5651 Audit?",
+    pilotButton: "Plan a pilot →",
     diagramAlt:
       "Omnitek H3S Ecosystem: Cyber Security Shield (VLAN), Legal Compliance (5651), Active Internet Control (ACL), central management panel and integration diagram",
   },
@@ -33,20 +30,13 @@ export function SectorHero({ sektor }: { sektor: Omit<Sektor, "icon"> }) {
 
   const ctaButtons = (
     <div className="flex flex-col sm:flex-row gap-4 justify-center">
-      <QuoteRequestDialog>
-        <Button size="lg" className="bg-primary text-primary-foreground hover:bg-primary/90 text-base px-8">
-          {t.quoteButton}
-        </Button>
-      </QuoteRequestDialog>
-      <ComplianceCheckDialog>
-        <Button
-          variant="outline"
-          size="lg"
-          className="bg-success text-success-foreground border border-success hover:bg-success/80 hover:border-success/80 text-base px-8 font-semibold transition-colors"
-        >
-          {t.complianceButton}
-        </Button>
-      </ComplianceCheckDialog>
+      <Button
+        asChild
+        size="lg"
+        className="bg-primary text-primary-foreground hover:bg-primary/90 text-base px-8"
+      >
+        <Link href="/#pilot">{t.pilotButton}</Link>
+      </Button>
     </div>
   )
 

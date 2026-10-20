@@ -78,7 +78,7 @@ export function ServiceJsonLd({
   const schema = {
     "@context": "https://schema.org",
     "@type": "Service",
-    name: `${sectorTitle} için H3S Wi-Fi & Güvenlik Çözümü`,
+    name: `${sectorTitle} için H3S Wi-Fi Pazarlama ve Güvenlik Çözümü`,
     serviceType,
     description,
     url,
