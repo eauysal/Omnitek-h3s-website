@@ -26,8 +26,9 @@ const badges: Record<Locale, string[]> = {
 
 const content = {
   tr: {
-    h1Before: "Şubelerinizdeki Wi-Fi, ",
-    h1Highlight: "en büyük müşteri veri kaynağınız.",
+    h1Line1: "Şubelerinizdeki Wi-Fi,",
+    h1Line2: "en büyük müşteri veri kaynağınız.",
+    h1Scale: 6.3,
     subtitle:
       "H3S, tüm şubelerdeki misafir bağlantılarını izinli müşteri verisine, ölçülebilir kampanyalara ve geri dönen müşteriye dönüştürür. Kurumsal güvenlik ve 5651/KVKK uyumu altyapıda hazır gelir.",
     pilotButton: "Zincir pilotu planlayın →",
@@ -38,8 +39,9 @@ const content = {
     trustBadgeEnd: " güvencesiyle",
   },
   en: {
-    h1Before: "The Wi-Fi in your branches is ",
-    h1Highlight: "your biggest source of customer data.",
+    h1Line1: "The Wi-Fi in your branches is",
+    h1Line2: "your biggest source of customer data.",
+    h1Scale: 5.35,
     subtitle:
       "H3S turns guest connections across all your branches into consented customer data, measurable campaigns and returning customers. Enterprise security and 5651/KVKK compliance come built into the infrastructure.",
     pilotButton: "Plan a chain pilot →",
@@ -49,7 +51,7 @@ const content = {
     trustBadgeLink: "Omnitek Telekom",
     trustBadgeEnd: " backed and guaranteed",
   },
-} satisfies Record<Locale, Record<string, string>>
+} satisfies Record<Locale, Record<string, string | number>>
 
 export function HeroSection() {
   const { locale } = useLanguage()
@@ -58,18 +60,23 @@ export function HeroSection() {
     <>
       <section className="flow-hero min-h-screen pt-24 lg:pt-28 pb-12 relative overflow-hidden">
         <div className="max-w-7xl mx-auto px-6 sm:px-6 lg:px-8 relative z-10">
-          <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
+          {/* Başlık: her genişlikte tam iki satır. İkinci satırın taşmaması için yazı boyutu kapsayıcı genişliğine göre ölçeklenir. */}
+          <Reveal direction="left" className="[container-type:inline-size]">
+            <h1
+              className="font-[family-name:var(--font-heading)] font-bold leading-[1.12] tracking-tight"
+              style={{ fontSize: `clamp(1rem, ${t.h1Scale}cqw, 4rem)` }}
+            >
+              <span className="block whitespace-nowrap">{t.h1Line1}</span>
+              <span className="block whitespace-nowrap text-primary">{t.h1Line2}</span>
+            </h1>
+          </Reveal>
+
+          <div className="mt-6 lg:mt-8 grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
             {/* Left Column */}
             <Reveal direction="left" className="space-y-8">
-              <div className="space-y-6">
-                <h1 className="font-[family-name:var(--font-heading)] text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-bold leading-tight text-balance">
-                  {t.h1Before}
-                  <span className="text-primary">{t.h1Highlight}</span>
-                </h1>
-                <p className="text-muted-foreground text-lg lg:text-xl max-w-xl">
-                  {t.subtitle}
-                </p>
-              </div>
+              <p className="text-muted-foreground text-lg lg:text-xl max-w-xl">
+                {t.subtitle}
+              </p>
 
               <div className="flex flex-col sm:flex-row sm:items-center gap-4 sm:gap-6">
                 <Button
