@@ -86,7 +86,7 @@ export function IsletmelerBody() {
 
       {/* Burro vakası + Hugg yorumu */}
       {/* TODO: TEYİT — Burro yazılı onayı ve rakamlar (345 kayıt, %38) */}
-      {/* TODO: TEYİT — Hugg yazılı onayı ve yumuşatılmış metin: "Misafir ağımızı ayırdık, istenmeyen sitelere erişimi engelledik; artık kurumsal bir altyapımız var." (yorum şu an yayında değil: components/testimonial-carousel.tsx) */}
+      {/* Hugg ve Mete Balta yorumları Burro vakasının altında alt alta (components/testimonial-carousel.tsx, stacked). Mete Balta yeni metin onayı için TEYİT notuna bakın. */}
       <section className="flow-packages py-16 lg:py-24">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <Reveal className="text-center mb-10">
@@ -98,7 +98,7 @@ export function IsletmelerBody() {
             <BurroCaseStudy />
           </Reveal>
           <Reveal delay={150} className="mt-6">
-            <TestimonialCarousel className="bg-card border border-border md:p-6" />
+            <TestimonialCarousel stacked className="bg-card border border-border md:p-6" />
           </Reveal>
         </div>
       </section>
