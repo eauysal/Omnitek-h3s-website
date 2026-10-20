@@ -3,7 +3,7 @@
 import { Check, X } from "lucide-react"
 import { Reveal } from "@/components/ui/reveal"
 import { Button } from "@/components/ui/button"
-import { QuoteRequestDialog } from "@/components/quote-request-dialog"
+import Link from "next/link"
 import type { Paket } from "@/data/sektorler"
 import { useLanguage, type Locale } from "@/lib/i18n/language-context"
 
@@ -23,14 +23,14 @@ const content: Record<Locale, {
     headingHighlight: "Çözüm Paketleri",
     subtitle: "İhtiyacınıza göre üç seviyede tasarlandı. Size uygun paketi birlikte netleştirelim.",
     recommended: "Tavsiye Edilen",
-    askButton: "Bu Paketi Sorun",
+    askButton: "Pilot planlayın →",
   },
   en: {
     heading: "Solution Packages",
     headingHighlight: "for Your Business",
     subtitle: "Designed across three tiers based on your needs. Let's figure out the right package together.",
     recommended: "Recommended",
-    askButton: "Ask About This Package",
+    askButton: "Plan a pilot →",
   },
 }
 
@@ -105,18 +105,17 @@ export function SectorPackages({ packages }: SectorPackagesProps) {
                     ))}
                   </ul>
 
-                  <QuoteRequestDialog>
-                    <Button
-                      variant={pkg.recommended ? "default" : "outline"}
-                      className={
-                        pkg.recommended
-                          ? "w-full bg-primary text-primary-foreground hover:bg-primary/90"
-                          : "w-full"
-                      }
-                    >
-                      {t.askButton}
-                    </Button>
-                  </QuoteRequestDialog>
+                  <Button
+                    asChild
+                    variant={pkg.recommended ? "default" : "outline"}
+                    className={
+                      pkg.recommended
+                        ? "w-full bg-primary text-primary-foreground hover:bg-primary/90"
+                        : "w-full"
+                    }
+                  >
+                    <Link href="/#pilot">{t.askButton}</Link>
+                  </Button>
                 </div>
               </div>
             </Reveal>

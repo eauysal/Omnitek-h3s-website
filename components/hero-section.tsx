@@ -31,7 +31,7 @@ const content = {
     h1Scale: 6.3,
     subtitle:
       "H3S, tüm şubelerdeki misafir bağlantılarını izinli müşteri verisine, ölçülebilir kampanyalara ve geri dönen müşteriye dönüştürür. Kurumsal güvenlik ve 5651/KVKK uyumu altyapıda hazır gelir.",
-    pilotButton: "Zincir pilotu planlayın →",
+    pilotButton: "Pilot planlayın →",
     singleBranchLink: "Tek şubeli işletmeler için →",
     diagramAlt: "Omnitek H3S - Siber Güvenlik Kalkanı, KVKK/İYS Kaydı (5651) ve Wi-Fi Pazarlama",
     trustBadgeStrong: "1986'dan beri",
@@ -44,7 +44,7 @@ const content = {
     h1Scale: 5.35,
     subtitle:
       "H3S turns guest connections across all your branches into consented customer data, measurable campaigns and returning customers. Enterprise security and 5651/KVKK compliance come built into the infrastructure.",
-    pilotButton: "Plan a chain pilot →",
+    pilotButton: "Plan a pilot →",
     singleBranchLink: "For single-branch businesses →",
     diagramAlt: "Omnitek H3S - Cyber Security Shield, KVKK/IYS Records (5651) and Wi-Fi Marketing",
     trustBadgeStrong: "Since 1986,",

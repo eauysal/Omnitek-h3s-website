@@ -4,8 +4,8 @@ import React from 'react';
 import { useLanguage } from '@/lib/i18n/language-context';
 
 const tooltipLabel = {
-  tr: "WhatsApp'tan Yazın",
-  en: "Message Us on WhatsApp",
+  tr: "WhatsApp'tan yazın",
+  en: "Message us on WhatsApp",
 };
 
 export default function WhatsAppButton() {

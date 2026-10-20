@@ -1,7 +1,6 @@
 "use client"
 
 import Image from "next/image"
-import { QuoteRequestDialog } from "@/components/quote-request-dialog"
 import { Reveal } from "@/components/ui/reveal"
 import { useLanguage, type Locale } from "@/lib/i18n/language-context"
 
@@ -150,9 +149,9 @@ const content: Record<Locale, {
     messageText: "Merhaba! Sizi bir süredir görmedik. Bu hafta uğrayın, ilk kahveniz bizden.",
     heroTitle: "Kaybettiğiniz müşteriyi geri getirin",
     ctaTitle: "Sizin şubelerinizde ne kadar potansiyel var?",
-    ctaBodyBefore: "Ücretsiz görüşme —",
-    ctaBodyStrong: "15 dakikada sistem analizini yapalım, taahhütsüz.",
-    ctaButton: "Pilot Planlayın",
+    ctaBodyBefore: "",
+    ctaBodyStrong: "Pilot görüşmesi 15 dakika sürer, taahhüt gerektirmez.",
+    ctaButton: "Pilot planlayın",
   },
   en: {
     headingLine1: "Wi-Fi isn't just internet",
@@ -164,9 +163,9 @@ const content: Record<Locale, {
     messageText: "Hi! We haven't seen you for a while. Stop by this week, your first coffee is on us.",
     heroTitle: "Bring back the customers you've lost",
     ctaTitle: "How much potential is there across your branches?",
-    ctaBodyBefore: "Free consultation —",
-    ctaBodyStrong: "let's do a 15-minute system analysis, no commitment.",
-    ctaButton: "Plan a Pilot",
+    ctaBodyBefore: "",
+    ctaBodyStrong: "The pilot call takes 15 minutes and requires no commitment.",
+    ctaButton: "Plan a pilot",
   },
 }
 
@@ -318,16 +317,16 @@ export function BenefitsSection() {
               {t.ctaTitle}
             </p>
             <p className="text-[#3B6D11] text-sm">
-              {t.ctaBodyBefore}{" "}
               <span className="font-medium text-[#27500A]">{t.ctaBodyStrong}</span>
             </p>
           </div>
-          <QuoteRequestDialog>
-            <button className="inline-flex items-center gap-2 bg-[#3B6D11] text-[#EAF3DE] text-[13px] font-medium px-5 py-2.5 rounded-xl whitespace-nowrap hover:bg-[#27500A] transition-colors flex-shrink-0">
+          <a
+            href="#pilot"
+            className="inline-flex items-center gap-2 bg-[#3B6D11] text-[#EAF3DE] text-[13px] font-medium px-5 py-2.5 rounded-xl whitespace-nowrap hover:bg-[#27500A] transition-colors flex-shrink-0"
+          >
               {t.ctaButton}
               <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12l14 0" /><path d="M13 18l6 -6" /><path d="M13 6l6 -6" /></svg>
-            </button>
-          </QuoteRequestDialog>
+          </a>
         </Reveal>
 
       </div>

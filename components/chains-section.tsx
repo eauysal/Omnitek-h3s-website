@@ -77,7 +77,7 @@ const content: Record<Locale, { headingBefore: string; headingHighlight: string;
     headingHighlight: "standart da önem kazanır",
     subtitle:
       "H3S her şubede aynı altyapıyı ve aynı misafir deneyimini kurar; tüm şubeleri tek ekrandan yönetmenizi sağlar.",
-    cta: "Zincir projesi için görüşme planlayın →",
+    cta: "Pilot planlayın →",
     opsHeadingBefore: "",
     opsHeadingHighlight: "Personel Wi-Fi",
     opsHeadingAfter: " ile Operasyonu Yönetin",
@@ -88,7 +88,7 @@ const content: Record<Locale, { headingBefore: string; headingHighlight: string;
     headingHighlight: "the more the standard matters",
     subtitle:
       "H3S sets up the same infrastructure and the same guest experience at every branch, and lets you manage all of them from a single screen.",
-    cta: "Plan a call for your chain project →",
+    cta: "Plan a pilot →",
     opsHeadingBefore: "Manage operations with ",
     opsHeadingHighlight: "staff Wi-Fi",
     opsHeadingAfter: "",
@@ -110,7 +110,7 @@ export function ChainsSection() {
             </h2>
             <p className="text-muted-foreground text-lg">{t.subtitle}</p>
             <Button asChild size="lg" className="bg-primary text-primary-foreground hover:bg-primary/90">
-              <a href="#iletisim">{t.cta}</a>
+              <a href="#pilot">{t.cta}</a>
             </Button>
           </Reveal>
 

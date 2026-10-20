@@ -3,7 +3,6 @@
 import Image from "next/image"
 import { Ghost, LockOpen, Package, Shield, ShieldAlert, type LucideIcon } from "lucide-react"
 import { ComparisonCards } from "@/components/comparison-section"
-import { ComplianceCheckDialog } from "@/components/compliance-check-dialog"
 import { Reveal } from "@/components/ui/reveal"
 import { useLanguage, type Locale } from "@/lib/i18n/language-context"
 
@@ -120,7 +119,7 @@ const content: Record<Locale, {
     diagnosticNoteStrong: "%80'i",
     diagnosticNoteAfter: " bu tabloya benziyor.",
     diagnosticFootnote: "Saha keşiflerimizdeki gözlemlere dayanan temsili bir orandır.",
-    testCta: "5651 uyumluluk testini deneyin →",
+    testCta: "Şube ağ analizi isteyin →",
   },
   en: {
     alt: "Hotel guests connecting to Wi-Fi at the front desk",
@@ -133,7 +132,7 @@ const content: Record<Locale, {
     diagnosticNoteStrong: "80%",
     diagnosticNoteAfter: " of the businesses we visit look like this.",
     diagnosticFootnote: "A representative figure based on our on-site assessment observations.",
-    testCta: "Try the 5651 compliance test →",
+    testCta: "Request a branch network analysis →",
   },
 }
 
@@ -227,13 +226,11 @@ export function SecuritySection() {
         {/* Comparison */}
         <ComparisonCards level={3} />
 
-        {/* 5651 self-test (moved here from the hero) */}
+        {/* İkincil eylem: şube ağ analizi talebi (iletişim formuna kaydırır) */}
         <Reveal delay={150} className="text-center mt-10">
-          <ComplianceCheckDialog>
-            <button className="text-sm font-semibold text-primary hover:underline underline-offset-4">
-              {t.testCta}
-            </button>
-          </ComplianceCheckDialog>
+          <a href="#iletisim" className="text-sm font-semibold text-primary hover:underline underline-offset-4">
+            {t.testCta}
+          </a>
         </Reveal>
       </div>
     </section>

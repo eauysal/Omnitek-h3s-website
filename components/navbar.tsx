@@ -26,8 +26,8 @@ const navLinks: Record<Locale, { href: string; label: string }[]> = {
 }
 
 const ctaLabel: Record<Locale, string> = {
-  tr: "Pilot Planlayın",
-  en: "Plan a Pilot",
+  tr: "Pilot planlayın",
+  en: "Plan a pilot",
 }
 
 const singleBranchLabel: Record<Locale, string> = {

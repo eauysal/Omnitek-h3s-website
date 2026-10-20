@@ -2,7 +2,6 @@
 
 import { BarChart3, CalendarRange, FileText, Handshake, type LucideIcon } from "lucide-react"
 import { Button } from "@/components/ui/button"
-import { QuoteRequestDialog } from "@/components/quote-request-dialog"
 import { Reveal } from "@/components/ui/reveal"
 import { useLanguage, type Locale } from "@/lib/i18n/language-context"
 
@@ -75,13 +74,13 @@ const content: Record<Locale, { heading: string; headingHighlight: string; subti
     heading: "Önce 2–3 şubede deneyin,",
     headingHighlight: "kendi verinizle karar verin",
     subtitle: "Tüm zinciri bağlamadan önce, H3S'in sizin şubelerinizde ne ürettiğini birlikte görelim.",
-    cta: "Pilot görüşmesi planlayın →",
+    cta: "Pilot planlayın →",
   },
   en: {
     heading: "Try it at 2–3 branches first,",
     headingHighlight: "and decide with your own data",
     subtitle: "Before connecting the whole chain, let's see together what H3S delivers at your own branches.",
-    cta: "Plan a pilot call →",
+    cta: "Plan a pilot →",
   },
 }
 
@@ -115,11 +114,13 @@ export function PilotSection() {
         </div>
 
         <Reveal delay={200} className="text-center mt-10">
-          <QuoteRequestDialog>
-            <Button size="lg" className="bg-primary text-primary-foreground hover:bg-primary/90 text-base px-8">
-              {t.cta}
-            </Button>
-          </QuoteRequestDialog>
+          <Button
+            asChild
+            size="lg"
+            className="bg-primary text-primary-foreground hover:bg-primary/90 text-base px-8"
+          >
+            <a href="#iletisim">{t.cta}</a>
+          </Button>
         </Reveal>
       </div>
     </section>

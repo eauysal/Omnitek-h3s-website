@@ -6,8 +6,8 @@ import Link from "next/link"
 import { useLanguage } from "@/lib/i18n/language-context"
 
 const ctaLabel = {
-  tr: "Pilot Planlayın",
-  en: "Plan a Pilot",
+  tr: "Pilot planlayın",
+  en: "Plan a pilot",
 }
 
 export function StickyCta() {
