@@ -46,7 +46,7 @@ const content = {
       "H3S turns guest connections across all your branches into consented customer data, measurable campaigns and returning customers. Enterprise security and 5651/KVKK compliance come built into the infrastructure.",
     pilotButton: "Plan a chain pilot →",
     singleBranchLink: "For single-branch businesses →",
-    diagramAlt: "Omnitek H3S - Cyber Security Shield, KVKK/IYS Records (5651) and Wi-Fi Marketing",
+    diagramAlt: "Omnitek H3S - Cyber Security Shield, Data Protection & Consent Records (KVKK, IYS, 5651) and Wi-Fi Marketing",
     trustBadgeStrong: "Since 1986,",
     trustBadgeLink: "Omnitek Telekom",
     trustBadgeEnd: " backed and guaranteed",
@@ -114,7 +114,7 @@ export function HeroSection() {
               <div className="relative w-full aspect-[1600/1312] rounded-2xl bg-gradient-to-br from-primary via-cyan-400 to-success p-[2px] shadow-2xl">
                 <div className="relative w-full h-full rounded-[calc(1rem-2px)] overflow-hidden">
                   <Image
-                    src={locale === "en" ? "/images/h3s-hero-en.webp" : "/images/h3s-hero.webp"}
+                    src={locale === "en" ? "/images/h3s-hero-en-v2.webp" : "/images/h3s-hero.webp"}
                     alt={t.diagramAlt}
                     width={1600}
                     height={1312}
