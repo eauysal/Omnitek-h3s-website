@@ -11,7 +11,7 @@ const content: Record<Locale, { pilotButton: string; diagramAlt: string }> = {
   tr: {
     pilotButton: "Pilot planlayın →",
     diagramAlt:
-      "Omnitek H3S Ekosistemi: Siber Güvenlik Kalkanı (VLAN), Yasal Uyumluluk (5651), Aktif İnternet Kontrolü (ACL), merkezi yönetim paneli ve entegrasyon şeması",
+      "Omnitek H3S Ekosistemi: Siber Güvenlik Kalkanı (VLAN), Yasal Uyumluluk (5651), Aktif İnternet Kontrolü (ACL), merkezî yönetim paneli ve entegrasyon şeması",
   },
   en: {
     pilotButton: "Plan a pilot →",
@@ -74,16 +74,16 @@ export function SectorHero({ sektor }: { sektor: Omit<Sektor, "icon"> }) {
           {introText}
         </p>
 
-        <div className={`flex flex-wrap justify-center gap-2 ${showDiagram ? "" : "mb-8"}`}>
+        <ul className={`flex flex-wrap justify-center gap-2 ${showDiagram ? "" : "mb-8"}`}>
           {tags.map((tag) => (
-            <span
+            <li
               key={tag}
               className="text-sm bg-primary/10 text-primary px-3 py-1.5 rounded-full font-medium"
             >
-              {tag}
-            </span>
+              {tag}{" "}
+            </li>
           ))}
-        </div>
+        </ul>
 
         {!showDiagram && ctaButtons}
       </div>

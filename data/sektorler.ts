@@ -154,8 +154,8 @@ export const sektorler: Sektor[] = [
         icon: "LockOpen",
         title: "POS, adisyon ve Wi-Fi aynı modeme bağlı",
         titleEn: "POS, order system and Wi-Fi all on the same modem",
-        description: "Ödeme güvenliği risk altında, olası bir sızıntı POS sisteminizi doğrudan etkileyebilir, ödemelerinizi alamaz hale gelebilirsiniz.",
-        descriptionEn: "Payment security is at risk — a potential breach can directly affect your POS system, and you could end up unable to process payments.",
+        description: "Ödeme güvenliği risk altında; olası bir sızıntı POS sisteminizi doğrudan etkileyebilir.",
+        descriptionEn: "Payment security is at risk; a potential breach can directly affect your POS system.",
         risk: "red",
       },
       {
@@ -326,12 +326,12 @@ export const sektorler: Sektor[] = [
     icon: Building,
     shortDescription: "Çoklu kullanıcı yönetimi ve kurumsal düzeyde güvenlik.",
     shortDescriptionEn: "Multi-user management with enterprise-grade security.",
-    tags: ["VLAN Ayrımı", "Kurumsal Güvenlik", "Merkezi Yönetim"],
+    tags: ["VLAN Ayrımı", "Kurumsal Güvenlik", "Merkezî Yönetim"],
     tagsEn: ["VLAN Separation", "Enterprise Security", "Central Management"],
     metaDescription:
-      "Ofis ve koworking alanları için VLAN ayrımı, kurumsal güvenlik ve merkezi ağ yönetimi. H3S ile 5651/KVKK uyumlu altyapı kurun.",
+      "Ofis ve koworking alanları için VLAN ayrımı, kurumsal güvenlik ve merkezî ağ yönetimi. H3S ile 5651/KVKK uyumlu altyapı kurun.",
     intro:
-      "Koworking alanlarında ve ofislerde farklı firmaların/kullanıcıların aynı ağı güvenli şekilde paylaşması gerekir. H3S, VLAN ayrımı ile her kullanıcı grubunu izole ederken, merkezi yönetim paneliyle tüm ağı tek yerden kontrol etmenizi sağlar.",
+      "Koworking alanlarında ve ofislerde farklı firmaların/kullanıcıların aynı ağı güvenli şekilde paylaşması gerekir. H3S, VLAN ayrımı ile her kullanıcı grubunu izole ederken, merkezî yönetim paneliyle tüm ağı tek yerden kontrol etmenizi sağlar.",
     introEn:
       "In coworking spaces and offices, different companies and users need to safely share the same network. H3S isolates each user group with VLAN separation, while a central management panel lets you control the entire network from one place.",
     painPoints: [
@@ -345,7 +345,7 @@ export const sektorler: Sektor[] = [
       },
       {
         icon: "Settings",
-        title: "Merkezi yönetim yok",
+        title: "Merkezî yönetim yok",
         titleEn: "No central management",
         description: "Ağ ve izleme sistemi tek yerden kontrol edilemiyor.",
         descriptionEn: "The network and monitoring system can't be controlled from one place.",
