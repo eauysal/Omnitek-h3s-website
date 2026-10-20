@@ -40,7 +40,7 @@ const problems: Record<Locale, Problem[]> = {
     },
     {
       icon: Ghost,
-      title: "Kimse bakmıyor kimse bilmiyor",
+      title: "Yetkin sorumlu bulunmuyor",
       description: "Ağınızı kim yönetiyor? Sorun çıkınca kimi arayacaksınız?",
       risk: "Orta risk",
       riskType: "amber",
@@ -70,7 +70,7 @@ const problems: Record<Locale, Problem[]> = {
     },
     {
       icon: Ghost,
-      title: "No one is watching, no one knows",
+      title: "No qualified person in charge",
       description: "Who's actually managing your network? Who will you call when something breaks?",
       risk: "Medium risk",
       riskType: "amber",
