@@ -140,8 +140,10 @@ export function SecuritySection() {
   const { locale } = useLanguage()
   const t = content[locale]
 
+  // scroll-mt: navbar (80px) − koyu "Benefits" bölümünün kavisli alt kenarının bu bölümün üstüne bindiği 34px (bkz. .flow-benefits);
+  // böylece #guvenlik'e kaydırınca o koyu kenar navbar'ın altında kalır ve görünmez.
   return (
-    <section id="guvenlik" className="flow-security py-16 lg:py-24 relative overflow-hidden scroll-mt-20">
+    <section id="guvenlik" className="flow-security py-16 lg:py-24 relative overflow-hidden scroll-mt-[46px]">
       {/* Background Image */}
       <div className="flow-photo-fade absolute inset-0 z-0">
         <Image
