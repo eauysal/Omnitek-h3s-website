@@ -13,15 +13,15 @@ interface Partner {
 }
 
 // Yeni ortak eklemek için: logoyu public/images/partners/ altına koy ve buraya bir satır ekle.
-// visible: false olan ortaklar silinmez, izin teyidine kadar yayında gizli kalır.
-// TODO: TEYİT — logo kullanım izinleri (Vodafone, Euronet, Diverjans, NASA Bilişim, BG Tek); izin gelince visible: true yapılır
+// visible: false olan bir ortak silinmez, yalnızca yayında gizlenir (izin geri çekilirse kullanılır).
+// Logo kullanım izinleri tüm ortaklar için teyit edildi: Vodafone, Euronet, Diverjans, Useroam, NASA Bilişim, BG Tek.
 const partners: Partner[] = [
-  { name: "Vodafone", logo: "/images/partners/vodafone.webp", width: 439, height: 160, href: "https://www.vodafone.com.tr", visible: false },
-  { name: "Euronet", logo: "/images/partners/euronet.webp", width: 445, height: 160, href: "https://www.euronet.com.tr", visible: false },
-  { name: "Diverjans", logo: "/images/partners/diverjans.webp", width: 434, height: 160, href: "https://www.diverjans.com.tr", visible: false },
+  { name: "Vodafone", logo: "/images/partners/vodafone.webp", width: 439, height: 160, href: "https://www.vodafone.com.tr", visible: true },
+  { name: "Euronet", logo: "/images/partners/euronet.webp", width: 445, height: 160, href: "https://www.euronet.com.tr", visible: true },
+  { name: "Diverjans", logo: "/images/partners/diverjans.webp", width: 434, height: 160, href: "https://www.diverjans.com.tr", visible: true },
   { name: "Useroam", logo: "/images/partners/useroam.webp", width: 445, height: 160, href: "https://useroam.com", visible: true },
-  { name: "NASA Bilişim", logo: "/images/partners/nasa-bilisim.webp", width: 301, height: 160, href: "https://www.nasabil.com", visible: false },
-  { name: "BG Tek", logo: "/images/partners/bg-tek.webp", width: 392, height: 160, href: "https://www.bg-tek.net", visible: false },
+  { name: "NASA Bilişim", logo: "/images/partners/nasa-bilisim.webp", width: 301, height: 160, href: "https://www.nasabil.com", visible: true },
+  { name: "BG Tek", logo: "/images/partners/bg-tek.webp", width: 392, height: 160, href: "https://www.bg-tek.net", visible: true },
 ]
 
 const label: Record<Locale, string> = {
