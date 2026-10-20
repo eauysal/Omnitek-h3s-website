@@ -1,6 +1,6 @@
 "use client"
 
-import { BarChart3, Database, MessageCircle, ShieldCheck, Star, type LucideIcon } from "lucide-react"
+import { BarChart3, Database, MessageCircle, Share2, ShieldCheck, Star, type LucideIcon } from "lucide-react"
 import { Reveal } from "@/components/ui/reveal"
 import { useLanguage, type Locale } from "@/lib/i18n/language-context"
 
@@ -32,12 +32,6 @@ const cards: Record<Locale, MarketingCard[]> = {
       published: true,
     },
     {
-      icon: Star,
-      title: "Google yorum yönlendirme",
-      description: "Memnun misafir doğru anda yoruma yönlendirilir.",
-      published: true,
-    },
-    {
       icon: Database,
       title: "CRM'inize veri akışı",
       description: "Toplanan izinli kayıtlar mevcut CRM sisteminize aktarılabilir.",
@@ -65,12 +59,6 @@ const cards: Record<Locale, MarketingCard[]> = {
       published: true,
     },
     {
-      icon: Star,
-      title: "Google review routing",
-      description: "Happy guests are guided to leave a review at the right moment.",
-      published: true,
-    },
-    {
       icon: Database,
       title: "Data flow into your CRM",
       description: "Collected consented records can be passed to your existing CRM.",
@@ -78,6 +66,28 @@ const cards: Record<Locale, MarketingCard[]> = {
       published: false,
     },
   ],
+}
+
+// TODO: TEYİT — Google yorumu ve sosyal medya hesaplarına yönlendirme kapsamı (hangi platformlar, hangi adımda) doğrulanmalı
+const growth: Record<Locale, { badge: string; title: string; text: string; chips: { icon: LucideIcon; label: string }[] }> = {
+  tr: {
+    badge: "Organik büyüme",
+    title: "Google yorumlarınız ve sosyal medya hesaplarınız organik olarak büyür",
+    text: "Memnun misafir doğru anda Google yorumuna ve sosyal medya hesaplarınıza yönlendirilir; itibarınız ve erişiminiz reklam harcaması olmadan büyür.",
+    chips: [
+      { icon: Star, label: "Google yorumları" },
+      { icon: Share2, label: "Sosyal medya" },
+    ],
+  },
+  en: {
+    badge: "Organic growth",
+    title: "Your Google reviews and social media accounts grow organically",
+    text: "Happy guests are guided to leave a Google review and to your social media accounts at the right moment, so your reputation and reach grow without ad spend.",
+    chips: [
+      { icon: Star, label: "Google reviews" },
+      { icon: Share2, label: "Social media" },
+    ],
+  },
 }
 
 const content: Record<Locale, { heading: string; headingHighlight: string; subtitle: string }> = {
@@ -99,6 +109,7 @@ export function MarketingSection() {
   const { locale } = useLanguage()
   const t = content[locale]
   const visible = cards[locale].filter((card) => card.published)
+  const g = growth[locale]
 
   return (
     <section id="pazarlama" className="flow-marketing py-16 lg:py-24 scroll-mt-20">
@@ -110,7 +121,7 @@ export function MarketingSection() {
           <p className="text-muted-foreground text-lg max-w-3xl mx-auto">{t.subtitle}</p>
         </Reveal>
 
-        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div className={`grid sm:grid-cols-2 gap-6 ${visible.length >= 4 ? "lg:grid-cols-4" : "lg:grid-cols-3"}`}>
           {visible.map((card, index) => (
             <Reveal key={card.title} delay={index * 80}>
               <div className="bg-card border border-border rounded-xl p-6 h-full transition-all duration-300 hover:border-primary/50 hover:-translate-y-1">
@@ -123,6 +134,29 @@ export function MarketingSection() {
             </Reveal>
           ))}
         </div>
+
+        {/* Organik büyüme vaadi */}
+        <Reveal delay={200} className="mt-8 lg:mt-10">
+          <div className="rounded-2xl bg-gradient-to-r from-primary to-[#1F4BD0] p-6 lg:p-8 text-white shadow-[0_24px_60px_-24px_rgba(47,95,240,0.55)] lg:flex lg:items-center lg:justify-between lg:gap-10">
+            <div className="max-w-2xl">
+              <span className="inline-block rounded-md bg-white/15 px-2.5 py-1 text-xs font-medium uppercase tracking-wide mb-3">
+                {g.badge}
+              </span>
+              <h3 className="font-[family-name:var(--font-heading)] text-xl sm:text-2xl lg:text-3xl font-bold leading-snug text-balance mb-2">
+                {g.title}
+              </h3>
+              <p className="text-white/85 text-base lg:text-lg">{g.text}</p>
+            </div>
+            <ul className="mt-5 flex flex-wrap gap-3 lg:mt-0 lg:flex-col lg:shrink-0">
+              {g.chips.map((chip) => (
+                <li key={chip.label} className="inline-flex items-center gap-2.5 rounded-xl bg-white/15 px-4 py-3 text-sm font-semibold">
+                  <chip.icon className="h-5 w-5" />
+                  {chip.label}
+                </li>
+              ))}
+            </ul>
+          </div>
+        </Reveal>
       </div>
     </section>
   )

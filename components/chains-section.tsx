@@ -71,9 +71,10 @@ const operations: Record<Locale, { icon: LucideIcon; Illustration: typeof QrMenu
   ],
 }
 
-const content: Record<Locale, { heading: string; subtitle: string; cta: string; opsHeadingBefore: string; opsHeadingHighlight: string; opsHeadingAfter: string; opsSubtitle: string }> = {
+const content: Record<Locale, { headingBefore: string; headingHighlight: string; subtitle: string; cta: string; opsHeadingBefore: string; opsHeadingHighlight: string; opsHeadingAfter: string; opsSubtitle: string }> = {
   tr: {
-    heading: "Şube sayınız arttıkça, standart da önem kazanır",
+    headingBefore: "Şube sayınız arttıkça,",
+    headingHighlight: "standart da önem kazanır",
     subtitle:
       "H3S her şubede aynı altyapıyı ve aynı misafir deneyimini kurar; tüm şubeleri tek ekrandan yönetmenizi sağlar.",
     cta: "Zincir projesi için görüşme planlayın →",
@@ -83,7 +84,8 @@ const content: Record<Locale, { heading: string; subtitle: string; cta: string; 
     opsSubtitle: "Şubelerin günlük işleyişi de aynı panelden yönetilir.",
   },
   en: {
-    heading: "The more branches you have, the more the standard matters",
+    headingBefore: "The more branches you have,",
+    headingHighlight: "the more the standard matters",
     subtitle:
       "H3S sets up the same infrastructure and the same guest experience at every branch, and lets you manage all of them from a single screen.",
     cta: "Plan a call for your chain project →",
@@ -104,7 +106,7 @@ export function ChainsSection() {
         <div className="grid lg:grid-cols-5 gap-8 lg:gap-12 items-center">
           <Reveal direction="left" className="lg:col-span-2 space-y-6">
             <h2 className="font-[family-name:var(--font-heading)] text-2xl sm:text-3xl lg:text-4xl font-bold text-foreground text-balance">
-              {t.heading}
+              {t.headingBefore} <span className="text-primary">{t.headingHighlight}</span>
             </h2>
             <p className="text-muted-foreground text-lg">{t.subtitle}</p>
             <Button asChild size="lg" className="bg-primary text-primary-foreground hover:bg-primary/90">
