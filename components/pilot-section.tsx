@@ -17,7 +17,7 @@ const points: Record<Locale, PilotPoint[]> = {
   tr: [
     {
       icon: CalendarRange,
-      title: "60 gün, 2–3 şube",
+      title: "30 gün deneme",
       description: "Seçtiğiniz şubelerde, gerçek misafir trafiğiyle çalışan bir deneme.",
       published: true,
     },
@@ -44,7 +44,7 @@ const points: Record<Locale, PilotPoint[]> = {
   en: [
     {
       icon: CalendarRange,
-      title: "60 days, 2–3 branches",
+      title: "30-day trial",
       description: "A trial running at the branches you choose, with real guest traffic.",
       published: true,
     },
