@@ -33,9 +33,12 @@ export interface Paket {
   nameEn: string
   description: string
   descriptionEn: string
-  recommended?: boolean
-  recommendedLabel?: string
-  recommendedLabelEn?: string
+  recommended?: boolean // "Tavsiye Edilen" rozeti (yalnızca H3S Kontrol)
+  idealLabel?: string // "… için ideal" rozeti (yalnızca H3S Uyum; sektöre göre değişir)
+  idealLabelEn?: string
+  ctaLabel: string
+  ctaLabelEn: string
+  ctaHref: string
   features: PaketOzellik[]
 }
 
@@ -63,56 +66,66 @@ const tekSubeKafeRestoranPaketleri: Paket[] = [
   {
     name: "H3S Uyum",
     nameEn: "H3S Compliance",
-    description: "Yalnızca yasal uyumluluğu karşılar. Her şube ayrı; merkezî görünürlük yoktur.",
-    descriptionEn: "Meets legal compliance only. Each branch is separate; there is no central visibility.",
+    description: "Yasal uyumluluğu karşılar. Her şube ayrı yönetilir; merkezî görünürlük yoktur.",
+    descriptionEn: "Meets legal compliance. Each branch is managed separately; there is no central visibility.",
+    // TODO: TEYİT — "SLA - Bakım ve yönetim" ve "Merkezî internet yönetimi" Uyum'a dahil mi? Dahilse ✓ listesine eklenecek, açıklamadaki "merkezî görünürlük yoktur" ifadesi güncellenecek
+    ctaLabel: "Görüşme planlayın →",
+    ctaLabelEn: "Plan a call →",
+    ctaHref: "#iletisim",
     features: [
-      { text: "5651 yasal loglama + temel hotspot", textEn: "5651 legal logging + basic hotspot", included: true },
-      { text: "Dış ve İç Ortam E-WiFi6 Access Point & E-Switch", textEn: "Indoor & outdoor E-WiFi6 Access Point & E-Switch", included: true },
-      { text: "POS / kasa izolasyonu (VLAN) yok", textEn: "No POS / till isolation (VLAN)", included: false },
-      { text: "7/24 uzaktan izleme yok", textEn: "No 24/7 remote monitoring", included: false },
-      { text: "SLA - Bakım ve yönetim", textEn: "SLA - Maintenance and management", included: false },
-      { text: "Merkezî internet yönetimi", textEn: "Central internet management", included: false },
+      { text: "5651 yasal loglama ve temel hotspot", textEn: "5651 legal logging and basic hotspot", included: true },
+      { text: "İç ve dış ortam E-WiFi6 access point ve E-Switch", textEn: "Indoor and outdoor E-WiFi6 access points and E-Switch", included: true },
       { text: "Fiziksel kurulum", textEn: "Physical installation", included: true },
       { text: "1 yıl güvenlik yazılımı", textEn: "1-year security software", included: true },
+      { text: "POS / kasa izolasyonu (VLAN)", textEn: "POS / till isolation (VLAN)", included: false },
+      { text: "7/24 uzaktan izleme", textEn: "24/7 remote monitoring", included: false },
+      { text: "Merkezî yönetim paneli", textEn: "Central management panel", included: false },
     ],
   },
   {
     name: "H3S Kontrol",
     nameEn: "H3S Control",
-    description: "Her misafir için tam koruma + tüm kullanıcıların tek merkezden yönetimi.",
-    descriptionEn: "Full protection for every guest, plus centralized management of all users.",
+    description: "Her misafir için tam koruma ve tüm şubelerin tek merkezden yönetimi.",
+    descriptionEn: "Full protection for every guest and central management of all branches.",
     recommended: true,
-    recommendedLabel: "İçin İdeal",
-    recommendedLabelEn: "Ideal For",
+    ctaLabel: "Pilot planlayın →",
+    ctaLabelEn: "Plan a pilot →",
+    ctaHref: "/#pilot",
     features: [
-      { text: "5651 yasal loglama + yönetimli hotspot + SMS Entegrasyonu", textEn: "5651 legal logging + managed hotspot + SMS integration", included: true },
-      { text: "POS / Kasa / Kamera / Adisyon Sistemi İzolasyonu — Siber Kalkan", textEn: "POS / till / camera / order-system isolation — cyber shield", included: true },
-      { text: "Dış Ortam ve İç Ortam E-WiFi6 Access Point & E-Switch", textEn: "Indoor & outdoor E-WiFi6 Access Point & E-Switch", included: true },
-      { text: "Pasif Network Ekipmanlar ve kurulum", textEn: "Passive network equipment and installation", included: true },
-      { text: "Uygulama & Web Site Filtre, Hız kontrolü", textEn: "App & website filtering, speed control", included: true },
-      { text: "2 yıl güvenlik yazılımı + merkezî CRM + 1 yıl SLA", textEn: "2-year security software + central CRM + 1-year SLA", included: true },
+      { text: "5651 yasal loglama, yönetilen hotspot ve SMS entegrasyonu", textEn: "5651 legal logging, managed hotspot and SMS integration", included: true },
+      { text: "POS, kasa, kamera ve adisyon sistemi izolasyonu (Siber Kalkan)", textEn: "POS, till, camera and order-system isolation (Cyber Shield)", included: true },
+      { text: "İç ve dış ortam E-WiFi6 access point ve E-Switch", textEn: "Indoor and outdoor E-WiFi6 access points and E-Switch", included: true },
+      { text: "Pasif network ekipmanları ve kurulum", textEn: "Passive network equipment and installation", included: true },
+      { text: "Uygulama ve web sitesi filtresi, hız kontrolü", textEn: "App and website filtering, speed control", included: true },
+      { text: "2 yıl güvenlik yazılımı, merkezî CRM ve 1 yıl SLA", textEn: "2-year security software, central CRM and 1-year SLA", included: true },
     ],
   },
   {
-    name: "H3S Kontrol +(PLUS)",
-    nameEn: "H3S Control +(PLUS)",
-    description: "Sıfır kesinti hedefleyen zincirler için en üst koruma katmanı.",
-    descriptionEn: "The top protection tier for chains aiming for zero downtime.",
+    name: "H3S Kontrol+",
+    nameEn: "H3S Control+",
+    description: "Kesintiye toleransı en düşük zincirler için en üst koruma katmanı.",
+    descriptionEn: "The top protection layer for chains with the lowest tolerance for downtime.",
+    // TODO: TEYİT — failover kapsamı: cihaz yedeği mi, hat yedeği mi? Hat yedeği (4G/5G) eklenirse madde güncellenecek.
+    // "Donanım yedekliliği (failover) — kesintisiz operasyon" ifadesi kaldırıldı: pakette yedek internet hattı yok, "kesintisiz" yanlış beklenti yaratıyor.
+    ctaLabel: "Pilot planlayın →",
+    ctaLabelEn: "Plan a pilot →",
+    ctaHref: "/#pilot",
     features: [
-      { text: "H3S Kontrol'ün tamamı", textEn: "Everything in H3S Control", included: true },
+      { text: "H3S Kontrol'ün tüm özellikleri", textEn: "Everything in H3S Control", included: true },
       { text: "E-Network ekipmanları ve fiziksel kurulum", textEn: "E-Network equipment and physical installation", included: true },
-      { text: "Donanım yedekliliği (failover) — kesintisiz operasyon", textEn: "Hardware redundancy (failover) — uninterrupted operation", included: true },
-      { text: "4 Saat içinde / 2 yıl VIP SLA", textEn: "Within 4 hours / 2-year VIP SLA", included: true },
-      { text: "Aktif Siber Saldırı Tespit ve Engelleme", textEn: "Active cyber attack detection and blocking", included: true },
-      { text: "Genişletilmiş Entegrasyon Destek kapsamı", textEn: "Extended integration support coverage", included: true },
-      { text: "3 yıl güvenlik yazılımı + merkezî CRM", textEn: "3-year security software + central CRM", included: true },
+      { text: "Cihaz yedekliliği: arıza durumunda yedek donanım devreye girer", textEn: "Device redundancy: spare hardware takes over in case of failure", included: true },
+      { text: "4 saat içinde müdahale, 2 yıl VIP SLA", textEn: "Response within 4 hours, 2-year VIP SLA", included: true },
+      { text: "Aktif siber saldırı tespiti ve engelleme", textEn: "Active cyber attack detection and blocking", included: true },
+      { text: "Genişletilmiş entegrasyon desteği", textEn: "Extended integration support", included: true },
+      { text: "3 yıl güvenlik yazılımı ve merkezî CRM", textEn: "3-year security software and central CRM", included: true },
     ],
   },
 ]
 
-function tekSubePaketleri(recommendedLabel: string, recommendedLabelEn: string): Paket[] {
+// idealLabel: sektöre göre değişen "… için ideal" rozeti yalnızca H3S Uyum'a eklenir.
+function tekSubePaketleri(idealLabel: string, idealLabelEn: string): Paket[] {
   return tekSubeKafeRestoranPaketleri.map((paket) =>
-    paket.recommended ? { ...paket, recommendedLabel, recommendedLabelEn } : paket
+    paket.name === "H3S Uyum" ? { ...paket, idealLabel, idealLabelEn } : paket
   )
 }
 
@@ -162,7 +175,7 @@ export const sektorler: Sektor[] = [
         risk: "red",
       },
     ],
-    packages: tekSubePaketleri("Butik Kafeler İçin İdeal", "Ideal for Boutique Cafés"),
+    packages: tekSubePaketleri("Butik kafeler için ideal", "Ideal for boutique cafés"),
   },
   {
     slug: "restoran",
@@ -209,7 +222,7 @@ export const sektorler: Sektor[] = [
         risk: "amber",
       },
     ],
-    packages: tekSubePaketleri("Tek Şubeli Restoranlar İçin İdeal", "Ideal for Single-Branch Restaurants"),
+    packages: tekSubePaketleri("Tek şubeli restoranlar için ideal", "Ideal for single-branch restaurants"),
   },
   {
     slug: "otel-pansiyon",
@@ -256,7 +269,7 @@ export const sektorler: Sektor[] = [
         risk: "red",
       },
     ],
-    packages: tekSubePaketleri("Butik Otel & Pansiyonlar İçin İdeal", "Ideal for Boutique Hotels & Guesthouses"),
+    packages: tekSubePaketleri("Butik otel ve pansiyonlar için ideal", "Ideal for boutique hotels and guesthouses"),
   },
   {
     slug: "dis-mekan-etkinlik",
