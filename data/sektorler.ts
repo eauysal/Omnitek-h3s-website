@@ -187,8 +187,8 @@ export const sektorler: Sektor[] = [
     icon: UtensilsCrossed,
     shortDescription: "Yoğun müşteri trafiğine uygun, güvenli ve hızlı ağ altyapısı.",
     shortDescriptionEn: "Secure, fast network infrastructure built for heavy customer traffic.",
-    tags: ["Yüksek Kapasite", "Güvenli Ödeme", "Log Kaydı"],
-    tagsEn: ["High Capacity", "Secure Payments", "Log Records"],
+    tags: ["Misafir Verisi", "Şube Kıyası", "POS Ayrımı"],
+    tagsEn: ["Guest Data", "Branch Comparison", "POS Separation"],
     metaDescription:
       "Misafir verisi, şube bazlı ölçüm ve kampanya tek panelde. Restoranlar için Wi-Fi pazarlama, misafir ağından ayrı ödeme ağı ve 5651/KVKK uyumu: Omnitek H3S.",
     heroImage: { url: "/images/h3s-sistem-diyagrami.webp", width: 1800, height: 1005 },
@@ -234,8 +234,8 @@ export const sektorler: Sektor[] = [
     icon: Building2,
     shortDescription: "Oda bazlı ağ yönetimi ve 7/24 kesintisiz bağlantı.",
     shortDescriptionEn: "Room-based network management and 24/7 uninterrupted connectivity.",
-    tags: ["Oda Yönetimi", "7/24 Bağlantı", "Misafir Portal"],
-    tagsEn: ["Room Management", "24/7 Connectivity", "Guest Portal"],
+    tags: ["Oda Ağı Ayrımı", "7/24 İzleme", "Misafir Portalı"],
+    tagsEn: ["Room Network Separation", "24/7 Monitoring", "Guest Portal"],
     metaDescription:
       "Misafir Wi-Fi'ı izinli iletişime dönüşür; oda ağı ve yönetim ağı ayrı ve izlenir. Oteller ve pansiyonlar için Wi-Fi pazarlama ve güvenli misafir ağı: Omnitek H3S.",
     heroImage: { url: "/images/h3s-sistem-diyagrami.webp", width: 1800, height: 1005 },
