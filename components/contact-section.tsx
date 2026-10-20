@@ -13,9 +13,8 @@ const businessTypeIds = [
   "kafe",
   "restoran",
   "otel-pansiyon",
-  "dis-mekan-etkinlik",
-  "ofis-koworking",
   "market-perakende",
+  "avm",
   "diger",
 ] as const
 type BusinessTypeId = (typeof businessTypeIds)[number]
@@ -26,9 +25,8 @@ const businessTypeLabels: Record<Locale, Record<BusinessTypeId, string>> = {
     kafe: "Kafe",
     restoran: "Restoran",
     "otel-pansiyon": "Otel & Pansiyon",
-    "dis-mekan-etkinlik": "Dış Mekan & Etkinlik",
-    "ofis-koworking": "Ofis & Koworking",
     "market-perakende": "Market & Perakende",
+    avm: "AVM",
     diger: "Diğer",
   },
   en: {
@@ -36,9 +34,8 @@ const businessTypeLabels: Record<Locale, Record<BusinessTypeId, string>> = {
     kafe: "Café",
     restoran: "Restaurant",
     "otel-pansiyon": "Hotel & Guesthouse",
-    "dis-mekan-etkinlik": "Outdoor Venue & Event",
-    "ofis-koworking": "Office & Coworking",
     "market-perakende": "Retail & Grocery",
+    avm: "Shopping Mall",
     diger: "Other",
   },
 }
@@ -169,7 +166,7 @@ const content: Record<Locale, {
   },
 }
 
-// singleBranch: /isletmeler sayfasında şube sayısı "1" gelir ve "paketler" notu (aynı sayfaya link) gösterilmez.
+// singleBranch: /isletmeler sayfasında "paketler" notu (aynı sayfaya link) gösterilmez; şube sayısı varsayılanı "Seçiniz" kalır.
 export function ContactSection({ singleBranch = false }: { singleBranch?: boolean }) {
   const { locale } = useLanguage()
   const t = content[locale]
@@ -182,7 +179,7 @@ export function ContactSection({ singleBranch = false }: { singleBranch?: boolea
     phone: "",
     business: "",
     businessType: "" as BusinessTypeId | "",
-    branchCount: singleBranch ? "1" : "",
+    branchCount: "",
     position: "" as PositionId | "",
     city: "",
     note: "",

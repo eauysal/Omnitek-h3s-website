@@ -85,7 +85,8 @@ export function IsletmelerBody() {
       </section>
 
       {/* Burro vakası + Hugg yorumu */}
-      {/* TODO: TEYİT — Burro ve Hugg yazılı kullanım izni; Burro rakamları (345 kayıt, %38) */}
+      {/* TODO: TEYİT — Burro yazılı onayı ve rakamlar (345 kayıt, %38) */}
+      {/* TODO: TEYİT — Hugg yazılı onayı ve yumuşatılmış metin: "Misafir ağımızı ayırdık, istenmeyen sitelere erişimi engelledik; artık kurumsal bir altyapımız var." (yorum şu an yayında değil: components/testimonial-carousel.tsx) */}
       <section className="flow-packages py-16 lg:py-24">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <Reveal className="text-center mb-10">

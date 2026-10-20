@@ -8,9 +8,11 @@ import { useLanguage, type Locale } from "@/lib/i18n/language-context"
 // TODO: TEYİT — Hugg Coffee ve das Böcek için yazılı kullanım izni
 const testimonials: Record<
   Locale,
-  { name: string; role: string; city: string; logo: string; quote: string }[]
+  { name: string; role: string; city: string; logo: string; quote: string; published: boolean }[]
 > = {
   tr: [
+    // TODO: TEYİT — Hugg yazılı onayı ve yumuşatılmış metin: "Misafir ağımızı ayırdık, istenmeyen sitelere erişimi engelledik; artık kurumsal bir altyapımız var."
+    // Yorum yayından kaldırıldı (published: false); onay ve yumuşatılmış metin gelince yeniden açılır.
     {
       name: "Emre Kepir",
       role: "Hugg Coffee Co.",
@@ -18,6 +20,7 @@ const testimonials: Record<
       logo: "/images/testimonials/hugg-logo.webp",
       quote:
         "Kafemizdeki müşterilerin internet hareketlerini artık kaydediyoruz. Özellikle yasadışı bahis ve kumar sitelerine erişimi engellemek istiyorduk, fazlasını elde ettik ve kurumsal bir statü kazandık.",
+      published: false,
     },
     {
       name: "Mete Balta",
@@ -26,9 +29,11 @@ const testimonials: Record<
       logo: "/images/testimonials/bocek-logo.webp",
       quote:
         "Böcek Kafe olarak önceliğimiz müşterilerin internet deneyimini iyileştirmekti, hız paylaşımı yapamıyorduk, ayrıca güvenlik olarak eksiklerimiz vardı. Şimdi kurumsal karşı ekranı ve adil hız paylaşımı yaparak müşterilerimizin internet hizmetinden daha iyi yararlanmalarını sağladıkları için H3S'i kesinlikle öneriyorum.",
+      published: true,
     },
   ],
   en: [
+    // TODO: TEYİT — Hugg written approval and softened text: "We separated our guest network and blocked access to unwanted sites; we now have a corporate-grade infrastructure."
     {
       name: "Emre Kepir",
       role: "Hugg Coffee Co.",
@@ -36,6 +41,7 @@ const testimonials: Record<
       logo: "/images/testimonials/hugg-logo.webp",
       quote:
         "We now log our customers' internet activity. We mainly wanted to block access to illegal betting and gambling sites — we got that and more, plus a genuinely corporate-grade setup.",
+      published: false,
     },
     {
       name: "Mete Balta",
@@ -44,16 +50,18 @@ const testimonials: Record<
       logo: "/images/testimonials/bocek-logo.webp",
       quote:
         "Our priority was improving our customers' internet experience — we couldn't share bandwidth fairly and had security gaps. With a branded landing page and fair bandwidth sharing now in place, I fully recommend H3S to anyone who wants their guests to get more out of the connection.",
+      published: true,
     },
   ],
 }
 
 export function TestimonialCarousel({ className = "bg-secondary/50" }: { className?: string }) {
   const { locale } = useLanguage()
-  const list = testimonials[locale]
+  const list = testimonials[locale].filter((item) => item.published)
   const [current, setCurrent] = useState(0)
 
   useEffect(() => {
+    if (list.length < 2) return
     const interval = setInterval(() => {
       setCurrent((prev) => (prev + 1) % list.length)
     }, 6000)
@@ -61,6 +69,7 @@ export function TestimonialCarousel({ className = "bg-secondary/50" }: { classNa
   }, [list.length])
 
   const item = list[current]
+  if (!item) return null
 
   return (
     <div className={`rounded-lg p-4 min-h-[120px] transition-all duration-500 ${className}`}>

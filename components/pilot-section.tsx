@@ -16,8 +16,9 @@ const points: Record<Locale, PilotPoint[]> = {
   tr: [
     {
       icon: CalendarRange,
-      title: "30 gün deneme",
-      description: "Seçtiğiniz şubelerde, gerçek misafir trafiğiyle çalışan bir deneme.",
+      // TODO: TEYİT — pilot süresi: 30 gün mü, 60 gün mü (önerilen 60); süre metinden çıkarıldı
+      title: "2–3 şubede deneme",
+      description: "Seçtiğiniz şubelerde, gerçek misafir trafiğiyle.",
       published: true,
     },
     {
@@ -43,8 +44,9 @@ const points: Record<Locale, PilotPoint[]> = {
   en: [
     {
       icon: CalendarRange,
-      title: "30-day trial",
-      description: "A trial running at the branches you choose, with real guest traffic.",
+      // TODO: TEYİT — pilot duration: 30 or 60 days (60 suggested); duration removed from the copy
+      title: "Trial at 2–3 branches",
+      description: "At the branches you choose, with real guest traffic.",
       published: true,
     },
     {

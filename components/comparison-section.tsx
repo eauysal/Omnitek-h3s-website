@@ -10,7 +10,7 @@ const currentSystem: Record<Locale, string[]> = {
     "Müşteriler, kasa ve POS ile aynı interneti kullanıyor",
     "Güvenlik duvarı yok veya yetersiz",
     "5651 log kaydı tutulmuyor",
-    "Yazılım güncellenmesi otomatik değil",
+    "Yazılım güncellemesi otomatik değil",
     "Proaktif izleme yok, ağdaki cihazlar korumasız",
     "Dokümantasyon ve destek yok",
   ],

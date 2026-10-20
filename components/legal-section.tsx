@@ -39,7 +39,7 @@ const content: Record<Locale, {
     kvkkBody:
       "Kişisel Verilerin Korunması Kanunu kapsamında, toplanan veriler güvenli şekilde işlenmeli ve saklanmalıdır. Veri ihlali durumunda idari yaptırımlar ve itibar kaybı söz konusudur.",
     solutionTitle: "H3S ile Yasal Yükümlülükleriniz Kayıt Altında",
-    solutionIntro: "H3S çözümü, tüm yasal gereksinimleri karşılayacak şekilde tasarlanmıştır:",
+    solutionIntro: "H3S, misafir Wi-Fi için 5651, KVKK ve İYS yükümlülüklerini karşılayacak şekilde kurulur:",
   },
   en: {
     heading: "Legal Compliance",
@@ -50,7 +50,7 @@ const content: Record<Locale, {
     kvkkBody:
       "Under Turkey's Personal Data Protection Law (KVKK), collected data must be processed and stored securely. A data breach can bring administrative sanctions and reputational damage.",
     solutionTitle: "Your Legal Obligations, on Record with H3S",
-    solutionIntro: "The H3S solution is designed to meet all legal requirements:",
+    solutionIntro: "H3S is set up to meet the 5651, KVKK and IYS obligations for guest Wi-Fi:",
   },
 }
 

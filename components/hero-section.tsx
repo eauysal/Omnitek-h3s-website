@@ -33,7 +33,7 @@ const content = {
       "H3S, tüm şubelerdeki misafir bağlantılarını izinli müşteri verisine, ölçülebilir kampanyalara ve geri dönen müşteriye dönüştürür. Kurumsal güvenlik ve 5651/KVKK uyumu altyapıda hazır gelir.",
     pilotButton: "Pilot planlayın →",
     singleBranchLink: "Tek şubeli işletmeler için →",
-    diagramAlt: "Omnitek H3S - Siber Güvenlik Kalkanı, KVKK/İYS Kaydı (5651) ve Wi-Fi Pazarlama",
+    diagramAlt: "Omnitek H3S tek panel: şubelerin misafir Wi-Fi, müşteri verisi ve güvenlik durumu",
     trustBadgeStrong: "1986'dan beri",
     trustBadgeLink: "Omnitek Telekom",
     trustBadgeEnd: " güvencesiyle",
@@ -46,7 +46,7 @@ const content = {
       "H3S turns guest connections across all your branches into consented customer data, measurable campaigns and returning customers. Enterprise security and 5651/KVKK compliance come built into the infrastructure.",
     pilotButton: "Plan a pilot →",
     singleBranchLink: "For single-branch businesses →",
-    diagramAlt: "Omnitek H3S - Cyber Security Shield, KVKK/IYS Records (5651) and Wi-Fi Marketing",
+    diagramAlt: "Omnitek H3S single panel: guest Wi-Fi, customer data and security status across your branches",
     trustBadgeStrong: "Since 1986,",
     trustBadgeLink: "Omnitek Telekom",
     trustBadgeEnd: " backed and guaranteed",
@@ -66,7 +66,7 @@ export function HeroSection() {
               className="font-[family-name:var(--font-heading)] font-bold leading-[1.12] tracking-tight"
               style={{ fontSize: `clamp(1rem, ${t.h1Scale}cqw, 4rem)` }}
             >
-              <span className="block whitespace-nowrap">{t.h1Line1}</span>
+              <span className="block whitespace-nowrap">{t.h1Line1}</span>{" "}
               <span className="block whitespace-nowrap text-primary">{t.h1Line2}</span>
             </h1>
           </Reveal>

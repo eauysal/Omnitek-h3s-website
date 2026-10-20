@@ -17,16 +17,19 @@ interface Faq {
 }
 
 // JSON-LD her zaman Türkçe içerikten üretilir (kanonik dil, tek URL üzerinden SEO tutarlılığı için)
+// Sıra: 0 Pilot · 1 Veri sahibi · 2 Altyapı · 3 Kurulum · 4 KVKK · 5 5651 · 6 Taahhüt
 const faqsForSchema: Faq[] = [
   {
-    question: "5651 sayılı kanun kapsamında işletme olarak ne yapmam gerekiyor?",
+    // TODO: TEYİT — pilot süresi ve ticari şartı (süre/bedel cümlesi teyitten sonra eklenecek)
+    question: "Pilot nasıl işliyor?",
     answer:
-      "Misafirlerinize internet erişimi sunuyorsanız, 5651 sayılı kanun gereği bağlantı log kayıtlarını tutmak ve talep halinde yetkili makamlara sunmak zorundasınız. H3S bu süreci otomatikleştirir; log kaydı, saklama ve raporlama sizin için yönetilir.",
+      "Seçtiğiniz 2–3 şubede kurulum yapılır; toplanan izinli kayıt, geri dönüş oranı, kampanya dönüşü ve şube kıyası ölçülür. Pilot sonunda şube bazlı sonuç raporu paylaşılır.",
   },
   {
-    question: "Kurulum ne kadar sürer?",
+    // TODO: TEYİT — Useroam veri dışa aktarma/CRM entegrasyonu; doğrulanırsa "kendi CRM'inize aktarabilirsiniz" cümlesi eklenecek
+    question: "Toplanan misafir verisi kimin?",
     answer:
-      "Ortalama kurulum süresi 6-8 saattir. Süreç ücretsiz saha keşfiyle başlar, ardından size özel bir çözüm planı ve kurulum takvimi oluşturulur.",
+      "Misafir verisi işletmenize aittir; KVKK aydınlatma ve açık rıza akışı misafir girişine entegredir.",
   },
   {
     question: "Mevcut ağ altyapımı tamamen değiştirmem gerekiyor mu?",
@@ -34,9 +37,20 @@ const faqsForSchema: Faq[] = [
       "Hayır. Mevcut altyapınız saha keşfinde değerlendirilir; kullanılabilir ekipman ve kablolama genellikle korunarak H3S sistemine entegre edilir, sadece eksik/uygun olmayan kısımlar tamamlanır.",
   },
   {
+    // TODO: TEYİT — kurulum süresi ("bir iş günü")
+    question: "Kurulum ne kadar sürer?",
+    answer:
+      "Şube başı kurulum genellikle bir iş günü içinde tamamlanır. Süreç ücretsiz saha keşfiyle başlar, ardından size özel bir çözüm planı ve kurulum takvimi oluşturulur.",
+  },
+  {
     question: "Misafir verilerimiz KVKK'ya uygun şekilde işleniyor mu?",
     answer:
       "Evet. Toplanan misafir verileri (telefon numarası zorunlu; ad isteğe bağlı) ve log kayıtları güvenli şekilde saklanır, yalnızca yasal yükümlülükler ve belirtilen amaçlarla işlenir.",
+  },
+  {
+    question: "5651 sayılı kanun kapsamında işletme olarak ne yapmam gerekiyor?",
+    answer:
+      "Misafirlerinize internet erişimi sunuyorsanız, 5651 sayılı kanun gereği bağlantı log kayıtlarını tutmak ve talep halinde yetkili makamlara sunmak zorundasınız. H3S bu süreci otomatikleştirir; log kaydı, saklama ve raporlama sizin için yönetilir.",
   },
   {
     question: "Uzun süreli bir sözleşme veya taahhüt zorunlu mu?",
@@ -63,8 +77,9 @@ const faqs: Record<Locale, Faq[]> = {
     faqsForSchema[0],
     faqsForSchema[1],
     faqsForSchema[2],
+    faqsForSchema[3],
     {
-      question: "Misafir verilerimiz KVKK'ya uygun şekilde işleniyor mu?",
+      question: faqsForSchema[4].question,
       answer: (
         <>
           Evet. Toplanan misafir verileri (telefon numarası zorunlu; ad isteğe bağlı) ve log kayıtları güvenli şekilde saklanır, yalnızca
@@ -76,23 +91,32 @@ const faqs: Record<Locale, Faq[]> = {
         </>
       ),
     },
-    faqsForSchema[4],
+    faqsForSchema[5],
+    faqsForSchema[6],
   ],
   en: [
     {
-      question: "What do I need to do as a business under Law No. 5651?",
+      // TODO: TEYİT — pilot duration and commercial terms
+      question: "How does the pilot work?",
       answer:
-        "If you provide internet access to guests, Law No. 5651 requires you to keep connection log records and present them to the relevant authorities on request. H3S automates this process — logging, retention and reporting are handled for you.",
+        "We set up at the 2–3 branches you choose and measure the consented records collected, return rate, campaign conversion and branch comparison. At the end of the pilot, a branch-by-branch results report is shared.",
     },
     {
-      question: "How long does installation take?",
+      // TODO: TEYİT — Useroam data export / CRM integration; if confirmed, add "you can pass it to your own CRM"
+      question: "Who owns the guest data we collect?",
       answer:
-        "The average installation takes 6-8 hours. The process starts with a free site survey, after which we prepare a tailored solution plan and installation schedule.",
+        "Guest data belongs to your business; the KVKK disclosure and explicit-consent flow is built into guest sign-in.",
     },
     {
       question: "Do I need to replace my entire existing network infrastructure?",
       answer:
         "No. Your existing infrastructure is assessed during the site survey; usable equipment and cabling are generally kept and integrated into the H3S system, with only missing or unsuitable parts completed.",
+    },
+    {
+      // TODO: TEYİT — setup time ("one business day")
+      question: "How long does installation take?",
+      answer:
+        "Setup per branch is usually completed within one business day. The process starts with a free site survey, after which we prepare a tailored solution plan and installation schedule.",
     },
     {
       question: "Is our guest data processed in compliance with KVKK?",
@@ -106,6 +130,11 @@ const faqs: Record<Locale, Faq[]> = {
           {" "}(Turkish).
         </>
       ),
+    },
+    {
+      question: "What do I need to do as a business under Law No. 5651?",
+      answer:
+        "If you provide internet access to guests, Law No. 5651 requires you to keep connection log records and present them to the relevant authorities on request. H3S automates this process — logging, retention and reporting are handled for you.",
     },
     {
       question: "Is a long-term contract or commitment required?",

@@ -24,7 +24,7 @@ export const metadata: Metadata = {
     siteName: siteConfig.name,
     locale: siteConfig.locale,
     type: siteConfig.ogType,
-    images: [siteConfig.defaultImage],
+    images: [{ ...siteConfig.defaultImage, alt: "Omnitek H3S - Tek şubeli işletmeler için Wi-Fi ve müşteri kazanımı" }],
   },
   twitter: {
     title: pageTitle,
