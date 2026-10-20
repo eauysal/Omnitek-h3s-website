@@ -149,7 +149,7 @@ export function HeroSection() {
 
       {/* Trust strip - below hero */}
       <section className="flow-proof py-12 lg:py-20 relative overflow-hidden">
-        <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <TrustStrip />
         </div>
       </section>
