@@ -356,12 +356,10 @@ export const sektorler: Sektor[] = [
     h1TitleEn: "POS Security and Guest Wi-Fi for Retail Stores",
     pluralLocative: "Market & Perakendede",
     icon: ShoppingCart,
-    // TODO: TEYİT — soğuk zincir stoklarının siber tehditlere karşı korunması iddiası ve kapsamı doğrulanacak;
-    // sektör sayfasının kendi metinleri (h1Title, intro, painPoints, metaDescription) hâlâ POS odaklı, sonra güncellenecek
-    shortDescription: "Soğuk zincir market stoklarını olası siber tehditlere karşı güvence altına alıyoruz.",
-    shortDescriptionEn: "We secure cold-chain grocery inventory against potential cyber threats.",
-    tags: ["Soğuk Zincir Güvenliği", "Envanter Güvenliği", "Siber Koruma"],
-    tagsEn: ["Cold Chain Security", "Inventory Security", "Cyber Protection"],
+    shortDescription: "Kasa, POS ve stok sistemleri misafir ağından ayrılır; tüm mağazalar tek panelden yönetilir.",
+    shortDescriptionEn: "Till, POS and inventory systems are separated from the guest network; all stores are managed from one panel.",
+    tags: ["POS Ayrımı", "Mağaza Kıyası", "Müşteri Verisi"],
+    tagsEn: ["POS Separation", "Store Comparison", "Customer Data"],
     metaDescription:
       "Market ve perakende işletmeleri için güvenli POS entegrasyonu, müşteri Wi-Fi ayrımı ve envanter sistemi güvenliği. H3S çözümü.",
     intro:
