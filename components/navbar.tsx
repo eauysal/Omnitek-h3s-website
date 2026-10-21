@@ -58,7 +58,7 @@ export function Navbar() {
       }`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between h-20">
-      <Link
+      <Link prefetch={false}
         href="/"
         className="shrink-0 flex items-center gap-2.5"
       >
@@ -76,7 +76,7 @@ export function Navbar() {
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center gap-6 lg:gap-8">
             {links.map((link) => (
-              <Link
+              <Link prefetch={false}
                 key={link.href}
                 href={link.href}
                 className="transition-colors text-sm font-medium text-gray-800 hover:text-primary"
@@ -84,7 +84,7 @@ export function Navbar() {
                 {link.label}
               </Link>
             ))}
-            <Link
+            <Link prefetch={false}
               href="/isletmeler"
               className="hidden lg:inline text-xs font-medium text-gray-600 underline-offset-4 hover:text-primary hover:underline"
             >
@@ -92,7 +92,7 @@ export function Navbar() {
             </Link>
             <LanguageSwitcher />
             <Button asChild className="bg-primary text-primary-foreground hover:bg-primary/90">
-              <Link href="/#pilot">{ctaLabel[locale]}</Link>
+              <Link prefetch={false} href="/#pilot">{ctaLabel[locale]}</Link>
             </Button>
           </div>
 
@@ -114,7 +114,7 @@ export function Navbar() {
           <div className="md:hidden py-4 border-t border-gray-200 bg-white">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col gap-4">
               {links.map((link) => (
-                <Link
+                <Link prefetch={false}
                   key={link.href}
                   href={link.href}
                   className="transition-colors text-sm font-medium py-2 text-gray-800 hover:text-primary"
@@ -123,7 +123,7 @@ export function Navbar() {
                   {link.label}
                 </Link>
               ))}
-              <Link
+              <Link prefetch={false}
                 href="/isletmeler"
                 className="transition-colors text-sm font-medium py-2 text-gray-600 hover:text-primary"
                 onClick={() => setIsMobileMenuOpen(false)}
@@ -135,7 +135,7 @@ export function Navbar() {
                 className="bg-primary text-primary-foreground hover:bg-primary/90 w-full"
                 onClick={() => setIsMobileMenuOpen(false)}
               >
-                <Link href="/#pilot">{ctaLabel[locale]}</Link>
+                <Link prefetch={false} href="/#pilot">{ctaLabel[locale]}</Link>
               </Button>
             </div>
           </div>

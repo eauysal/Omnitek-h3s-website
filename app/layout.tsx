@@ -1,5 +1,5 @@
 import type { Metadata } from 'next'
-import { Plus_Jakarta_Sans, Inter } from 'next/font/google'
+import localFont from 'next/font/local'
 import { Analytics } from '@vercel/analytics/next'
 import './globals.css'
 // Hatayı çözen nokta-eğik çizgili import:
@@ -10,16 +10,40 @@ import { StickyCta } from '@/components/sticky-cta'
 import { siteConfig } from '@/lib/seo'
 import { LanguageProvider } from '@/lib/i18n/language-context'
 
-const plusJakarta = Plus_Jakarta_Sans({ 
-  subsets: ['latin'],
+// Fontlar kendi sunucumuzdan: Google'ın latin dosyaları aynen, Türkçe'ye özgü harfler (Ğ ğ İ Ş ş ₺) için
+// yalnızca bu 6 karakteri içeren küçük bir kopya (ayrıntı: app/fonts/README.md). Eski 'latin-ext' dosyaları
+// 85KB + 22KB idi ve ilk yüklemede PageSpeed'in FCP/LCP hesabını yavaşlatıyordu.
+// Değişken eksen 400–800'e kırpıldı (sitede bunun dışında kalınlık kullanılmıyor). Yığın sırası globals.css'te: önce Türkçe harf dosyası, sonra latin dosya.
+const plusJakarta = localFont({
+  src: './fonts/plus-jakarta-sans-latin.woff2',
+  weight: '400 800',
   variable: '--font-heading-var',
-  display: 'swap'
+  display: 'swap',
+  adjustFontFallback: 'Arial'
 })
 
-const inter = Inter({ 
-  subsets: ['latin'],
+const plusJakartaTr = localFont({
+  src: './fonts/plus-jakarta-sans-tr.woff2',
+  weight: '400 800',
+  variable: '--font-heading-tr-var',
+  display: 'swap',
+  adjustFontFallback: false
+})
+
+const inter = localFont({
+  src: './fonts/inter-latin.woff2',
+  weight: '400 800',
   variable: '--font-sans-var',
-  display: 'swap'
+  display: 'swap',
+  adjustFontFallback: 'Arial'
+})
+
+const interTr = localFont({
+  src: './fonts/inter-tr.woff2',
+  weight: '400 800',
+  variable: '--font-sans-tr-var',
+  display: 'swap',
+  adjustFontFallback: false
 })
 
 const siteTitle = 'Omnitek H3S | Zincirler için Wi-Fi Pazarlama ve Yönetilen Misafir Ağı'
@@ -56,7 +80,7 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="tr" className={`${plusJakarta.variable} ${inter.variable}`}>
+    <html lang="tr" className={`${plusJakarta.variable} ${plusJakartaTr.variable} ${inter.variable} ${interTr.variable}`}>
       <body className="font-sans antialiased bg-background text-foreground relative">
         <LanguageProvider>
           <LocalBusinessJsonLd />

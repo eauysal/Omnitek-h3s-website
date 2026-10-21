@@ -40,7 +40,7 @@ export function StickyCta() {
       }`}
     >
       <Button asChild size="lg" className="w-full bg-primary text-primary-foreground hover:bg-primary/90">
-        <Link href="/#pilot">{ctaLabel[locale]}</Link>
+        <Link prefetch={false} href="/#pilot">{ctaLabel[locale]}</Link>
       </Button>
     </div>
   )

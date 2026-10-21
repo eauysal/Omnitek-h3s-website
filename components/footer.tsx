@@ -87,7 +87,7 @@ export function Footer() {
           {/* Links */}
           <nav className="flex flex-wrap justify-center gap-6">
             {footerLinks[locale].map((link) => (
-              <Link
+              <Link prefetch={false}
                 key={link.href}
                 href={link.href}
                 className="text-sm text-[#C7D4F5] hover:text-white transition-colors"
@@ -104,7 +104,7 @@ export function Footer() {
           </p>
           <nav className="flex flex-wrap justify-center gap-4">
             {legalLinks[locale].map((link) => (
-              <Link
+              <Link prefetch={false}
                 key={link.href}
                 href={link.href}
                 className="text-xs text-[#C7D4F5] hover:text-white transition-colors"

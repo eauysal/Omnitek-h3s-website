@@ -35,8 +35,8 @@
 }
 
 @theme inline {
-  --font-sans: var(--font-sans-var), 'DM Sans', ui-sans-serif, system-ui, sans-serif;
-  --font-heading: var(--font-heading-var), 'Syne', ui-sans-serif, system-ui, sans-serif;
+  --font-sans: var(--font-sans-tr-var), var(--font-sans-var), 'DM Sans', ui-sans-serif, system-ui, sans-serif;
+  --font-heading: var(--font-heading-tr-var), var(--font-heading-var), 'Syne', ui-sans-serif, system-ui, sans-serif;
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-card: var(--card);

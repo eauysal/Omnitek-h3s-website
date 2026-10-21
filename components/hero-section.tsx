@@ -85,7 +85,7 @@ export function HeroSection() {
                 >
                   <a href="#pilot">{t.pilotButton}</a>
                 </Button>
-                <Link
+                <Link prefetch={false}
                   href="/isletmeler"
                   className="text-sm font-semibold text-primary hover:underline underline-offset-4"
                 >
@@ -112,14 +112,14 @@ export function HeroSection() {
               {/* TODO: GÖRSEL — Arda onayı (hero diyagramı henüz zincir/pazarlama mesajına göre yenilenmedi) */}
               <div className="relative w-full aspect-[1600/1312] rounded-2xl bg-gradient-to-br from-primary via-cyan-400 to-success p-[2px] shadow-2xl">
                 <div className="relative w-full h-full rounded-[calc(1rem-2px)] overflow-hidden">
-                  {/* LCP görseli: mobilde 800px'lik sürüm iner (next/image kapalı olduğu için srcSet elle verilir) */}
+                  {/* LCP görseli: mobilde 720px'lik sürüm iner (next/image kapalı olduğu için srcSet elle verilir) */}
                   {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img
                     src={locale === "en" ? "/images/h3s-hero-en-v2.webp" : "/images/h3s-hero.webp"}
                     srcSet={
                       locale === "en"
-                        ? "/images/h3s-hero-en-v2-800.webp 800w, /images/h3s-hero-en-v2.webp 1600w"
-                        : "/images/h3s-hero-800.webp 800w, /images/h3s-hero.webp 1600w"
+                        ? "/images/h3s-hero-en-v2-720.webp 720w, /images/h3s-hero-en-v2.webp 1600w"
+                        : "/images/h3s-hero-720.webp 720w, /images/h3s-hero.webp 1600w"
                     }
                     sizes="(min-width: 1280px) 600px, (min-width: 1024px) 45vw, 92vw"
                     alt={t.diagramAlt}
