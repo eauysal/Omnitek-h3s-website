@@ -4,6 +4,7 @@ import { MarketingSection } from "@/components/marketing-section"
 import { ChainsSection } from "@/components/chains-section"
 import { BenefitsSection } from "@/components/benefits-section"
 import { SecuritySection } from "@/components/security-section"
+import { OperationsSection } from "@/components/operations-section"
 import { LegalSection } from "@/components/legal-section"
 import { PilotSection } from "@/components/pilot-section"
 import { ProcessSection } from "@/components/process-section"
@@ -21,6 +22,7 @@ export default function Home() {
       <ChainsSection />
       <BenefitsSection />
       <SecuritySection />
+      <OperationsSection />
       <LegalSection />
       <PilotSection />
       <ProcessSection />

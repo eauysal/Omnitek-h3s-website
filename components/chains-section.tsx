@@ -1,25 +1,22 @@
 "use client"
 
-import { Building2, ClipboardList, Headset, LayoutDashboard, Scale, type LucideIcon } from "lucide-react"
+import { Building2, Headset, LayoutDashboard, Scale, type LucideIcon } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Reveal } from "@/components/ui/reveal"
 import { useLanguage, type Locale } from "@/lib/i18n/language-context"
 
-const points: Record<Locale, { icon: LucideIcon; text: string; optional?: boolean }[]> = {
+const points: Record<Locale, { icon: LucideIcon; text: string }[]> = {
   tr: [
     { icon: LayoutDashboard, text: "Tüm şubelerin Wi-Fi, güvenlik ve misafir verisi tek panelde" },
     { icon: Building2, text: "Franchise dahil her şubede aynı kurulum standardı" },
     { icon: Scale, text: "Şubeler arası kıyas: hangi şube müşteri kazanıyor, hangisi kaybediyor" },
     { icon: Headset, text: "Tek muhatap, tek hizmet seviyesi (SLA)" },
-    // Operasyon modülleri ana akıştan çıkarıldı; tek satırlık not olarak kaldı (detay: components/operations-block.tsx)
-    { icon: ClipboardList, text: "İsteğe bağlı: QR menü, personel takibi (PDKS) ve görevlendirme aynı panelde.", optional: true },
   ],
   en: [
     { icon: LayoutDashboard, text: "Wi-Fi, security and guest data for every branch in one panel" },
     { icon: Building2, text: "The same installation standard at every branch, franchises included" },
     { icon: Scale, text: "Branch comparison: which branch is winning customers and which is losing them" },
     { icon: Headset, text: "One point of contact, one service level (SLA)" },
-    { icon: ClipboardList, text: "Optional: QR menu, staff attendance (PDKS) and task assignment in the same panel.", optional: true },
   ],
 }
 
@@ -60,12 +57,8 @@ export function ChainsSection() {
 
           <div className="lg:col-span-3 grid sm:grid-cols-2 gap-4 lg:gap-6">
             {points[locale].map((point, index) => (
-              <Reveal key={point.text} delay={index * 80} className={point.optional ? "sm:col-span-2" : ""}>
-                <div
-                  className={`rounded-xl p-6 h-full transition-all duration-300 hover:border-primary/50 hover:-translate-y-1 ${
-                    point.optional ? "bg-card/60 border border-dashed border-primary/40" : "bg-card border border-border"
-                  }`}
-                >
+              <Reveal key={point.text} delay={index * 80}>
+                <div className="bg-card border border-border rounded-xl p-6 h-full transition-all duration-300 hover:border-primary/50 hover:-translate-y-1">
                   <div className="w-11 h-11 rounded-lg bg-primary/10 flex items-center justify-center mb-4">
                     <point.icon className="h-5 w-5 text-primary" />
                   </div>
