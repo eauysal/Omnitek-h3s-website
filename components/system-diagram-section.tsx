@@ -21,7 +21,7 @@ export function SystemDiagramSection() {
             <div className="relative w-full rounded-[calc(1rem-2px)] overflow-hidden bg-card">
               <Image
                 src="/images/h3s-sistem-diyagrami.webp"
-                alt="Omnitek H3S Ekosistemi: Siber Güvenlik Kalkanı (VLAN), Yasal Uyumluluk (5651), Aktif İnternet Kontrolü (ACL), merkezi yönetim paneli ve entegrasyon şeması"
+                alt="Omnitek H3S Ekosistemi: Siber Güvenlik Kalkanı (VLAN), Yasal Uyumluluk (5651), Aktif İnternet Kontrolü (ACL), merkezî yönetim paneli ve entegrasyon şeması"
                 width={1800}
                 height={1005}
                 className="w-full h-auto"

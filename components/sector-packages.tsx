@@ -1,6 +1,6 @@
 "use client"
 
-import { Check, X } from "lucide-react"
+import { Check, Minus } from "lucide-react"
 import { Reveal } from "@/components/ui/reveal"
 import { Button } from "@/components/ui/button"
 import Link from "next/link"
@@ -16,21 +16,21 @@ const content: Record<Locale, {
   headingHighlight: string
   subtitle: string
   recommended: string
-  askButton: string
+  excluded: string
 }> = {
   tr: {
     heading: "İşletmeniz İçin",
     headingHighlight: "Çözüm Paketleri",
     subtitle: "İhtiyacınıza göre üç seviyede tasarlandı. Size uygun paketi birlikte netleştirelim.",
     recommended: "Tavsiye Edilen",
-    askButton: "Pilot planlayın →",
+    excluded: "Pakete dahil değil",
   },
   en: {
     heading: "Solution Packages",
     headingHighlight: "for Your Business",
     subtitle: "Designed across three tiers based on your needs. Let's figure out the right package together.",
     recommended: "Recommended",
-    askButton: "Plan a pilot →",
+    excluded: "Not included",
   },
 }
 
@@ -54,7 +54,10 @@ export function SectorPackages({ packages }: SectorPackagesProps) {
           {packages.map((pkg, index) => {
             const name = locale === "en" ? pkg.nameEn : pkg.name
             const description = locale === "en" ? pkg.descriptionEn : pkg.description
-            const recommendedLabel = locale === "en" ? pkg.recommendedLabelEn : pkg.recommendedLabel
+            const idealLabel = locale === "en" ? pkg.idealLabelEn : pkg.idealLabel
+            const ctaLabel = locale === "en" ? pkg.ctaLabelEn : pkg.ctaLabel
+            const included = pkg.features.filter((feature) => feature.included)
+            const excluded = pkg.features.filter((feature) => !feature.included)
             return (
             <Reveal key={pkg.name} delay={index * 100} className="h-full">
               <div
@@ -69,9 +72,6 @@ export function SectorPackages({ packages }: SectorPackagesProps) {
                     <p className="font-[family-name:var(--font-heading)] text-sm font-bold tracking-wide uppercase">
                       {t.recommended}
                     </p>
-                    {recommendedLabel && (
-                      <p className="text-xs text-background/80 mt-0.5">{recommendedLabel}</p>
-                    )}
                   </div>
                 )}
                 <div
@@ -81,29 +81,45 @@ export function SectorPackages({ packages }: SectorPackagesProps) {
                       : "border-border rounded-xl hover:border-primary/50 hover:shadow-[0_20px_50px_rgba(42,129,244,0.18)]"
                   }`}
                 >
+                  {idealLabel && (
+                    <span className="self-start mb-3 inline-block rounded-full bg-primary/10 px-3 py-1 text-xs font-semibold text-primary">
+                      {idealLabel}
+                    </span>
+                  )}
                   <h3 className="text-xl lg:text-2xl font-bold text-foreground mb-3">
                     {name}
                   </h3>
                   <p className="text-sm text-muted-foreground mb-6 leading-relaxed">{description}</p>
 
-                  <ul className="space-y-3 mb-8 flex-1">
-                    {pkg.features.map((feature, i) => (
-                      <li key={i} className="flex items-start gap-2.5">
-                        {feature.included ? (
+                  <div className="mb-8 flex-1 space-y-5">
+                    <ul className="space-y-3">
+                      {included.map((feature, i) => (
+                        <li key={i} className="flex items-start gap-2.5">
                           <Check className="h-4 w-4 text-success-ink flex-shrink-0 mt-0.5" />
-                        ) : (
-                          <X className="h-4 w-4 text-destructive/70 flex-shrink-0 mt-0.5" />
-                        )}
-                        <span
-                          className={`text-sm leading-snug ${
-                            feature.included ? "text-foreground" : "text-muted-foreground"
-                          }`}
-                        >
-                          {locale === "en" ? feature.textEn : feature.text}
-                        </span>
-                      </li>
-                    ))}
-                  </ul>
+                          <span className="text-sm leading-snug text-foreground">
+                            {locale === "en" ? feature.textEn : feature.text}
+                          </span>
+                        </li>
+                      ))}
+                    </ul>
+                    {excluded.length > 0 && (
+                      <div className="border-t border-border pt-4">
+                        <p className="mb-3 text-xs font-semibold uppercase tracking-wide text-muted-foreground/70">
+                          {t.excluded}
+                        </p>
+                        <ul className="space-y-3">
+                          {excluded.map((feature, i) => (
+                            <li key={i} className="flex items-start gap-2.5 opacity-60">
+                              <Minus className="h-4 w-4 text-muted-foreground flex-shrink-0 mt-0.5" />
+                              <span className="text-sm leading-snug text-muted-foreground">
+                                {locale === "en" ? feature.textEn : feature.text}
+                              </span>
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                    )}
+                  </div>
 
                   <Button
                     asChild
@@ -114,7 +130,7 @@ export function SectorPackages({ packages }: SectorPackagesProps) {
                         : "w-full"
                     }
                   >
-                    <Link href="/#pilot">{t.askButton}</Link>
+                    <Link href={pkg.ctaHref}>{ctaLabel}</Link>
                   </Button>
                 </div>
               </div>

@@ -137,16 +137,16 @@ export function SectorsSection() {
                   <h3 className="font-semibold text-foreground text-lg">{card.title}</h3>
                 </div>
                 <p className="text-sm text-muted-foreground mb-4">{card.description}</p>
-                <div className="flex flex-wrap gap-2">
+                <ul className="flex flex-wrap gap-2">
                   {card.tags.map((tag) => (
-                    <span
+                    <li
                       key={tag}
                       className="text-xs bg-primary/10 text-primary px-2.5 py-1 rounded-full"
                     >
-                      {tag}
-                    </span>
+                      {tag}{" "}
+                    </li>
                   ))}
-                </div>
+                </ul>
               </Link>
             </Reveal>
           ))}
