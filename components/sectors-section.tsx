@@ -5,6 +5,7 @@ import Link from "next/link"
 import { Network, ShoppingBag, type LucideIcon } from "lucide-react"
 import { sektorler } from "@/data/sektorler"
 import { Reveal } from "@/components/ui/reveal"
+import { SectorTags } from "@/components/sector-tags"
 import { useLanguage, type Locale } from "@/lib/i18n/language-context"
 
 const content: Record<Locale, { alt: string; heading: string; headingHighlight: string; subtitle: string }> = {
@@ -136,17 +137,8 @@ export function SectorsSection() {
                   </div>
                   <h3 className="font-semibold text-foreground text-lg">{card.title}</h3>
                 </div>
-                <p className="text-sm text-muted-foreground mb-4">{card.description}</p>
-                <ul className="flex flex-wrap gap-2">
-                  {card.tags.map((tag) => (
-                    <li
-                      key={tag}
-                      className="text-xs bg-primary/10 text-primary px-2.5 py-1 rounded-full"
-                    >
-                      {tag}{" "}
-                    </li>
-                  ))}
-                </ul>
+                <p className="text-sm text-muted-foreground mb-4">{card.description}{" "}</p>
+                <SectorTags tags={card.tags} />
               </Link>
             </Reveal>
           ))}
