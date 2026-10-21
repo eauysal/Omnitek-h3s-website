@@ -55,7 +55,7 @@ export interface Sektor {
   tags: string[]
   tagsEn: string[]
   metaDescription: string
-  heroImage?: { url: string; width: number; height: number }
+  heroImage?: { url: string; width: number; height: number; smallUrl?: string; smallWidth?: number }
   intro: string
   introEn: string
   painPoints: SektorSorun[]
@@ -144,7 +144,7 @@ export const sektorler: Sektor[] = [
     tagsEn: ["Guest Wi-Fi", "POS Security", "5651 Compliance"],
     metaDescription:
       "Misafir bağlanır, tanınır, kampanyayla geri gelir. Kafeler için Wi-Fi pazarlama, ayrı POS ağı ve 5651/KVKK uyumlu altyapı tek çözümde: Omnitek H3S.",
-    heroImage: { url: "/images/h3s-sistem-diyagrami.webp", width: 1800, height: 1005 },
+    heroImage: { url: "/images/h3s-sistem-diyagrami.webp", width: 1800, height: 1005, smallUrl: "/images/h3s-sistem-diyagrami-900.webp", smallWidth: 900 },
     intro:
       "Misafir bağlanır, tanınır, kampanyayla geri gelir. Kasa ve POS ağı ayrı, 5651/KVKK altyapıda hazır.",
     introEn:
@@ -191,7 +191,7 @@ export const sektorler: Sektor[] = [
     tagsEn: ["Guest Data", "Branch Comparison", "POS Separation"],
     metaDescription:
       "Misafir verisi, şube bazlı ölçüm ve kampanya tek panelde. Restoranlar için Wi-Fi pazarlama, misafir ağından ayrı ödeme ağı ve 5651/KVKK uyumu: Omnitek H3S.",
-    heroImage: { url: "/images/h3s-sistem-diyagrami.webp", width: 1800, height: 1005 },
+    heroImage: { url: "/images/h3s-sistem-diyagrami.webp", width: 1800, height: 1005, smallUrl: "/images/h3s-sistem-diyagrami-900.webp", smallWidth: 900 },
     intro:
       "Misafir verisi, şube bazlı ölçüm ve kampanya tek panelde. Ödeme ağı misafir ağından ayrı.",
     introEn:
@@ -238,7 +238,7 @@ export const sektorler: Sektor[] = [
     tagsEn: ["Room Network Separation", "24/7 Monitoring", "Guest Portal"],
     metaDescription:
       "Misafir Wi-Fi'ı izinli iletişime dönüşür; oda ağı ve yönetim ağı ayrı ve izlenir. Oteller ve pansiyonlar için Wi-Fi pazarlama ve güvenli misafir ağı: Omnitek H3S.",
-    heroImage: { url: "/images/h3s-sistem-diyagrami.webp", width: 1800, height: 1005 },
+    heroImage: { url: "/images/h3s-sistem-diyagrami.webp", width: 1800, height: 1005, smallUrl: "/images/h3s-sistem-diyagrami-900.webp", smallWidth: 900 },
     intro:
       "Misafir Wi-Fi'ı izinli iletişime dönüşür; oda ağı ve yönetim ağı ayrı ve izlenir.",
     introEn:

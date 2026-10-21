@@ -1,6 +1,5 @@
 "use client"
 
-import Image from "next/image"
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { Reveal } from "@/components/ui/reveal"
@@ -61,7 +60,7 @@ export function HeroSection() {
       <section className="flow-hero min-h-screen pt-24 lg:pt-28 pb-12 relative overflow-hidden">
         <div className="max-w-7xl mx-auto px-6 sm:px-6 lg:px-8 relative z-10">
           {/* Başlık: her genişlikte tam iki satır. İkinci satırın taşmaması için yazı boyutu kapsayıcı genişliğine göre ölçeklenir. */}
-          <Reveal direction="left" className="[container-type:inline-size]">
+          <Reveal immediate className="[container-type:inline-size]">
             <h1
               className="font-[family-name:var(--font-heading)] font-bold leading-[1.12] tracking-tight"
               style={{ fontSize: `clamp(1rem, ${t.h1Scale}cqw, 4rem)` }}
@@ -73,7 +72,7 @@ export function HeroSection() {
 
           <div className="mt-6 lg:mt-8 grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
             {/* Left Column */}
-            <Reveal direction="left" className="space-y-8">
+            <Reveal immediate className="space-y-8">
               <p className="text-muted-foreground text-lg lg:text-xl max-w-xl">
                 {t.subtitle}
               </p>
@@ -106,20 +105,29 @@ export function HeroSection() {
             </Reveal>
 
             {/* Right Column - H3S Diagram */}
-            <Reveal direction="right" delay={150} className="relative flex items-center justify-center">
+            <Reveal immediate className="relative flex items-center justify-center">
               {/* Soft brand-colored glow behind the card */}
               <div className="absolute inset-4 -z-10 rounded-[2rem] bg-gradient-to-br from-primary/30 via-cyan-400/20 to-success/30 blur-3xl" />
 
               {/* TODO: GÖRSEL — Arda onayı (hero diyagramı henüz zincir/pazarlama mesajına göre yenilenmedi) */}
               <div className="relative w-full aspect-[1600/1312] rounded-2xl bg-gradient-to-br from-primary via-cyan-400 to-success p-[2px] shadow-2xl">
                 <div className="relative w-full h-full rounded-[calc(1rem-2px)] overflow-hidden">
-                  <Image
+                  {/* LCP görseli: mobilde 800px'lik sürüm iner (next/image kapalı olduğu için srcSet elle verilir) */}
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img
                     src={locale === "en" ? "/images/h3s-hero-en-v2.webp" : "/images/h3s-hero.webp"}
+                    srcSet={
+                      locale === "en"
+                        ? "/images/h3s-hero-en-v2-800.webp 800w, /images/h3s-hero-en-v2.webp 1600w"
+                        : "/images/h3s-hero-800.webp 800w, /images/h3s-hero.webp 1600w"
+                    }
+                    sizes="(min-width: 1280px) 600px, (min-width: 1024px) 45vw, 92vw"
                     alt={t.diagramAlt}
                     width={1600}
                     height={1312}
                     className="w-full h-full object-cover"
-                    priority
+                    fetchPriority="high"
+                    decoding="async"
                   />
                 </div>
               </div>

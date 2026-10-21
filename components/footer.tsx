@@ -60,12 +60,10 @@ export function Footer() {
           {/* Logo */}
           <div className="flex flex-col items-center md:items-start gap-2">
             <Image
-              src="/images/logo.jpeg"
+              src="/images/logo-footer.webp"
               alt="Omnitek H3S Logo"
-              width={300}
-                  height={140}
-                  quality={100}
-                  priority
+              width={600}
+                  height={310}
                   className="h-11 lg:h-16 w-auto object-contain rounded-lg bg-white p-1.5"
             />
             <p className="text-sm text-[#C7D4F5]">
