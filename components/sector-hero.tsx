@@ -1,6 +1,5 @@
 "use client"
 
-import Image from "next/image"
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { Reveal } from "@/components/ui/reveal"
@@ -49,18 +48,26 @@ export function SectorHero({ sektor }: { sektor: Omit<Sektor, "icon"> }) {
 
         {sektor.heroImage && (
           <>
-            <Reveal className="mb-8 relative">
+            <Reveal immediate className="mb-8 relative">
               <div className="absolute inset-4 -z-10 rounded-[2rem] bg-gradient-to-br from-primary/30 via-cyan-400/20 to-success/30 blur-3xl" />
               <div className="relative rounded-2xl bg-gradient-to-br from-primary via-cyan-400 to-success p-[2px] shadow-2xl">
                 <div className="relative w-full rounded-[calc(1rem-2px)] overflow-hidden bg-card">
-                  <Image
+                  {/* LCP görseli: next/image kapalı olduğu için mobil sürüm srcSet ile elle verilir */}
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img
                     src={sektor.heroImage.url}
+                    srcSet={
+                      sektor.heroImage.smallUrl
+                        ? `${sektor.heroImage.smallUrl} ${sektor.heroImage.smallWidth}w, ${sektor.heroImage.url} ${sektor.heroImage.width}w`
+                        : undefined
+                    }
                     alt={t.diagramAlt}
                     width={sektor.heroImage.width}
                     height={sektor.heroImage.height}
                     className="w-full h-auto"
-                    sizes="(min-width: 1024px) 896px, 100vw"
-                    priority
+                    sizes="(min-width: 1024px) 896px, 92vw"
+                    fetchPriority="high"
+                    decoding="async"
                   />
                 </div>
               </div>

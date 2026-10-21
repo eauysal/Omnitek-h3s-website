@@ -80,7 +80,8 @@ export function BurroCaseStudy({ className = "" }: { className?: string }) {
         <div className="relative flex-shrink-0">
           <div className="w-14 h-14 rounded-full bg-white/10 border-2 border-white/20 overflow-hidden flex items-center justify-center">
             {/* TODO: GÖRSEL — Arda onayı */}
-            <img src="/images/burro_tabela-baski.jpg" alt="Burak Kaçmaz" className="w-full h-full object-cover" />
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img src="/images/burro-avatar.webp" alt="Burak Kaçmaz" width={224} height={224} loading="lazy" decoding="async" className="w-full h-full object-cover" />
           </div>
           <span className="absolute -bottom-0.5 -right-0.5 w-4 h-4 bg-green-400 border-2 border-[#1F3A5F] rounded-full" />
         </div>

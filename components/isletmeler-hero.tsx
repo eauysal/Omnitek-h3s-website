@@ -28,7 +28,7 @@ export function IsletmelerHero() {
 
   return (
     <section className="flow-sector-hero pt-28 lg:pt-36 pb-16 lg:pb-20 overflow-hidden">
-      <Reveal className="max-w-4xl mx-auto px-6 lg:px-8 text-center space-y-6">
+      <Reveal immediate className="max-w-4xl mx-auto px-6 lg:px-8 text-center space-y-6">
         <h1 className="font-[family-name:var(--font-heading)] text-3xl sm:text-4xl lg:text-5xl font-bold text-foreground text-balance">
           {t.h1Before}
           <span className="text-primary">{t.h1Highlight}</span>

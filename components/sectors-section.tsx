@@ -106,7 +106,7 @@ export function SectorsSection() {
       {/* Background Image */}
       <div className="flow-photo-fade absolute inset-0 z-0">
         <Image
-          src="/images/happy-guests-3.jpg"
+          src="/images/happy-guests-bg.webp"
           alt={t.alt}
           fill
           className="object-cover opacity-10"

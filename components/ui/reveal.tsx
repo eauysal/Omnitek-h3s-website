@@ -7,15 +7,17 @@ interface RevealProps {
   direction?: "left" | "right" | "up"
   delay?: number
   className?: string
+  // Ekranın ilk görünümündeki (LCP) içerik için: sunucu çıktısında zaten görünür, JS/hydration beklemez.
+  immediate?: boolean
 }
 
-export function Reveal({ children, direction = "up", delay = 0, className = "" }: RevealProps) {
+export function Reveal({ children, direction = "up", delay = 0, className = "", immediate = false }: RevealProps) {
   const ref = useRef<HTMLDivElement>(null)
   const [visible, setVisible] = useState(false)
 
   useEffect(() => {
     const el = ref.current
-    if (!el) return
+    if (!el || immediate) return
 
     const observer = new IntersectionObserver(
       ([entry]) => {
@@ -26,7 +28,9 @@ export function Reveal({ children, direction = "up", delay = 0, className = "" }
 
     observer.observe(el)
     return () => observer.disconnect()
-  }, [])
+  }, [immediate])
+
+  if (immediate) return <div className={className}>{children}</div>
 
   const hiddenTransform =
     direction === "left"

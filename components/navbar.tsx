@@ -64,7 +64,7 @@ export function Navbar() {
       >
         <div className="relative h-14 w-14 lg:h-16 lg:w-16 overflow-hidden shrink-0">
           <Image
-            src="/images/h3s-logo-nav.webp"
+            src="/images/h3s-logo-nav-sm.webp"
             alt="Omnitek H3S"
             fill
             className="object-cover scale-[1.35] origin-[50%_35%] object-[50%_52%]"
