@@ -24,7 +24,7 @@ const points: Record<Locale, PilotPoint[]> = {
     {
       icon: BarChart3,
       title: "Ölçülenler",
-      description: "Toplanan izinli kayıt, geri dönüş oranı, kampanya dönüşü ve şube kıyası.",
+      description: "Toplanan izinli kayıt, geri dönüş oranı, kampanya dönüşü ve şube kıyası. İsteğe bağlı: şube bazlı personel giriş-çıkış raporu.",
       published: true,
     },
     {
@@ -52,7 +52,7 @@ const points: Record<Locale, PilotPoint[]> = {
     {
       icon: BarChart3,
       title: "What we measure",
-      description: "Consented records collected, return rate, campaign conversion and branch comparison.",
+      description: "Consented records collected, return rate, campaign conversion and branch comparison. Optional: a branch-level staff attendance report.",
       published: true,
     },
     {

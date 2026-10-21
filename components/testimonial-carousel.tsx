@@ -21,8 +21,7 @@ const testimonials: Record<
         "Kafemizdeki müşterilerin internet hareketlerini artık kaydediyoruz. Özellikle yasa dışı bahis ve kumar sitelerine erişimi engellemek istiyorduk; fazlasını elde ettik ve kurumsal bir statü kazandık.",
       published: true,
     },
-    // TODO: TEYİT — cümle yapısı değişti; Mete Bey'e yeni metin onaylatılacak. Onay gelene kadar yayındaki metin yalnızca "karşı ekranı" → "karşılama ekranı" düzeltmesiyle kalır.
-    // Onaylanırsa yayındaki metin şununla değiştirilecek:
+    // TODO: TEYİT — Mete Bey onayı gelince mevcut metinle değiştirilecek (onay gelene kadar aşağıdaki yayındaki metin kalır):
     // "Böcek Kafe olarak önceliğimiz, müşterilerimizin internet deneyimini iyileştirmekti. Hız paylaşımı yapamıyorduk, güvenlik tarafında da eksiklerimiz vardı. Artık kurumsal bir karşılama ekranı ve adil hız paylaşımı sayesinde müşterilerimiz internetten çok daha iyi yararlanıyor. H3S'i kesinlikle öneriyorum."
     {
       name: "Mete Balta",

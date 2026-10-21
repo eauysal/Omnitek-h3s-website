@@ -3,6 +3,7 @@
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { Reveal } from "@/components/ui/reveal"
+import { SectorTags } from "@/components/sector-tags"
 import { useLanguage, type Locale } from "@/lib/i18n/language-context"
 import type { Sektor } from "@/data/sektorler"
 
@@ -81,16 +82,7 @@ export function SectorHero({ sektor }: { sektor: Omit<Sektor, "icon"> }) {
           {introText}
         </p>
 
-        <ul className={`flex flex-wrap justify-center gap-2 ${showDiagram ? "" : "mb-8"}`}>
-          {tags.map((tag) => (
-            <li
-              key={tag}
-              className="text-sm bg-primary/10 text-primary px-3 py-1.5 rounded-full font-medium"
-            >
-              {tag}{" "}
-            </li>
-          ))}
-        </ul>
+        <SectorTags tags={tags} size="md" className={`justify-center ${showDiagram ? "" : "mb-8"}`} />
 
         {!showDiagram && ctaButtons}
       </div>

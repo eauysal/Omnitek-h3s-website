@@ -232,8 +232,8 @@ export const sektorler: Sektor[] = [
     h1TitleEn: "Your guest checks out, the relationship continues.",
     pluralLocative: "Otel & Pansiyonlarda",
     icon: Building2,
-    shortDescription: "Oda bazlı ağ yönetimi ve 7/24 kesintisiz bağlantı.",
-    shortDescriptionEn: "Room-based network management and 24/7 uninterrupted connectivity.",
+    shortDescription: "Oda bazlı ağ ayrımı ve 7/24 izleme.",
+    shortDescriptionEn: "Room-based network separation and 24/7 monitoring.",
     tags: ["Oda Ağı Ayrımı", "7/24 İzleme", "Misafir Portalı"],
     tagsEn: ["Room Network Separation", "24/7 Monitoring", "Guest Portal"],
     metaDescription:
