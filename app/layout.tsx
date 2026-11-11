@@ -7,6 +7,7 @@ import WhatsAppButton from './WhatsAppButton'
 import CookieBanner from '@/components/cookie-banner'
 import { LocalBusinessJsonLd } from '@/components/json-ld'
 import { StickyCta } from '@/components/sticky-cta'
+import { AttributionCapture } from '@/components/attribution-capture'
 import { siteConfig } from '@/lib/seo'
 import { LanguageProvider } from '@/lib/i18n/language-context'
 
@@ -89,6 +90,7 @@ export default function RootLayout({
           <WhatsAppButton />
           <StickyCta />
           <CookieBanner />
+          <AttributionCapture />
         </LanguageProvider>
 
         {process.env.NODE_ENV === 'production' && <Analytics />}
