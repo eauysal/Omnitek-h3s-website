@@ -6,6 +6,9 @@ import { Mail, MapPin, CheckCircle, AlertCircle } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Reveal } from "@/components/ui/reveal"
+import { track } from "@vercel/analytics"
+import { getAttribution } from "@/lib/attribution"
+import { whatsappUrl } from "@/lib/whatsapp"
 import { useLanguage, type Locale } from "@/lib/i18n/language-context"
 
 const businessTypeIds = [
@@ -82,6 +85,8 @@ const content: Record<Locale, {
   genericError: string
   successTitle: string
   successBody: string
+  successWhatsapp: string
+  whatsappButton: string
   nameLabel: string
   namePlaceholder: string
   phoneLabel: string
@@ -112,6 +117,8 @@ const content: Record<Locale, {
     genericError: "Bir hata oluştu. Lütfen daha sonra tekrar deneyin.",
     successTitle: "Talebiniz Alındı!",
     successBody: "En kısa sürede sizinle iletişime geçeceğiz.",
+    successWhatsapp: "Hemen yazmak isterseniz WhatsApp'tan da ulaşabilirsiniz.",
+    whatsappButton: "WhatsApp'tan yazın",
     nameLabel: "Ad Soyad",
     namePlaceholder: "Adınız Soyadınız",
     phoneLabel: "Telefon",
@@ -121,11 +128,11 @@ const content: Record<Locale, {
     businessTypeLabel: "İşletme Türü",
     businessTypeSelect: "Seçiniz",
     branchCountLabel: "Şube Sayısı",
-    positionLabel: "Pozisyonunuz",
+    positionLabel: "Pozisyonunuz (Opsiyonel)",
     singleBranchNoteBefore: "Tek şubeli işletmeler için hazır paketlerimizi ",
     singleBranchNoteLink: "İşletmeler sayfasında",
     singleBranchNoteAfter: " inceleyebilirsiniz.",
-    cityLabel: "Şehir",
+    cityLabel: "Şehir (Opsiyonel)",
     cityPlaceholder: "İstanbul, Ankara, İzmir...",
     noteLabel: "Kısa Not (Opsiyonel)",
     notePlaceholder: "Eklemek istediğiniz notlar...",
@@ -142,6 +149,8 @@ const content: Record<Locale, {
     genericError: "Something went wrong. Please try again later.",
     successTitle: "Your Request Has Been Received!",
     successBody: "We'll get in touch with you as soon as possible.",
+    successWhatsapp: "If you'd like to reach us right away, you can also message us on WhatsApp.",
+    whatsappButton: "Message us on WhatsApp",
     nameLabel: "Full Name",
     namePlaceholder: "Your full name",
     phoneLabel: "Phone",
@@ -151,11 +160,11 @@ const content: Record<Locale, {
     businessTypeLabel: "Business Type",
     businessTypeSelect: "Select",
     branchCountLabel: "Number of Branches",
-    positionLabel: "Your Role",
+    positionLabel: "Your Role (Optional)",
     singleBranchNoteBefore: "For single-branch businesses, you can explore our ready-made packages on the ",
     singleBranchNoteLink: "Businesses page",
     singleBranchNoteAfter: ".",
-    cityLabel: "City",
+    cityLabel: "City (Optional)",
     cityPlaceholder: "Istanbul, Ankara, Izmir...",
     noteLabel: "Short Note (Optional)",
     notePlaceholder: "Anything you'd like to add...",
@@ -174,6 +183,7 @@ export function ContactSection({ singleBranch = false }: { singleBranch?: boolea
   const [isLoading, setIsLoading] = useState(false)
   const [error, setError] = useState("")
   const [consent, setConsent] = useState(false)
+  const [honeypot, setHoneypot] = useState("") // bot tuzağı: insanlar görmez/doldurmaz
   const emptyForm = {
     name: "",
     phone: "",
@@ -191,6 +201,12 @@ export function ContactSection({ singleBranch = false }: { singleBranch?: boolea
 
     if (!consent) {
       setError(t.consentError)
+      return
+    }
+
+    // Gizli alanı dolduran bir bottur: göndermeden, sessizce "başarılı" göster (bot fark etmesin)
+    if (honeypot) {
+      setIsSubmitted(true)
       return
     }
 
@@ -214,6 +230,25 @@ export function ContactSection({ singleBranch = false }: { singleBranch?: boolea
       formDataToSend.append("city", formData.city)
       formDataToSend.append("note", formData.note)
       formDataToSend.append("Kaynak", "İletişim Formu")
+
+      // Geliş kaynağı (lib/attribution.ts): e-postada tek okunur satır + ayrı UTM alanları
+      const attribution = getAttribution()
+      formDataToSend.append("Geliş kaynağı", attribution.label)
+      formDataToSend.append("Giriş sayfası", attribution.landing || window.location.pathname)
+      formDataToSend.append("Form sayfası", window.location.pathname)
+      formDataToSend.append("Dil", locale)
+      for (const [key, value] of Object.entries(attribution.utm)) {
+        if (value) formDataToSend.append(key, value)
+      }
+      if (attribution.referrer) formDataToSend.append("referrer", attribution.referrer)
+
+      // Formspree özel alanları: e-posta konusu (gelen kutusunda tek bakışta işletme/şube/kaynak) ve bot tuzağı
+      const branchText = formData.branchCount ? ` · ${formData.branchCount} şube` : ""
+      formDataToSend.append(
+        "_subject",
+        `Yeni talep: ${formData.business.trim().slice(0, 60)}${branchText} · ${attribution.label}`
+      )
+      formDataToSend.append("_gotcha", "")
       formDataToSend.append("kvkkOnay", "Evet")
 
       // Submit to Formspree
@@ -227,6 +262,18 @@ export function ContactSection({ singleBranch = false }: { singleBranch?: boolea
 
       if (!response.ok) {
         throw new Error("Form submission failed")
+      }
+
+      // Dönüşüm olayı (kişisel veri yok: yalnızca işletme türü, şube sayısı, kaynak). Plan desteklemiyorsa sessizce yok sayılır.
+      try {
+        track("lead_submitted", {
+          business_type: formData.businessType || "-",
+          branch_count: formData.branchCount || "-",
+          source: attribution.source || "direct",
+          locale,
+        })
+      } catch {
+        // ölçüm hatası formu etkilemesin
       }
 
       setIsSubmitted(true)
@@ -296,9 +343,15 @@ export function ContactSection({ singleBranch = false }: { singleBranch?: boolea
                 <p className="text-muted-foreground">
                   {t.successBody}
                 </p>
+                <p className="text-sm text-muted-foreground mt-6">{t.successWhatsapp}</p>
+                <Button asChild variant="outline" className="mt-3">
+                  <a href={whatsappUrl} target="_blank" rel="noopener noreferrer">
+                    {t.whatsappButton}
+                  </a>
+                </Button>
               </div>
             ) : (
-              <form onSubmit={handleSubmit} className="space-y-5">
+              <form onSubmit={handleSubmit} className="relative space-y-5">
                 {error && (
                   <div className="flex items-center gap-2 p-3 bg-destructive/20 border border-destructive/30 rounded-lg">
                     <AlertCircle className="h-4 w-4 text-destructive" />
@@ -403,7 +456,6 @@ export function ContactSection({ singleBranch = false }: { singleBranch?: boolea
                     <select
                       id="position"
                       name="position"
-                      required
                       value={formData.position}
                       onChange={handleChange}
                       className="w-full h-10 px-3 rounded-md bg-secondary border border-border text-foreground focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary"
@@ -436,7 +488,6 @@ export function ContactSection({ singleBranch = false }: { singleBranch?: boolea
                     id="city"
                     name="city"
                     type="text"
-                    required
                     value={formData.city}
                     onChange={handleChange}
                     className="bg-secondary border-border focus:border-primary"
@@ -456,6 +507,19 @@ export function ContactSection({ singleBranch = false }: { singleBranch?: boolea
                     onChange={handleChange}
                     className="w-full px-3 py-2 rounded-md bg-secondary border border-border text-foreground focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary resize-none"
                     placeholder={t.notePlaceholder}
+                  />
+                </div>
+
+                <div aria-hidden="true" className="absolute -left-[9999px] h-0 w-0 overflow-hidden">
+                  <label htmlFor="website-hp">Bu alanı boş bırakın</label>
+                  <input
+                    id="website-hp"
+                    name="_gotcha"
+                    type="text"
+                    tabIndex={-1}
+                    autoComplete="off"
+                    value={honeypot}
+                    onChange={(e) => setHoneypot(e.target.value)}
                   />
                 </div>
 

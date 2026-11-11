@@ -2,6 +2,7 @@
 
 import React from 'react';
 import { useLanguage } from '@/lib/i18n/language-context';
+import { whatsappUrl } from '@/lib/whatsapp';
 
 const tooltipLabel = {
   tr: "WhatsApp'tan yazın",
@@ -10,15 +11,6 @@ const tooltipLabel = {
 
 export default function WhatsAppButton() {
   const { locale } = useLanguage();
-
-  // Kendi telefon numaranı buraya yaz (Başına 90 ekleyerek sıfırsız)
-  const phoneNumber = "905369202214";
-
-  // Esnafın sana göndereceği hazır mesaj şablonu (sahibi Türkçe okuyacağı için mesaj dil değişse de Türkçe kalır)
-  const message = "Merhaba Omnitek, işletmem/şubelerim için Wi-Fi pazarlama ve güvenlik (H3S) çözümleri hakkında bilgi almak ve görüşme planlamak istiyorum.";
-
-  // URL formatına dönüştürme
-  const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
 
   return (
     <a
