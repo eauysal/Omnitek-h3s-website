@@ -44,7 +44,7 @@ export default function CookieBanner() {
       <div className="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-3">
         <p className="text-sm text-background/85 text-center sm:text-left">
           {t.textBefore}{" "}
-          <Link href="/gizlilik-politikasi" className="underline hover:no-underline">
+          <Link prefetch={false} href="/gizlilik-politikasi" className="underline hover:no-underline">
             {t.linkLabel}
           </Link>
           {t.textAfter}
